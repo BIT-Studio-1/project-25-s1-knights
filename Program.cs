@@ -1,5 +1,21 @@
-﻿namespace gameproject
+﻿using System;
+using static System.Console;
+using static gameproject.Globals;
+
+
+
+
+namespace gameproject
 {
+    
+    
+    
+    public static class Globals
+    {
+
+
+    }
+    
     internal class Program
     {
         static void Main(string[] args)

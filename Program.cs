@@ -23,6 +23,8 @@ namespace gameproject
         static void Main()
         {
             CursorVisible = false; 
+            Tim();
+            
             while (start == true)
             {
                 movement(); //calls on the movement method while the start bool is true so it is continuous.

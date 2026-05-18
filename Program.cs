@@ -89,6 +89,14 @@ namespace gameproject
 
         public static void Tim()
         {
+            Random rand = new Random();
+
+            int x = rand.Next(Console.WindowWidth);
+            int y = 0;
+            Console.SetCursorPosition(x, y);
+            Console.WriteLine("X");
+
+
 
         }
 

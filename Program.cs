@@ -86,7 +86,7 @@ namespace gameproject
 
         public static void Luke()
         {
-
+            for (int i = PlayerBullets.count
         }
 
         public static void Tim()

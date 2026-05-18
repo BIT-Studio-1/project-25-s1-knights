@@ -23,6 +23,10 @@ namespace gameproject
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight/2;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = true, moved = false;
+        public static int invader;
+
+        public static int invaderX = (600f);
+        public static int invaderY = 0f;
     }
     
     internal class Program
@@ -110,12 +114,9 @@ namespace gameproject
 <<<<<<< HEAD
             int invader;
 
-            float invaderX = (600f);
-            float invaderY = 0f;
+            int invaderX = (600f);
+            int invaderY = 0f;
            
-
-
-
             for (int i = 0; i < 15; i++)
             {
 
@@ -124,12 +125,11 @@ namespace gameproject
                 invaderY = 0;
                 Console.SetCursorPosition((int)invaderX, (int)invaderY);
                 Console.WriteLine("X");
-
-                
+        
             }
-            while (invaderY != 0)
+            while (invaderY != 1000f)
             {
-                invaderY += 1;
+                invaderY += 1f;
             }
 
 

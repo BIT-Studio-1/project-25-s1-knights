@@ -1,9 +1,10 @@
 ﻿using System;
-using static System.Console;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using static gameproject.Globals;
+using static System.Console;
 using static System.ConsoleKey;
 using static System.Math;
-using System.Runtime.InteropServices;
 
 
 
@@ -19,6 +20,7 @@ namespace gameproject
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight/2;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = true, moved = false;
+        public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
     }
     
     internal class Program
@@ -95,7 +97,16 @@ namespace gameproject
 
         public static void Luke()
         {
-            for (int i = PlayerBullets.count
+            for (int i = PlayerBullets.count -1 ; i >= 0; i--) //update the players bullets
+            {
+                if (PlayerBullets[i].Y >=0 && PlayerBullets[i].y < WindowHeight)
+                {
+                    SetCursorPosition(PlayerBullets[i].X, PlayerBullets[i].Y);
+                    Write(' ');
+                }
+                playerBullets[i].Move();
+                
+            }
         }
 
         public static void Tim()

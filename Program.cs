@@ -3,6 +3,7 @@ using static System.Console;
 using static gameproject.Globals;
 using static System.ConsoleKey;
 using static System.Math;
+using System.Threading.Tasks;
 
 
 
@@ -23,7 +24,7 @@ namespace gameproject
         static void Main()
         {
             CursorVisible = false; 
-            Tim();
+            _=newInvader();
             
             while (start == true)
             {
@@ -89,14 +90,39 @@ namespace gameproject
 
         }
 
-        public static void Tim()
+        public static async Task newInvader()
         {
+          
             Random rand = new Random();
 
-            int x = rand.Next(Console.WindowWidth);
-            int y = 0;
-            Console.SetCursorPosition(x, y);
-            Console.WriteLine("X");
+            int invader;
+
+            float invaderX = (600f);
+            float invaderY = 0f;
+           
+
+
+
+            for (int i = 0; i < 15; i++)
+            {
+
+                await Task.Delay(1000);
+                invaderX = rand.Next(Console.WindowWidth);
+                invaderY = 0;
+                Console.SetCursorPosition((int)invaderX, (int)invaderY);
+                Console.WriteLine("X");
+
+                
+            }
+            while (invaderY != 0)
+            {
+                invaderY += 1;
+            }
+
+
+
+
+
 
 
 

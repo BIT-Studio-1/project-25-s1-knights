@@ -3,13 +3,9 @@ using static System.Console;
 using static gameproject.Globals;
 using static System.ConsoleKey;
 using static System.Math;
-<<<<<<< HEAD
 using System.Threading.Tasks;
-=======
 using System.Runtime.InteropServices;
 
-
->>>>>>> 0c4b2ac284c727087bba3ede1cab1c4ccd370e5a
 
 
 
@@ -107,7 +103,7 @@ namespace gameproject
           
             Random rand = new Random();
 
-<<<<<<< HEAD
+
             int invader;
 
             float invaderX = (600f);
@@ -136,13 +132,12 @@ namespace gameproject
 
 
 
-=======
+
             int x = rand.Next(Console.WindowWidth);
             int y = 0;
             Console.SetCursorPosition(x, y);
             Console.WriteLine("X");
             
->>>>>>> 0c4b2ac284c727087bba3ede1cab1c4ccd370e5a
 
             
         }

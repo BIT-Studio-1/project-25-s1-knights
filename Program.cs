@@ -20,7 +20,14 @@ namespace gameproject
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight/2;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = true, moved = false;
+<<<<<<< HEAD
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
+=======
+        public static int invader;
+
+        public static int invaderX = (600f);
+        public static int invaderY = 0f;
+>>>>>>> 0bd21183825c017e83e82eb03875b06167a185eb
     }
     
     internal class Program
@@ -98,7 +105,25 @@ namespace gameproject
 
         public static void Luke()
         {
+<<<<<<< HEAD
             for (int i = PlayerBullets.Count -1 ; i >= 0; i--) //update the players bullets by looping backwards
+=======
+
+        }
+
+        public static async Task newInvader()
+        {
+          
+            Random rand = new Random();
+
+
+            int invader;
+
+            int invaderX = (600f);
+            int invaderY = 0f;
+           
+            for (int i = 0; i < 15; i++)
+>>>>>>> 0bd21183825c017e83e82eb03875b06167a185eb
             {
                 if (PlayerBullets[i].Y >=0 && PlayerBullets[i].Y < WindowHeight) //check if the bullet is still within the window
                 {
@@ -106,6 +131,7 @@ namespace gameproject
                     Write(' '); // clear the old position
                 }
 
+<<<<<<< HEAD
                 PlayerBullets[i].Move();
 
                 if (PlayerBullets[i].Y < 0)
@@ -122,6 +148,23 @@ namespace gameproject
                 
             }
         }
+=======
+                await Task.Delay(1000);
+                invaderX = rand.Next(Console.WindowWidth);
+                invaderY = 0;
+                Console.SetCursorPosition((int)invaderX, (int)invaderY);
+                Console.WriteLine("X");
+        
+            }
+            while (invaderY != 1000f)
+            {
+                invaderY += 1f;
+            }
+
+
+
+
+>>>>>>> 0bd21183825c017e83e82eb03875b06167a185eb
 
         public static void Tim()
         {

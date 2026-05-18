@@ -89,6 +89,7 @@ namespace gameproject
                     playerX--;
                     moved = true;
                 }
+
                 
 
                 
@@ -97,14 +98,27 @@ namespace gameproject
 
         public static void Luke()
         {
-            for (int i = PlayerBullets.count -1 ; i >= 0; i--) //update the players bullets
+            for (int i = PlayerBullets.Count -1 ; i >= 0; i--) //update the players bullets by looping backwards
             {
-                if (PlayerBullets[i].Y >=0 && PlayerBullets[i].y < WindowHeight)
+                if (PlayerBullets[i].Y >=0 && PlayerBullets[i].Y < WindowHeight) //check if the bullet is still within the window
                 {
                     SetCursorPosition(PlayerBullets[i].X, PlayerBullets[i].Y);
-                    Write(' ');
+                    Write(' '); // clear the old position
                 }
-                playerBullets[i].Move();
+
+                PlayerBullets[i].Move();
+
+                if (PlayerBullets[i].Y < 0)
+                {
+                    PlayerBullets.RemoveAt(i); //remove if off screen otherwise draw
+                }
+
+                else
+                {
+                    SetCursorPosition(PlayerBullets[i].X, PlayerBullets[i].Y);
+                    Write('|');
+                }
+                
                 
             }
         }

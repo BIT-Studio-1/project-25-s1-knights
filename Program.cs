@@ -42,7 +42,7 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false; 
-            Tim();
+            newInvader();
             
             while (start == true)
             {
@@ -105,33 +105,16 @@ namespace gameproject
 
         public static void Luke()
         {
-<<<<<<< HEAD
-            for (int i = PlayerBullets.Count -1 ; i >= 0; i--) //update the players bullets by looping backwards
-=======
 
-        }
-
-        public static async Task newInvader()
-        {
-          
-            Random rand = new Random();
-
-
-            int invader;
-
-            int invaderX = (600f);
-            int invaderY = 0f;
-           
-            for (int i = 0; i < 15; i++)
->>>>>>> 0bd21183825c017e83e82eb03875b06167a185eb
+            for (int i = PlayerBullets.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
             {
-                if (PlayerBullets[i].Y >=0 && PlayerBullets[i].Y < WindowHeight) //check if the bullet is still within the window
+                if (PlayerBullets[i].Y >= 0 && PlayerBullets[i].Y < WindowHeight) //check if the bullet is still within the window
                 {
                     SetCursorPosition(PlayerBullets[i].X, PlayerBullets[i].Y);
                     Write(' '); // clear the old position
                 }
 
-<<<<<<< HEAD
+
                 PlayerBullets[i].Move();
 
                 if (PlayerBullets[i].Y < 0)
@@ -144,40 +127,53 @@ namespace gameproject
                     SetCursorPosition(PlayerBullets[i].X, PlayerBullets[i].Y);
                     Write('|');
                 }
-                
-                
             }
         }
-=======
+
+
+        
+
+
+            
+
+
+
+
+
+
+
+
+            
+
+            
+        public static async Task newInvader()
+        {
+            
+
+            Random rand = new Random();
+
+
+            int invader;
+
+            int invaderX = (600f);
+            int invaderY = 0f;
+
+            for (int i = 0; i < 15; i++)
+            {
                 await Task.Delay(1000);
                 invaderX = rand.Next(Console.WindowWidth);
                 invaderY = 0;
                 Console.SetCursorPosition((int)invaderX, (int)invaderY);
                 Console.WriteLine("X");
-        
             }
+
+
             while (invaderY != 1000f)
             {
                 invaderY += 1f;
             }
-
-
-
-
->>>>>>> 0bd21183825c017e83e82eb03875b06167a185eb
-
-        public static void Tim()
-        {
-            Random rand = new Random();
-
-            int x = rand.Next(Console.WindowWidth);
-            int y = 0;
-            Console.SetCursorPosition(x, y);
-            Console.WriteLine("X");
-            
-
-            
         }
+
 
         public static void Arjun()
         {

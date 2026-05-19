@@ -58,15 +58,11 @@ namespace gameproject
                 Luke();
 
 
-                
-                
-                if (moved)
-                {
-                    Clear();
-                    SetCursorPosition(playerX, playerY);
-                    Write('^');
-                    await Task.Delay(15);
-                } // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
+                Clear();
+                SetCursorPosition(playerX, playerY);
+                Write('^');
+                await Task.Delay(15);
+                // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
             }
 
             

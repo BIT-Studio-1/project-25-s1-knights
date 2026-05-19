@@ -58,7 +58,7 @@ namespace gameproject
                 Luke();
 
 
-                Clear();
+                
                 SetCursorPosition(playerX, playerY);
                 Write('^');
                 await Task.Delay(15);
@@ -82,8 +82,8 @@ namespace gameproject
 
 
             SetCursorPosition(playerX, playerY);
-            Write('^');
-            //writes the player at the location that is set at each loop
+            Write(' ');
+            //clear old position before moving
 
 
             

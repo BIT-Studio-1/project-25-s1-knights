@@ -29,6 +29,8 @@ namespace gameproject
         public static int invaderX = 0;
         public static int invaderY = 0;
 
+        public static int shootCooldown = 0; //stops bullet spam
+
     }
     public class Bullet
     {
@@ -49,19 +51,20 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false; 
-            newInvader();
+            
             
             while (start == true)
             {
                 limits();
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 Luke();
+                newInvader();
 
 
-                
+
                 SetCursorPosition(playerX, playerY);
                 Write('^');
-                await Task.Delay(15);
+                await Task.Delay(50);
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
             }
 

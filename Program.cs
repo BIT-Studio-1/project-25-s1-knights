@@ -5,6 +5,7 @@ using static gameproject.Globals;
 using static System.Console;
 using static System.ConsoleKey;
 using static System.Math;
+using static gameproject.Bullet;
 
 
 
@@ -33,7 +34,7 @@ namespace gameproject
     {
         public int x {  get; set; }
         public int y { get; set; }
-        public void Move() => Y--;
+        public void Move() => y--;
     }
     
     internal class Program
@@ -107,7 +108,7 @@ namespace gameproject
             }
             if (IsKeyDown(Spacebar))
             {
-                PlayerBullets.Add(new Bullet { X = playerX, Y = playerY - 1});
+                PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1});
             }
             
                 
@@ -126,23 +127,23 @@ namespace gameproject
 
             for (int i = PlayerBullets.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
             {
-                if (PlayerBullets[i].Y >= 0 && PlayerBullets[i].Y < WindowHeight) //check if the bullet is still within the window
+                if (PlayerBullets[i].y >= 0 && PlayerBullets[i].y < WindowHeight) //check if the bullet is still within the window
                 {
-                    SetCursorPosition(PlayerBullets[i].X, PlayerBullets[i].Y);
+                    SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write(' '); // clear the old position
                 }
 
 
                 PlayerBullets[i].Move();
 
-                if (PlayerBullets[i].Y < 0)
+                if (PlayerBullets[i].y < 0)
                 {
                     PlayerBullets.RemoveAt(i); //remove if off screen otherwise draw
                 }
 
                 else
                 {
-                    SetCursorPosition(PlayerBullets[i].X, PlayerBullets[i].Y);
+                    SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write('|');
                 }
             }
@@ -173,8 +174,8 @@ namespace gameproject
 
              
 
-             invaderX = (600f);
-             invaderY = 0f;
+             invaderX = 0;
+             invaderY = 0;
 
             for (int i = 0; i < 15; i++)
             {
@@ -182,13 +183,13 @@ namespace gameproject
                 invaderX = rand.Next(Console.WindowWidth);
                 invaderY = 0;
                 Console.SetCursorPosition((int)invaderX, (int)invaderY);
-                Console.WriteLine("X");
+                Console.WriteLine("x");
             }
 
 
             while (invaderY != 1000f)
             {
-                invaderY += 1f;
+                invaderY += 1;
             }
         }
 

@@ -132,6 +132,20 @@ namespace gameproject
 
                 PlayerBullets[i].Move();
 
+                if (PlayerBullets[i].x == invaderX && PlayerBullets[i].y == invaderY)
+                {
+                    SetCurserPosition(invaderX, invaderY);
+                    Write(' '); // removes invader if it hits
+
+                    PlayerBullets.RemoveAt(i); // removes bullets after hit
+
+                    Random rand = new Random();
+                    invaderX = rand.Next(WindowWidth);
+                    invaderY = 0;
+
+                    continue; // bullet is gone, skip to next one
+                }
+
                 if (PlayerBullets[i].y < 0)
                 {
                     PlayerBullets.RemoveAt(i); //remove if off screen otherwise draw

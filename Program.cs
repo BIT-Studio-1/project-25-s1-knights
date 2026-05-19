@@ -188,13 +188,13 @@ namespace gameproject
 
             while (true)
             {
-                Console.Clear();
+                Clear();
 
 
                 spawnTimer++;
                 if (spawnTimer >= 10 && spawned < 15)
                 {
-                    invaderX[spawned] = rand.Next(Console.WindowWidth);
+                    invaderX[spawned] = rand.Next(WindowWidth);
                     invaderY[spawned] = 0;
                     spawned++;
                     spawnTimer = 0;
@@ -204,8 +204,8 @@ namespace gameproject
                 for (int i = 0; i < spawned; i++)
                 {
                     invaderY[i]++;
-                    Console.SetCursorPosition(invaderX[i], invaderY[i] % Console.WindowHeight);
-                    Console.Write("X");
+                    SetCursorPosition(invaderX[i], invaderY[i] % WindowHeight);
+                    Write("X");
                 }
 
                 await Task.Delay(300);

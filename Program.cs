@@ -20,14 +20,14 @@ namespace gameproject
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight/2;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = true, moved = false;
-<<<<<<< HEAD
+
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
-=======
+
         public static int invader;
 
         public static int invaderX = (600f);
         public static int invaderY = 0f;
->>>>>>> 0bd21183825c017e83e82eb03875b06167a185eb
+
     }
     
     internal class Program
@@ -153,10 +153,10 @@ namespace gameproject
             Random rand = new Random();
 
 
-            int invader;
+             
 
-            int invaderX = (600f);
-            int invaderY = 0f;
+             invaderX = (600f);
+             invaderY = 0f;
 
             for (int i = 0; i < 15; i++)
             {

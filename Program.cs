@@ -25,8 +25,8 @@ namespace gameproject
 
         public static int invader;
 
-        public static int invaderX = (600f);
-        public static int invaderY = 0f;
+        public static int invaderX = 0;
+        public static int invaderY = 0;
 
     }
     

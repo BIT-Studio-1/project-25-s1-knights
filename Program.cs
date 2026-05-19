@@ -5,7 +5,7 @@ using static gameproject.Globals;
 using static System.Console;
 using static System.ConsoleKey;
 using static System.Math;
-using static gameproject.Bullet;
+
 
 
 

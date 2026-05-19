@@ -50,15 +50,15 @@ namespace gameproject
 
         static async Task Main()
         {
-            CursorVisible = false; 
-            
-            
+            CursorVisible = false;
+            newInvader();
+
             while (start == true)
             {
                 limits();
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 Luke();
-                newInvader();
+                
 
 
 
@@ -108,7 +108,9 @@ namespace gameproject
             if (IsKeyDown(Spacebar))
             {
                 PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1});
+                shootCooldown = 5;
             }
+            if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
             
                 
             

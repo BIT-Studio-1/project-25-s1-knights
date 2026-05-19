@@ -181,10 +181,11 @@ namespace gameproject
 
             Random rand = new Random();
 
-            int[] invaderX = new int[15];
-            int[] invaderY = new int[15];
+            int[] invaderX = new int[1000];
+            int[] invaderY = new int[1000];
             int spawned = 0;
             int spawnTimer = 0;
+            int finished = 0;
 
             while (true)
             {
@@ -203,9 +204,20 @@ namespace gameproject
 
                 for (int i = 0; i < spawned; i++)
                 {
-                    invaderY[i]++;
-                    Console.SetCursorPosition(invaderX[i], invaderY[i] % Console.WindowHeight);
-                    Console.Write("X");
+                    if (invaderY[i] < Console.WindowHeight)
+                    {
+                        invaderY[i]++;
+                        Console.SetCursorPosition(invaderX[i], invaderY[i] % Console.WindowHeight);
+                        Console.Write("X");
+                    }
+
+                    else if (invaderY[i] == Console.WindowHeight)
+                    {
+
+                        invaderY[i] = 0;
+                    }
+
+                    
                 }
 
                 await Task.Delay(300);

@@ -134,7 +134,7 @@ namespace gameproject
 
                 if (PlayerBullets[i].x == invaderX && PlayerBullets[i].y == invaderY)
                 {
-                    SetCurserPosition(invaderX, invaderY);
+                    SetCursorPosition(invaderX,invaderY);
                     Write(' '); // removes invader if it hits
 
                     PlayerBullets.RemoveAt(i); // removes bullets after hit

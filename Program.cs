@@ -54,6 +54,9 @@ namespace gameproject
             {
                 limits();
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
+                Luke();
+
+
                 
                 
                 if (moved)

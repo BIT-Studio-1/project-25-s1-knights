@@ -29,6 +29,12 @@ namespace gameproject
         public static int invaderY = 0;
 
     }
+    public class Bullet
+    {
+        public int x {  get; set; }
+        public int y { get; set; }
+        public void Move() => Y--;
+    }
     
     internal class Program
     {
@@ -82,21 +88,30 @@ namespace gameproject
 
             
             
-                moved = false; //sets the move bool to false at the start of each loop so the movement isnt continuous
+             moved = false; //sets the move bool to false at the start of each loop so the movement isnt continuous
 
                
 
-                if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerX < farRow)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
-                {
-                    playerX++;
-                    moved = true;
-                }
-                if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerX > 0))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
-                {
-                    playerX--;
-                    moved = true;
-                }
-
+             if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerX < farRow)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
+             {
+                 playerX++;
+                 moved = true;
+             }
+            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerX > 0))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
+            {
+                playerX--;
+                moved = true;
+            }
+            if (IsKeyDown(Spacebar))
+            {
+                PlayerBullets.Add(new Bullet { X = playerX, Y = playerY - 1});
+            }
+            
+                
+            
+                
+                    
+                
                 
 
                 

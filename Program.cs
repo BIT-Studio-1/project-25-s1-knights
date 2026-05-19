@@ -160,10 +160,6 @@ namespace gameproject
         }
 
 
-        
-
-
-            
 
 
 
@@ -172,34 +168,47 @@ namespace gameproject
 
 
 
-            
 
-            
+
+
+
+
+
+
         public static async Task newInvader()
         {
-            
+
 
             Random rand = new Random();
 
+            int[] invaderX = new int[15];
+            int[] invaderY = new int[15];
+            int spawned = 0;
+            int spawnTimer = 0;
 
-             
-
-             invaderX = 0;
-             invaderY = 0;
-
-            for (int i = 0; i < 15; i++)
+            while (true)
             {
-                await Task.Delay(1000);
-                invaderX = rand.Next(Console.WindowWidth);
-                invaderY = 0;
-                Console.SetCursorPosition((int)invaderX, (int)invaderY);
-                Console.WriteLine("x");
-            }
+                Console.Clear();
 
 
-            while (invaderY != 1000f)
-            {
-                invaderY += 1;
+                spawnTimer++;
+                if (spawnTimer >= 10 && spawned < 15)
+                {
+                    invaderX[spawned] = rand.Next(Console.WindowWidth);
+                    invaderY[spawned] = 0;
+                    spawned++;
+                    spawnTimer = 0;
+                }
+
+
+                for (int i = 0; i < spawned; i++)
+                {
+                    invaderY[i]++;
+                    Console.SetCursorPosition(invaderX[i], invaderY[i] % Console.WindowHeight);
+                    Console.Write("X");
+                }
+
+                await Task.Delay(300);
             }
         }
 

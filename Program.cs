@@ -143,21 +143,27 @@ namespace gameproject
 
                 PlayerBullets[i].Move();
 
+
                 //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
-                if (PlayerBullets[i].x == invaderX && PlayerBullets[i].y == invaderY)
-
+                bool hitSomething = false;
+                for (int e = 0; e < spawned && !hitSomething; e++) // loop through every invader
                 {
-                    SetCursorPosition(invaderX, invaderY);
-                    Write(' '); // removes invader if it hits
+                    if (invaderX[e] == -1) continue; // skip already destroyed ones
 
-                    PlayerBullets.RemoveAt(i); // removes bullets after hit
+                    if (PlayerBullets[i].x == invaderX[e] && PlayerBullets[i].y == invaderY[e]) // check if bullet is on same spot as this invader
+                    {
+                        SetCursorPosition(invaderX[e], invaderY[e]);
+                        Write(' '); // erase invader from screen
 
-                    Random rand = new Random();
-                    invaderX = rand.Next(WindowWidth);
-                    invaderY = 0;
+                        invaderX[e] = -1; // mark as destroyed
+                        invaderY[e] = -1;
 
-                    continue; // bullet is gone, skip to next one
+                        PlayerBullets.RemoveAt(i); // remove the bullet
+                        hitSomething = true; // stops the loop since this bullet is used up
+                    }
                 }
+                if (hitSomething) continue; // skip to next bullet since this one is gone
+
 
                 if (PlayerBullets[i].y < 0)
                 {

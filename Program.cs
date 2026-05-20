@@ -29,6 +29,8 @@ namespace gameproject
         public static int invaderX = 0;
         public static int invaderY = 0;
 
+        public static int shootCooldown = 0; //stops bullet spam
+
     }
     public class Bullet
     {
@@ -48,20 +50,21 @@ namespace gameproject
 
         static async Task Main()
         {
-            CursorVisible = false; 
+            CursorVisible = false;
             newInvader();
-            
+
             while (start == true)
             {
                 limits();
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 Luke();
-
-
                 
+
+
+
                 SetCursorPosition(playerX, playerY);
                 Write('^');
-                await Task.Delay(15);
+                await Task.Delay(50);
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
             }
 
@@ -105,7 +108,9 @@ namespace gameproject
             if (IsKeyDown(Spacebar))
             {
                 PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1});
+                shootCooldown = 5;
             }
+            if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
             
                 
             
@@ -189,13 +194,13 @@ namespace gameproject
 
             while (true)
             {
-                Console.Clear();
+                Clear();
 
 
                 spawnTimer++;
                 if (spawnTimer >= 10 && spawned < 15)
                 {
-                    invaderX[spawned] = rand.Next(Console.WindowWidth);
+                    invaderX[spawned] = rand.Next(WindowWidth);
                     invaderY[spawned] = 0;
                     spawned++;
                     spawnTimer = 0;
@@ -204,6 +209,7 @@ namespace gameproject
 
                 for (int i = 0; i < spawned; i++)
                 {
+
                     if (invaderY[i] < Console.WindowHeight)
                     {
                         invaderY[i]++;
@@ -218,7 +224,8 @@ namespace gameproject
                     }
 
                     
-                }
+
+
 
                 await Task.Delay(300);
             }

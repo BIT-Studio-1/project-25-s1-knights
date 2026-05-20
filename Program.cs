@@ -113,7 +113,7 @@ namespace gameproject
                 PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1});
                 shootCooldown = 5;
             }
-            if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
+            if (shootCooldown && shootCooldown == 0) ;// adds a cool down for the bullets
             
                 
             

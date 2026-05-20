@@ -18,7 +18,7 @@ namespace gameproject
     
     public static class Globals // variables that any class or function can access
     {
-        public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight/2;
+        public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight-5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = true, moved = false;
 
@@ -51,8 +51,8 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            newInvader();
-
+            _=newInvader();
+            
             while (start == true)
             {
                 limits();
@@ -64,7 +64,7 @@ namespace gameproject
 
                 SetCursorPosition(playerX, playerY);
                 Write('^');
-                await Task.Delay(50);
+                await Task.Delay(15);
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
             }
 

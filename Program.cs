@@ -219,8 +219,6 @@ namespace gameproject
                         
                     {
                         invaderY[i] = 0;
-
-<<<<<<< HEAD
                     }
                     Console.SetCursorPosition(invaderX[i], invaderY[i]);
                     Console.Write("X");
@@ -228,16 +226,9 @@ namespace gameproject
 
                 }
                     
-=======
->>>>>>> 28f328212be8fcaa1851d2b6190bd39aa0f62fc3
-
-
-
-
                     await Task.Delay(300);
                 }
             }
-        }
 
 
         public static void Arjun()

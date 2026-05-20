@@ -3,6 +3,7 @@ using static System.Console;
 using static gameproject.Globals;
 using static System.ConsoleKey;
 using static System.Math;
+using System.Diagnostics;
 
 
 
@@ -16,6 +17,14 @@ namespace gameproject
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight/2;
         public static ConsoleKey key;
         public static bool start = true;
+
+        // Level System Added
+        public static int level = 1;
+        public static int maxInvaders = 5;
+        public static int invaderSpeed = 300;
+        public static int spawnRate = 10;
+        public static int enemiesKilled = 0;
+        
     }
     
     internal class Program
@@ -27,6 +36,7 @@ namespace gameproject
             
             while (start == true)
             {
+                Level(); //calls on the level method while the start bool is true so it is continuous.
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
             }
             
@@ -107,8 +117,56 @@ namespace gameproject
 
         }
 
-        public static void Stephanie()
+        public static void Level() //Stephanie
         {
+            //LEVEL 1
+            if (level == 1)
+            {
+                maxInvaders = 5;
+                invaderSpeed = 300;
+                spawnRate = 10;
+            }
+            else if (level == 2)
+            {
+                maxInvaders = 8;
+                invaderSpeed = 250;
+                spawnRate = 8;
+            }
+            else if (level == 3)
+            {
+                maxInvaders = 10;
+                invaderSpeed = 200;
+                spawnRate = 6;
+            }
+            else if (level == 4)
+            {
+                maxInvaders = 12;
+                invaderSpeed = 150;
+                spawnRate = 5;
+            }
+            else if (level == 5)
+            {
+                maxInvaders = 15;
+                invaderSpeed = 100;
+                spawnRate = 3;
+            }
+
+            // WIN GAME
+            if (level > 5)
+            {
+                Clear();
+
+                SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
+                Write("You WIN!");
+
+                start = false;
+            }
+
+            //SHOW LEVEL
+            string levelText = $"Level: {level}";
+            SetCursorPosition(0, 0);
+            Write(levelText);
+
 
         }
 

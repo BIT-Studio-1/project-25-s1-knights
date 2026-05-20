@@ -13,12 +13,12 @@ using static System.Math;
 
 namespace gameproject
 {
-    
-    
-    
+
+
+
     public static class Globals // variables that any class or function can access
     {
-        public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight-5;
+        public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = true, moved = false;
 
@@ -26,8 +26,11 @@ namespace gameproject
 
         public static int invader;
 
-        public static int invaderX = 0;
-        public static int invaderY = 0;
+        //Arjun - Variables declared in Invanders moved to here.
+        public static int[] invaderX = new int[1000];
+        public static int[] invaderY = new int[1000];
+        public static int spawned = 0;
+        public static int spawnTimer = 0;
 
         public static int shootCooldown = 0; //stops bullet spam
 
@@ -36,11 +39,11 @@ namespace gameproject
     }
     public class Bullet
     {
-        public int x {  get; set; }
+        public int x { get; set; }
         public int y { get; set; }
         public void Move() => y--;
     }
-    
+
     internal class Program
     {
         [DllImport("user32.dll")] // imports a library for to make the movement smoother
@@ -53,15 +56,15 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            _=newInvader();
-            
+            _ = newInvader();
+
             while (start == true)
             {
                 limits();
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 Luke();
                 Arjun(); // Calls the function to calculate the lives.
-                
+
 
 
 
@@ -71,7 +74,7 @@ namespace gameproject
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
             }
 
-            
+
         }
 
         public static void limits()
@@ -84,7 +87,7 @@ namespace gameproject
         }
         public static void movement() //James
         {
-           
+
 
 
             SetCursorPosition(playerX, playerY);
@@ -92,38 +95,38 @@ namespace gameproject
             //clear old position before moving
 
 
-            
-            
-             moved = false; //sets the move bool to false at the start of each loop so the movement isnt continuous
 
-               
 
-             if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerX < farRow)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
-             {
-                 playerX++;
-                 moved = true;
-             }
+            moved = false; //sets the move bool to false at the start of each loop so the movement isnt continuous
+
+
+
+            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerX < farRow)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
+            {
+                playerX++;
+                moved = true;
+            }
             if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerX > 0))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
             {
                 playerX--;
                 moved = true;
             }
-            if (IsKeyDown(Spacebar)&& shootCooldown == 0)
+            if (IsKeyDown(Spacebar) && shootCooldown == 0)
             {
-                PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1});
+                PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1 });
                 shootCooldown = 5;
             }
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
-            
-                
-            
-                
-                    
-                
-                
 
-                
-            
+
+
+
+
+
+
+
+
+
         }
 
         public static void Luke()
@@ -140,9 +143,11 @@ namespace gameproject
 
                 PlayerBullets[i].Move();
 
+                //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
                 if (PlayerBullets[i].x == invaderX && PlayerBullets[i].y == invaderY)
+
                 {
-                    SetCursorPosition(invaderX,invaderY);
+                    SetCursorPosition(invaderX, invaderY);
                     Write(' '); // removes invader if it hits
 
                     PlayerBullets.RemoveAt(i); // removes bullets after hit
@@ -189,10 +194,11 @@ namespace gameproject
 
             Random rand = new Random();
 
-            int[] invaderX = new int[1000];
-            int[] invaderY = new int[1000];
-            int spawned = 0;
-            int spawnTimer = 0;
+            //Arjun - moving this variables to global. in global it declared as a int only. if need to use all invanders i need to declare it in global
+            //int[] invaderX = new int[1000];
+            //int[] invaderY = new int[1000];
+            //int spawned = 0;
+            //int spawnTimer = 0;
             int finished = 0;
 
             while (true)
@@ -216,7 +222,7 @@ namespace gameproject
                 {
                     invaderY[i]++;
                     if (invaderY[i] >= Console.WindowHeight)
-                        
+
                     {
                         invaderY[i] = 0;
                     }
@@ -225,21 +231,28 @@ namespace gameproject
 
 
                 }
-                    
-                    await Task.Delay(300);
-                }
+
+                await Task.Delay(300);
             }
+        }
 
 
         public static void Arjun()
         {
-            if (invaderX == playerX && invaderY == playerY)
+            for (int i = 0; i < spawned; i++)
             {
-                lives--;
-                //invaderX = 0;
-                //invaderY = 0;
+                if (invaderX[i] == -1) continue; // skip destroyed invaders
+                if (invaderX[i] == playerX && invaderY[i] == playerY)
+                {
+                    lives--;
+                    // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
+                    invaderX[i] = -1;
+                    invaderY[i] = -1;
+                }
             }
-            //preparing the text for the Lives to show in the display.
+
+            if (lives <= 0) start = false;
+
             string livesText = $"Lives: {lives}";
             SetCursorPosition(WindowWidth - livesText.Length, 0);
             Write(livesText);

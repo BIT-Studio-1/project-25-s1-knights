@@ -241,8 +241,8 @@ namespace gameproject
             if (invaderX == playerX && invaderY == playerY)
             {
                 lives--;
-                invaderX = 0;
-                invaderY = 0;
+                //invaderX = 0;
+                //invaderY = 0;
             }
             //preparing the text for the Lives to show in the display.
             string livesText = $"Lives: {lives}";

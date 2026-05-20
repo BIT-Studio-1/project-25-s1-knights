@@ -31,6 +31,8 @@ namespace gameproject
 
         public static int shootCooldown = 0; //stops bullet spam
 
+        public static int lives = 5; // set lives to 5 by default
+
     }
     public class Bullet
     {
@@ -58,6 +60,7 @@ namespace gameproject
                 limits();
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 Luke();
+                Arjun(); // Calls the function to calculate the lives.
                 
 
 
@@ -105,7 +108,7 @@ namespace gameproject
                 playerX--;
                 moved = true;
             }
-            if (IsKeyDown(Spacebar))
+            if (IsKeyDown(Spacebar)&& shootCooldown == 0)
             {
                 PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1});
                 shootCooldown = 5;
@@ -217,6 +220,7 @@ namespace gameproject
                     {
                         invaderY[i] = 0;
 
+<<<<<<< HEAD
                     }
                     Console.SetCursorPosition(invaderX[i], invaderY[i]);
                     Console.Write("X");
@@ -224,17 +228,30 @@ namespace gameproject
 
                 }
                     
+=======
+>>>>>>> 28f328212be8fcaa1851d2b6190bd39aa0f62fc3
 
 
 
-                await Task.Delay(300);
+
+                    await Task.Delay(300);
+                }
             }
         }
 
 
         public static void Arjun()
         {
-
+            if (invaderX == playerX && invaderY == playerY)
+            {
+                lives--;
+                //invaderX = 0;
+                //invaderY = 0;
+            }
+            //preparing the text for the Lives to show in the display.
+            string livesText = $"Lives: {lives}";
+            SetCursorPosition(WindowWidth - livesText.Length, 0);
+            Write(livesText);
         }
 
         public static void Stephanie()

@@ -194,13 +194,15 @@ namespace gameproject
 
             while (true)
             {
+                int consoleWidth = Console.WindowWidth;
+                int consoleHeight = Console.WindowHeight;
                 Clear();
 
 
                 spawnTimer++;
                 if (spawnTimer >= 10 && spawned < 15)
                 {
-                    invaderX[spawned] = rand.Next(WindowWidth);
+                    invaderX[spawned] = rand.Next(consoleWidth);
                     invaderY[spawned] = 0;
                     spawned++;
                     spawnTimer = 0;
@@ -209,20 +211,18 @@ namespace gameproject
 
                 for (int i = 0; i < spawned; i++)
                 {
-
-                    if (invaderY[i] < Console.WindowHeight)
+                    invaderY[i]++;
+                    if (invaderY[i] >= Console.WindowHeight)
+                        
                     {
-                        invaderY[i]++;
-                        Console.SetCursorPosition(invaderX[i], invaderY[i] % Console.WindowHeight);
-                        Console.Write("X");
-                    }
-
-                    else if (invaderY[i] == Console.WindowHeight)
-                    {
-
                         invaderY[i] = 0;
-                    }
 
+                    }
+                    Console.SetCursorPosition(invaderX[i], invaderY[i]);
+                    Console.Write("X");
+
+
+                }
                     
 
 

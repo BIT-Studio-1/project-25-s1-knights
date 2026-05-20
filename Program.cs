@@ -60,7 +60,7 @@ namespace gameproject
                 limits();
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 Luke();
-                Arjun();
+                Arjun(); // Calls the function to calculate the lives.
                 
 
 
@@ -244,7 +244,7 @@ namespace gameproject
                 invaderX = 0;
                 invaderY = 0;
             }
-
+            //preparing the text for the Lives to show in the display.
             string livesText = $"Lives: {lives}";
             SetCursorPosition(WindowWidth - livesText.Length, 0);
             Write(livesText);

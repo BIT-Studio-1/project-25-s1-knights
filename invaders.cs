@@ -37,6 +37,7 @@ namespace gameproject
             {
                 int consoleWidth = Console.WindowWidth;
                 int consoleHeight = Console.WindowHeight;
+                Clear();
 
                 
 
@@ -63,7 +64,6 @@ namespace gameproject
 
 
                 {
-                    Write(" ");
                     invaderY[i]++;
                     if (invaderY[i] >= Console.WindowHeight)
 

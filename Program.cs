@@ -9,6 +9,7 @@ using System.Diagnostics;
 using static gameproject.Character;
 using static gameproject.Lives;
 using static gameproject.invaders;
+using static gameproject.Levels;
 
 
 
@@ -104,84 +105,6 @@ namespace gameproject
             // sets the player position every time it loops and makes it so that if the window maximizes and the minimizes it doesn't crash form out of bounds
         }
         
-
-
-       
-
-
-        
-
-        public static void Level() //Stephanie
-        {
-            //LEVEL 1
-            if (level == 1)
-            {
-                maxInvaders = 5;
-                invaderSpeed = 290; // was 300
-                spawnRate = 10;
-            }
-            else if (level == 2)
-            {
-                maxInvaders = 8;
-                invaderSpeed = 250;
-                spawnRate = 8;
-            }
-            else if (level == 3)
-            {
-                maxInvaders = 10;
-                invaderSpeed = 200;
-                spawnRate = 6;
-            }
-            else if (level == 4)
-            {
-                maxInvaders = 12;
-                invaderSpeed = 150;
-                spawnRate = 5;
-            }
-            else if (level == 5)
-            {
-                maxInvaders = 15;
-                invaderSpeed = 100;
-                spawnRate = 3;
-            }
-
-            // WIN GAME
-            if (level > 5)
-            {
-                Clear();
-
-                SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
-                Write("You WIN! GAME COMPLETE!");
-
-                start = false;
-            }
-
-            //SHOW LEVEL
-            string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
-            SetCursorPosition(0, 0);
-            Write(levelText);
-
-            //Level Progression: move to the next level.
-            if (enemiesKilled >= maxInvaders)
-            {
-                level++;
-                enemiesKilled = 0;
-
-                Clear();
-                SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
-                Write($"Level {level}");
-                Thread.Sleep(1000);
-                Clear();
-
-                SetCursorPosition(WindowWidth / 2 - 6, WindowHeight / 2 - 1);
-                Write("GET READY!");
-                Thread.Sleep(500);
-
-                Clear();
-            }
-
-
-        }
 
     }
 }

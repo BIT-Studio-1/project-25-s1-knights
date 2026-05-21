@@ -10,6 +10,7 @@ using static gameproject.Bullet;
 using static gameproject.Program;
 using static gameproject.Character;
 using static gameproject.invaders;
+using static gameproject.Levels;
 
 namespace gameproject
 {

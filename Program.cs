@@ -322,7 +322,7 @@ namespace gameproject
                 Clear();
 
                 SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
-                Write("You WIN!");
+                Write("You WIN! GAME COMPLETE!");
 
                 start = false;
             }

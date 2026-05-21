@@ -12,7 +12,45 @@ using static gameproject.Character;
 
 namespace gameproject
 {
-    internal class menu
+    internal class Menu
     {
+        static int option = 1;
+
+        public static void startmenu()
+        {
+            while (menustart)
+            {
+                Clear();
+
+                if (option == 1)
+                {
+                    BackgroundColor = ConsoleColor.White;
+                    ForegroundColor = ConsoleColor.Black;
+                    WriteLine("> PLAY    ");
+                    ResetColor();
+                    WriteLine("  CONTROLS");
+                    WriteLine("  EXIT    ");
+                }
+                else if (option == 2)
+                {
+                    WriteLine("  PLAY    ");
+                    BackgroundColor = ConsoleColor.White;
+                    ForegroundColor = ConsoleColor.Black;
+                    WriteLine("> CONTROLS");
+                    ResetColor();
+                    WriteLine("  EXIT    ");
+                }
+                else if (option == 3)
+                {
+                    WriteLine("  PLAY    ");
+                    WriteLine("  CONTROLS");
+                    BackgroundColor = ConsoleColor.White;
+                    ForegroundColor = ConsoleColor.Black;
+                    WriteLine("> EXIT    ");
+                    ResetColor();
+                }
+                ReadKey(true);
+            }
+        }
     }
 }

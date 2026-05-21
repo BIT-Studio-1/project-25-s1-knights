@@ -344,7 +344,7 @@ namespace gameproject
                 Thread.Sleep(1000);
                 Clear();
 
-                SetCursor(WindowWidth / 2 - 6, WindowHeight / 2 - 1);
+                SetCursorPosition(WindowWidth / 2 - 6, WindowHeight / 2 - 1);
                 Write("GET READY!");
                 Thread.Sleep(500);
 

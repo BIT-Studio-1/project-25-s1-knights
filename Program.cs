@@ -332,6 +332,14 @@ namespace gameproject
             SetCursorPosition(0, 0);
             Write(levelText);
 
+            //Level Progression: move to the next level.
+            if (enemiesKilled >= maxInvaders)
+            {
+                level++;
+                enemiesKilled = 0;
+                Clear();
+            }
+
 
         }
 

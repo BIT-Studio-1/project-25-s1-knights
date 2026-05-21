@@ -341,7 +341,7 @@ namespace gameproject
                 Clear();
                 SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
                 Write($"Level {level}");
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 Clear();
             }
 

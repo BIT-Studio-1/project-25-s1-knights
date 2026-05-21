@@ -328,7 +328,7 @@ namespace gameproject
             }
 
             //SHOW LEVEL
-            string levelText = $"Level: {level} | Kills: {enemiesKilled}";
+            string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
             SetCursorPosition(0, 0);
             Write(levelText);
 

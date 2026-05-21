@@ -8,6 +8,7 @@ using static System.Math;
 using System.Diagnostics;
 using static gameproject.Bullet;
 using static gameproject.Program;
+using static gameproject.Lives;
 
 namespace gameproject
 {

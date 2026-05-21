@@ -7,6 +7,7 @@ using static System.ConsoleKey;
 using static System.Math;
 using System.Diagnostics;
 using static gameproject.Character;
+using static gameproject.Lives;
 
 
 
@@ -153,25 +154,7 @@ namespace gameproject
         }
 
 
-        public static async Task Arjun()
-        {
-            for (int i = 0; i < spawned; i++)
-            {
-                if (invaderX[i] == -1) continue; // skip destroyed invaders
-                if (invaderX[i] == playerX && invaderY[i] == playerY)
-                {
-                    lives--;
-                    // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
-                    await Task.Delay(100);
-                }
-            }
-
-            if (lives <= 0) start = false;
-
-            string livesText = $"Lives: {lives}";
-            SetCursorPosition(WindowWidth - livesText.Length, 0);
-            Write(livesText);
-        }
+        
 
         public static void Level() //Stephanie
         {

@@ -37,7 +37,8 @@ namespace gameproject
             {
                 int consoleWidth = Console.WindowWidth;
                 int consoleHeight = Console.WindowHeight;
-                Clear();
+                Write(' ');
+                
 
                 
 
@@ -69,6 +70,10 @@ namespace gameproject
 
                     {
                         invaderY[i] = 0;
+                    }
+                    if (invaderY[i] == -1)
+                    {
+                        continue;
                     }
                     Console.SetCursorPosition(invaderX[i], invaderY[i]);
                     Console.Write("X");

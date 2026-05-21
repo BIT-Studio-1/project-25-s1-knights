@@ -20,10 +20,7 @@ namespace gameproject
     public static class Globals // variables that any class or function can access
     {
 // HEAD
-        public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth/2, playerY = WindowHeight/2;
-        public static ConsoleKey key;
-        public static bool start = true;
-
+     
         // Level System Added
         public static int level = 1;
         public static int maxInvaders = 5;
@@ -78,10 +75,10 @@ namespace gameproject
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 //
                 limits();
+                _= Arjun(); // Calls the function to calculate the lives.
 // 1a76d734df82ee41272dee5603e1235ed87f19ee
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 Luke();
-                Arjun(); // Calls the function to calculate the lives.
 
 
 
@@ -261,7 +258,7 @@ namespace gameproject
         }
 
 
-        public static void Arjun()
+        public static async Task Arjun()
         {
             for (int i = 0; i < spawned; i++)
             {
@@ -270,8 +267,7 @@ namespace gameproject
                 {
                     lives--;
                     // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
-                    invaderX[i] = -1;
-                    invaderY[i] = -1;
+                    await Task.Delay(100);
                 }
             }
 

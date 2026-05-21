@@ -9,6 +9,7 @@ using System.Diagnostics;
 using static gameproject.Bullet;
 using static gameproject.Program;
 using static gameproject.Character;
+using static gameproject.menu;
 
 namespace gameproject
 {

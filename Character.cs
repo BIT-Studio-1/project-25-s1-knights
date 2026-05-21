@@ -11,6 +11,7 @@ using static gameproject.Program;
 using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
+using static gameproject.menu;
 
 namespace gameproject
 {

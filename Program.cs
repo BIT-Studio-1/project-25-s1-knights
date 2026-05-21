@@ -337,6 +337,11 @@ namespace gameproject
             {
                 level++;
                 enemiesKilled = 0;
+
+                Clear();
+                SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
+                Write($"Level {level}");
+                Thread.Sleep(2000);
                 Clear();
             }
 

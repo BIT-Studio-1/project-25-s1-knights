@@ -33,7 +33,8 @@ namespace gameproject
             {
                 int consoleWidth = Console.WindowWidth;
                 int consoleHeight = Console.WindowHeight;
-                Clear();
+               
+                
 
 
                 spawnTimer++;

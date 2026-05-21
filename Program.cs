@@ -72,18 +72,19 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            _ = newInvader();
 
+            _ = newInvader();
             while (start == true)
             {
 
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 
                 limits();
-                _= Arjun(); // Calls the function to calculate the lives.
+                _=Arjun(); // Calls the function to calculate the lives.
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();
+                
 
 
 

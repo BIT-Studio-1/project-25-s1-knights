@@ -284,7 +284,7 @@ namespace gameproject
             if (level == 1)
             {
                 maxInvaders = 5;
-                invaderSpeed = 300;
+                invaderSpeed = 290; // was 300
                 spawnRate = 10;
             }
             else if (level == 2)
@@ -318,15 +318,34 @@ namespace gameproject
                 Clear();
 
                 SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
-                Write("You WIN!");
+                Write("You WIN! GAME COMPLETE!");
 
                 start = false;
             }
 
             //SHOW LEVEL
-            string levelText = $"Level: {level}";
+            string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
             SetCursorPosition(0, 0);
             Write(levelText);
+
+            //Level Progression: move to the next level.
+            if (enemiesKilled >= maxInvaders)
+            {
+                level++;
+                enemiesKilled = 0;
+
+                Clear();
+                SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
+                Write($"Level {level}");
+                Thread.Sleep(1000);
+                Clear();
+
+                SetCursorPosition(WindowWidth / 2 - 6, WindowHeight / 2 - 1);
+                Write("GET READY!");
+                Thread.Sleep(500);
+
+                Clear();
+            }
 
 
         }

@@ -58,6 +58,7 @@ namespace gameproject
                 Write("You WIN! GAME COMPLETE!");
 
                 start = false;
+                return;
             }
 
             //SHOW LEVEL

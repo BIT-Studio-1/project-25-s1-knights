@@ -27,7 +27,7 @@ namespace gameproject
                 {
                     lives--;
                     // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
-                    await Task.Delay(100);
+                    await Task.Delay(1000);
                 }
             }
 

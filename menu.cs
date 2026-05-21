@@ -18,7 +18,7 @@ namespace gameproject
 
         public static void startmenu()
         {
-            while (menustart)
+            while (menuStart)
             {
                 Clear();
 
@@ -50,6 +50,65 @@ namespace gameproject
                     ResetColor();
                 }
                 ReadKey(true);
+                menuControl();
+                menuOpperation();
+            }
+
+            static void menuControl()
+            {
+
+                if ((IsKeyDown(DownArrow) || IsKeyDown(S)) && (option < 3))
+                {
+                    option++;
+                }
+                else if ((IsKeyDown(UpArrow) || IsKeyDown(W)) && (option > 1))
+                {
+                    option--;
+
+                }
+            }
+
+            static void menuOpperation()
+            {
+
+                if ((IsKeyDown(Spacebar) || IsKeyDown(Enter)) && (option == 1))
+                {
+                    start = true;
+                    menuStart = false;
+                    Clear();
+                }
+                else if ((IsKeyDown(Spacebar) || IsKeyDown(Enter)) && (option == 2))
+                {
+
+                    menuStart = false;
+                    Clear();
+                    WriteLine("MOVEMENT:    A and D        ARROW KEYS");
+                    WriteLine("SHOOT:       SPACEBAR                 ");
+                    BackgroundColor = ConsoleColor.White;
+                    ForegroundColor = ConsoleColor.Black;
+                    WriteLine("\n\n\n> RETURN  ");
+                    ResetColor();
+
+                    bool inControls = true;
+                    while (inControls)
+                    {
+                        ConsoleKey controlKey = ReadKey(true).Key;
+                        if (controlKey == Spacebar || controlKey == Enter)
+                        {
+                            inControls = false;
+                            menuStart = true;
+                        }
+                    }
+
+
+                }
+                else if ((IsKeyDown(Spacebar) || IsKeyDown(Enter)) && (option == 3))
+                {
+
+                    menuStart = false;
+                }
+
+
             }
         }
     }

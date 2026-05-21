@@ -84,6 +84,8 @@ namespace gameproject
                         invaderX[e] = -1; // mark as destroyed
                         invaderY[e] = -1;
 
+                        enemiesKilled++; // Increase kill count for level progression
+
                         PlayerBullets.RemoveAt(i); // remove the bullet
                         hitSomething = true; // stops the loop since this bullet is used up
                     }

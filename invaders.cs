@@ -28,12 +28,19 @@ namespace gameproject
             //int spawned = 0;
             //int spawnTimer = 0;
             int finished = 0;
+            int[] meteorX = new int[1000];
+            int[] meteorY = new int[1000];
+            int meteorSpawn = 0;
+            int meteorSpawnTimer = 0;
 
             while (true)
             {
                 int consoleWidth = Console.WindowWidth;
                 int consoleHeight = Console.WindowHeight;
-                Clear();
+                Write(' ');
+                
+
+                
 
 
                 spawnTimer++;
@@ -45,8 +52,18 @@ namespace gameproject
                     spawnTimer = 0;
                 }
 
+                if ((meteorSpawnTimer >=5) && (meteorSpawn < 2))
+                {
+                    meteorX[meteorSpawn] = rand.Next(consoleWidth);
+                    meteorY[meteorSpawn] = 0;
+                    meteorSpawn++;
+                    meteorSpawnTimer = 0;
+                }
+
 
                 for (int i = 0; i < spawned; i++)
+
+
                 {
                     invaderY[i]++;
                     if (invaderY[i] >= Console.WindowHeight)
@@ -54,13 +71,33 @@ namespace gameproject
                     {
                         invaderY[i] = 0;
                     }
+                    if (invaderY[i] == -1)
+                    {
+                        continue;
+                    }
                     Console.SetCursorPosition(invaderX[i], invaderY[i]);
                     Console.Write("X");
 
 
                 }
 
-                await Task.Delay(300);
+                for (int j = 0; j < meteorSpawn; j++)
+                {
+                    meteorY[j]++;
+                    if (meteorY[j] >= Console.WindowHeight)
+                    {
+                        meteorY[j] = 0;
+                    }
+                    Console.SetCursorPosition(meteorX[j], meteorY[j]);
+                    Console.Write("O");
+                }
+
+
+
+
+
+
+                    await Task.Delay(300);
             }
         }
     }

@@ -11,6 +11,7 @@ using static gameproject.Program;
 using static gameproject.Character;
 using static gameproject.Levels;
 using static gameproject.Menu;
+using static gameproject.Invader;
 
 namespace gameproject
 {
@@ -44,11 +45,10 @@ namespace gameproject
 
 
                 spawnTimer++;
-                if (spawnTimer >= 10 && spawned < 15)
+                if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
                 {
-                    invaderX[spawned] = rand.Next(consoleWidth);
-                    invaderY[spawned] = 0;
-                    spawned++;
+                    Invaders.Add(new Invader{ x = rand.Next(Console.WindowWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
+
                     spawnTimer = 0;
                 }
 
@@ -61,25 +61,23 @@ namespace gameproject
                 }
 
 
-                for (int i = 0; i < spawned; i++)
 
+                 
 
+                
+                foreach (Invader invader in Invaders)
                 {
-                    invaderY[i]++;
-                    if (invaderY[i] >= Console.WindowHeight)
-
+                    invader.Move();
+                    
+                    if (invader.y >= Console.WindowHeight)
                     {
-                        invaderY[i] = 0;
+                        invader.y = 0;
                     }
-                    if (invaderY[i] == -1)
-                    {
-                        continue;
-                    }
-                    Console.SetCursorPosition(invaderX[i], invaderY[i]);
-                    Console.Write("X");
-
-
+                    SetCursorPosition(invader.x, invader.y);
+                    Write("X");
                 }
+
+                
 
                 for (int j = 0; j < meteorSpawn; j++)
                 {
@@ -97,7 +95,7 @@ namespace gameproject
 
 
 
-                    await Task.Delay(300);
+                    await Task.Delay(invaderSpeed);
             }
         }
     }

@@ -43,9 +43,7 @@ namespace gameproject
         public static int invader;
 
         //Arjun - Variables declared in Invanders moved to here.
-        public static int[] invaderX = new int[1000];
-        public static int[] invaderY = new int[1000];
-        public static int spawned = 0;
+        public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static int spawnTimer = 0;
 
         public static int shootCooldown = 0; //stops bullet spam
@@ -58,6 +56,14 @@ namespace gameproject
         public int x { get; set; }
         public int y { get; set; }
         public void Move() => y--;
+    }
+
+    public class Invader
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public int Move() => y++;
     }
 
     internal class Program

@@ -72,17 +72,16 @@ namespace gameproject
 
                 //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
                 bool hitSomething = false;
-                for (int e = 0; e < spawned && !hitSomething; e++) // loop through every invader
+                for (int e = Invaders.Count -1; e >= 0 && !hitSomething; e--) // loop through every invader
                 {
-                    if (invaderX[e] == -1) continue; // skip already destroyed ones
+                   
 
-                    if (PlayerBullets[i].x == invaderX[e] && PlayerBullets[i].y == invaderY[e]) // check if bullet is on same spot as this invader
+                    if (PlayerBullets[i].x == Invaders[e].x && PlayerBullets[i].y == Invaders[e].y) // check if bullet is on same spot as this invader
                     {
-                        SetCursorPosition(invaderX[e], invaderY[e]);
+                        SetCursorPosition(Invaders[e].x, Invaders[e].y);
                         Write(' '); // erase invader from screen
 
-                        invaderX[e] = -1; // mark as destroyed
-                        invaderY[e] = -1;
+                        Invaders.RemoveAt(e); //removes invaders from list
 
                         enemiesKilled++; // Increase kill count for level progression
 

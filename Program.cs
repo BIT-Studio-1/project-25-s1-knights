@@ -40,7 +40,7 @@ namespace gameproject
 
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
 
-        public static int invader;
+        
 
         //Arjun - Variables declared in Invanders moved to here.
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
@@ -79,7 +79,7 @@ namespace gameproject
         {
             CursorVisible = false;
             startmenu();
-            if (start) { _ = newInvader(); }
+            
             
 
 
@@ -89,10 +89,12 @@ namespace gameproject
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 
                 limits();
-                _=Arjun(); // Calls the function to calculate the lives.
+                //_=Arjun(); // Calls the function to calculate the lives.
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();
+                //newInvader(); // removed because of async
+                updateinvaders();
                 
 
 

@@ -63,7 +63,7 @@ namespace gameproject
             }
 
 
-            if (level < 6)
+            if (level <= 5)
             {
                 //SHOW LEVEL
                 string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
@@ -73,7 +73,7 @@ namespace gameproject
             }
 
             //Level Progression: move to the next level.
-            if (enemiesKilled >= maxInvaders)
+            if (enemiesKilled >= maxInvaders && level <=5)
             {
                 level++;
                 enemiesKilled = 0;

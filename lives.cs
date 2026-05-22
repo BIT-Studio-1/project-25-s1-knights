@@ -18,7 +18,7 @@ namespace gameproject
     internal class Lives
     {
 
-        //public static async Task Arjun()
+        //public static async Task lives()
         //{
         //    for (int i = 0; i < spawned; i++)
         //    {

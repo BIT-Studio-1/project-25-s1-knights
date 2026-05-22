@@ -35,7 +35,7 @@ namespace gameproject
                 
                 if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
                 {
-                    Invaders.Add(new Invader{ x = rand.Next(WindowWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
+                    Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
 
                     spawnTimer = 0;
                 }

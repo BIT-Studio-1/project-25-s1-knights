@@ -89,7 +89,7 @@ namespace gameproject
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 
                 limits();
-                //_=Arjun(); // Calls the function to calculate the lives.
+                //_=lives(); // Calls the function to calculate the lives.
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();
@@ -110,7 +110,7 @@ namespace gameproject
                     start = false;
                     menuStart = true;
                     startmenu();
-                }
+                } //pauses if you press escape
             }
 
 

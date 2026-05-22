@@ -18,8 +18,8 @@ namespace gameproject
     internal class Lives
     {
 
-        public static async Task Arjun()
-        {
+        //public static async Task Arjun()
+        //{
         //    for (int i = 0; i < spawned; i++)
         //    {
         //        if (invaderX[i] == -1) continue; // skip destroyed invaders
@@ -36,7 +36,7 @@ namespace gameproject
         //    string livesText = $"Lives: {lives}";
         //    SetCursorPosition(WindowWidth - livesText.Length, 0);
         //    Write(livesText);
-        }
+        //}
 
     }
 }

@@ -63,7 +63,7 @@ namespace gameproject
         public int x { get; set; }
         public int y { get; set; }
 
-        public int Move() => y++;
+        public void Move() => y++;
     }
 
     internal class Program
@@ -82,7 +82,7 @@ namespace gameproject
             if (start) { _ = newInvader(); }
             
 
-            _ = newInvader();
+
             while (start == true)
             {
 

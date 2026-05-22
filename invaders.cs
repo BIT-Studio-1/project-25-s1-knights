@@ -38,7 +38,7 @@ namespace gameproject
             {
                 int consoleWidth = Console.WindowWidth;
                 int consoleHeight = Console.WindowHeight;
-                Write(' ');
+
                 
 
                 
@@ -47,48 +47,54 @@ namespace gameproject
                 spawnTimer++;
                 if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
                 {
-                    Invaders.Add(new Invader{ x = rand.Next(Console.WindowWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
+                    Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
 
                     spawnTimer = 0;
                 }
 
-                if ((meteorSpawnTimer >=5) && (meteorSpawn < 2))
-                {
-                    meteorX[meteorSpawn] = rand.Next(consoleWidth);
-                    meteorY[meteorSpawn] = 0;
-                    meteorSpawn++;
-                    meteorSpawnTimer = 0;
-                }
+                //if ((meteorSpawnTimer >=5) && (meteorSpawn < 2))
+                //{
+                //    meteorX[meteorSpawn] = rand.Next(consoleWidth);
+                //    meteorY[meteorSpawn] = 0;
+                //    meteorSpawn++;
+                //    meteorSpawnTimer = 0;
+                //}
 
 
 
                  
 
                 
-                foreach (Invader invader in Invaders)
+                for (int i = Invaders.Count-1; i >= 0; i--)
                 {
-                    invader.Move();
-                    
-                    if (invader.y >= Console.WindowHeight)
+                    if (Invaders[i].y >= 0 && Invaders[i].y < consoleHeight) ;
                     {
-                        invader.y = 0;
+                        SetCursorPosition(Invaders[i].x, Invaders[i].y);
+
+                        Write(' ');
                     }
-                    SetCursorPosition(invader.x, invader.y);
+                    Invaders[i].Move();
+                    
+                    if (Invaders[i].y >= consoleHeight)
+                    {
+                        Invaders[i].y = 0;
+                    }
+                    SetCursorPosition(Invaders[i].x, Invaders[i].y);
                     Write("X");
                 }
 
                 
 
-                for (int j = 0; j < meteorSpawn; j++)
-                {
-                    meteorY[j]++;
-                    if (meteorY[j] >= Console.WindowHeight)
-                    {
-                        meteorY[j] = 0;
-                    }
-                    Console.SetCursorPosition(meteorX[j], meteorY[j]);
-                    Console.Write("O");
-                }
+                //for (int j = 0; j < meteorSpawn; j++)
+                //{
+                //    meteorY[j]++;
+                //    if (meteorY[j] >= Console.WindowHeight)
+                //    {
+                //        meteorY[j] = 0;
+                //    }
+                //    Console.SetCursorPosition(meteorX[j], meteorY[j]);
+                //    Console.Write("O");
+                //}
 
 
 

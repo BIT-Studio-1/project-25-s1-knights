@@ -58,13 +58,19 @@ namespace gameproject
                 Write("You WIN! GAME COMPLETE!");
 
                 start = false;
+                ReadKey();
                 return;
             }
 
-            //SHOW LEVEL
-            string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
-            SetCursorPosition(0, 0);
-            Write(levelText);
+
+            if (level < 6)
+            {
+                //SHOW LEVEL
+                string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
+                SetCursorPosition(0, 0);
+                Write(levelText);
+
+            }
 
             //Level Progression: move to the next level.
             if (enemiesKilled >= maxInvaders)

@@ -51,6 +51,8 @@ namespace gameproject
             }
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
 
+            if (playerY != WindowHeight - 5) playerY = WindowHeight - 5; 
+
 
         }
 
@@ -92,7 +94,7 @@ namespace gameproject
                 if (hitSomething) continue; // skip to next bullet since this one is gone
 
 
-                if (PlayerBullets[i].y < 0)
+                if (PlayerBullets[i].y < 0 || PlayerBullets[i].y > WindowHeight || PlayerBullets[i].x > WindowWidth)
                 {
                     PlayerBullets.RemoveAt(i); //remove if off screen otherwise draw
                 }

@@ -82,8 +82,9 @@ namespace gameproject
 
                     menuStart = false;
                     Clear();
-                    WriteLine("MOVEMENT:    A and D        ARROW KEYS");
+                    WriteLine("MOVEMENT:    A AND D        ARROW KEYS");
                     WriteLine("SHOOT:       SPACEBAR                 ");
+                    WriteLine("PAUSE:       ESCAPE                   ");
                     BackgroundColor = ConsoleColor.White;
                     ForegroundColor = ConsoleColor.Black;
                     WriteLine("\n\n\n> RETURN  ");

@@ -44,12 +44,7 @@ namespace gameproject
 
         //Arjun - Variables declared in Invanders moved to here.
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
-        public static int spawnTimer = 0;
-
-        public static int shootCooldown = 0; //stops bullet spam
-
-        public static int lives = 5; // set lives to 5 by default
-
+        public static int spawnTimer = 0, shootCooldown = 0, lives = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
     }
     public class Bullet
     {
@@ -78,13 +73,17 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
+
             startmenu();
             
             
 
 
-            while (start == true)
+            while (start)
             {
+                consoleHeight = WindowHeight;
+                consoleWidth = WindowWidth;
+
 
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 
@@ -122,6 +121,8 @@ namespace gameproject
             farRow = WindowWidth - 1;
             playerX = Clamp(playerX, 0, farRow);
             playerY = Clamp(playerY, 0, bottomRow - 1);
+            CursorLeft = Clamp(CursorLeft, 0, consoleWidth);
+            CursorTop = Clamp(CursorTop, 0, consoleHeight);
             // sets the player position every time it loops and makes it so that if the window maximizes and the minimizes it doesn't crash form out of bounds
         }
         

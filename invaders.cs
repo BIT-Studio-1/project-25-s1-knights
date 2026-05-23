@@ -21,8 +21,7 @@ namespace gameproject
         public static void updateinvaders()
         {
 
-            int consoleWidth = Console.WindowWidth;
-            int consoleHeight = Console.WindowHeight;
+            
             Random rand = new Random();
 
 

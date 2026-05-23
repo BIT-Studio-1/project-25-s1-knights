@@ -12,6 +12,7 @@ using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
+using System.Numerics;
 
 namespace gameproject
 {
@@ -62,8 +63,9 @@ namespace gameproject
 
             for (int i = PlayerBullets.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
             {
-                if (PlayerBullets[i].y >= 0 && PlayerBullets[i].y < WindowHeight) //check if the bullet is still within the window
+                if (PlayerBullets[i].y >= 0 && PlayerBullets[i].y < WindowHeight && PlayerBullets[i].x < WindowWidth) //check if the bullet is still within the window
                 {
+                    
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write(' '); // clear the old position
                 }
@@ -101,6 +103,7 @@ namespace gameproject
 
                 else
                 {
+                    
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write('|');
                 }

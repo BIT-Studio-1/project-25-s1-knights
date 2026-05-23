@@ -21,31 +21,31 @@ namespace gameproject
             if (level == 1)
             {
                 maxInvaders = 5;
-                invaderSpeed = 290; // was 300
+                invaderSpeed = 10; // was 300
                 spawnRate = 10;
             }
             else if (level == 2)
             {
                 maxInvaders = 8;
-                invaderSpeed = 250;
+                invaderSpeed = 9;
                 spawnRate = 8;
             }
             else if (level == 3)
             {
                 maxInvaders = 10;
-                invaderSpeed = 200;
+                invaderSpeed = 8;
                 spawnRate = 6;
             }
             else if (level == 4)
             {
                 maxInvaders = 12;
-                invaderSpeed = 150;
+                invaderSpeed = 7;
                 spawnRate = 5;
             }
             else if (level == 5)
             {
                 maxInvaders = 15;
-                invaderSpeed = 100;
+                invaderSpeed = 6;
                 spawnRate = 3;
             }
 

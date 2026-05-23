@@ -17,7 +17,11 @@ namespace gameproject
 {
     internal class invaders
     {
-        Random rand = new Random();
+
+
+            
+        
+        
         public static void updateinvaders()
         {
 
@@ -32,12 +36,12 @@ namespace gameproject
 
 
                 
-                if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
-                {
-                    Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
+            if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
+            {
+                Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
 
-                    spawnTimer = 0;
-                }
+                spawnTimer = 0;
+            }
 
             for (int i = Invaders.Count - 1; i >= 0; i--)
             {
@@ -47,6 +51,7 @@ namespace gameproject
 
                     Write(' ');
                 }
+                
                 Invaders[i].Move();
 
                 if (Invaders[i].y >= WindowHeight)

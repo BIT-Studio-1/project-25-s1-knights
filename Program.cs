@@ -32,7 +32,7 @@ namespace gameproject
         public static int invaderSpeed = 10;
         public static int spawnRate = 10;
         public static int enemiesKilled = 0;
-        
+        public static Random rand = new Random();
 
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
@@ -82,10 +82,14 @@ namespace gameproject
 
             while (start)
             {
-                consoleHeight = WindowHeight;
-                consoleWidth = WindowWidth;
 
-                
+
+                if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
+                {
+                    consoleWidth = WindowWidth;
+                    consoleHeight = WindowHeight;
+                    Clear();
+                }
 
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 

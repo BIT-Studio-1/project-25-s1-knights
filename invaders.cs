@@ -25,17 +25,12 @@ namespace gameproject
         public static void updateinvaders()
         {
 
-            
-            Random rand = new Random();
+
 
 
             spawnTimer++;
             
-            
-                
-
-
-                
+ 
             if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
             {
                 Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
@@ -45,8 +40,21 @@ namespace gameproject
 
             for (int i = Invaders.Count - 1; i >= 0; i--)
             {
-                if (Invaders[i].y >= 0 && Invaders[i].y < WindowHeight && Invaders[i].x < WindowWidth)
+
+
+                if (Invaders[i].x >= consoleWidth)
                 {
+                    Invaders[i].x = rand.Next(consoleWidth);
+                }
+
+                if (Invaders[i].y >= consoleHeight)
+                {
+                    Invaders[i].y = rand.Next(consoleHeight);
+                }
+
+                if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
+                {
+
                     SetCursorPosition(Invaders[i].x, Invaders[i].y);
 
                     Write(' ');
@@ -54,12 +62,12 @@ namespace gameproject
                 
                 Invaders[i].Move();
 
-                if (Invaders[i].y >= WindowHeight)
+                if (Invaders[i].y >= consoleHeight)
                 {
                     Invaders[i].y = 0;
                 }
 
-                if (Invaders[i].x < WindowWidth && Invaders[i].y < WindowHeight)
+                if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
                 {
                     SetCursorPosition(Invaders[i].x, Invaders[i].y);
                     Write("X");

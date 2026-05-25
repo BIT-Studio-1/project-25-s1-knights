@@ -12,6 +12,7 @@ using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
+using System.Numerics;
 
 namespace gameproject
 {
@@ -51,6 +52,8 @@ namespace gameproject
             }
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
 
+            if (playerY != WindowHeight - 5) playerY = WindowHeight - 5; 
+
 
         }
 
@@ -60,8 +63,9 @@ namespace gameproject
 
             for (int i = PlayerBullets.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
             {
-                if (PlayerBullets[i].y >= 0 && PlayerBullets[i].y < WindowHeight) //check if the bullet is still within the window
+                if (PlayerBullets[i].y >= 0 && PlayerBullets[i].y < WindowHeight && PlayerBullets[i].x < WindowWidth) //check if the bullet is still within the window
                 {
+                    
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write(' '); // clear the old position
                 }
@@ -72,17 +76,16 @@ namespace gameproject
 
                 //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
                 bool hitSomething = false;
-                for (int e = 0; e < spawned && !hitSomething; e++) // loop through every invader
+                for (int e = Invaders.Count -1; e >= 0 && !hitSomething; e--) // loop through every invader
                 {
-                    if (invaderX[e] == -1) continue; // skip already destroyed ones
+                   
 
-                    if (PlayerBullets[i].x == invaderX[e] && PlayerBullets[i].y == invaderY[e]) // check if bullet is on same spot as this invader
+                    if (PlayerBullets[i].x == Invaders[e].x && PlayerBullets[i].y == Invaders[e].y) // check if bullet is on same spot as this invader
                     {
-                        SetCursorPosition(invaderX[e], invaderY[e]);
+                        SetCursorPosition(Invaders[e].x, Invaders[e].y);
                         Write(' '); // erase invader from screen
 
-                        invaderX[e] = -1; // mark as destroyed
-                        invaderY[e] = -1;
+                        Invaders.RemoveAt(e); //removes invaders from list
 
                         enemiesKilled++; // Increase kill count for level progression
 
@@ -93,13 +96,14 @@ namespace gameproject
                 if (hitSomething) continue; // skip to next bullet since this one is gone
 
 
-                if (PlayerBullets[i].y < 0)
+                if (PlayerBullets[i].y < 0 || PlayerBullets[i].y > WindowHeight || PlayerBullets[i].x > WindowWidth)
                 {
                     PlayerBullets.RemoveAt(i); //remove if off screen otherwise draw
                 }
 
                 else
                 {
+                    
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write('|');
                 }

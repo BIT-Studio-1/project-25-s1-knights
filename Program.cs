@@ -29,10 +29,10 @@ namespace gameproject
         // Level System Added
         public static int level = 1;
         public static int maxInvaders = 5;
-        public static int invaderSpeed = 300;
+        public static int invaderSpeed = 10;
         public static int spawnRate = 10;
         public static int enemiesKilled = 0;
-        
+        public static Random rand = new Random();
 
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
@@ -40,24 +40,25 @@ namespace gameproject
 
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
 
-        public static int invader;
+        
 
         //Arjun - Variables declared in Invanders moved to here.
-        public static int[] invaderX = new int[1000];
-        public static int[] invaderY = new int[1000];
-        public static int spawned = 0;
-        public static int spawnTimer = 0;
-
-        public static int shootCooldown = 0; //stops bullet spam
-
-        public static int lives = 5; // set lives to 5 by default
-
+        public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
+        public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, lives = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
     }
     public class Bullet
     {
         public int x { get; set; }
         public int y { get; set; }
         public void Move() => y--;
+    }
+
+    public class Invader
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public void Move() => y++;
     }
 
     internal class Program
@@ -72,22 +73,35 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            startmenu();
-            if (start) { _ = newInvader(); }
             
 
-            _ = newInvader();
-            while (start == true)
+            startmenu();
+            
+            
+
+
+            while (start)
             {
+
+
+                if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
+                {
+                    consoleWidth = WindowWidth;
+                    consoleHeight = WindowHeight;
+                    Clear();
+                }
 
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 
                 limits();
-                _=Arjun(); // Calls the function to calculate the lives.
+                //_=lives(); // Calls the function to calculate the lives.
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();
-                
+                //newInvader(); // removed because of async
+                updateinvaders();
+
+
 
 
 
@@ -96,6 +110,13 @@ namespace gameproject
                 Write('^');
                 await Task.Delay(15);
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
+
+                if (IsKeyDown(Escape))
+                {
+                    start = false;
+                    menuStart = true;
+                    startmenu();
+                } //pauses if you press escape
             }
 
 
@@ -107,6 +128,7 @@ namespace gameproject
             farRow = WindowWidth - 1;
             playerX = Clamp(playerX, 0, farRow);
             playerY = Clamp(playerY, 0, bottomRow - 1);
+            
             // sets the player position every time it loops and makes it so that if the window maximizes and the minimizes it doesn't crash form out of bounds
         }
         

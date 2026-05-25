@@ -8,5 +8,15 @@ namespace gameproject
 {
     internal class OutroAndDeath
     {
+        public static void ShowWin()
+        {
+            
+        }
+
+        public static void ShowLose()
+        {
+
+        }
+
     }
 }

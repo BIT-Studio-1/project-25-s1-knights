@@ -73,7 +73,8 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            
+
+            OutroAndDeath.ShowWin();
 
             startmenu();
             

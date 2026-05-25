@@ -22,8 +22,8 @@ namespace gameproject
         //{
         //    for (int i = 0; i < spawned; i++)
         //    {
-        //        if (invaderX[i] == -1) continue; // skip destroyed invaders
-        //        if (invaderX[i] == playerX && invaderY[i] == playerY)
+        //        if (invader[i].x == -1) continue; // skip destroyed invaders
+        //        if (invader[i].x == playerX && invaderY[i] == playerY)
         //        {
         //            lives--;
         //            // Arjun - setting this because of need to skip or destroy the invander from screen after hitting

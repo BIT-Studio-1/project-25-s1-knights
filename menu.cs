@@ -18,6 +18,7 @@ namespace gameproject
 
         public static void startmenu()
         {
+            SetCursorPosition(0,0);
             while (menuStart)
             {
                 Clear();

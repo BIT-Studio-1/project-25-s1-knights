@@ -44,7 +44,7 @@ namespace gameproject
 
         //Arjun - Variables declared in Invanders moved to here.
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
-        public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, lives = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
+        public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, Life = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
     }
     public class Bullet
     {
@@ -94,7 +94,7 @@ namespace gameproject
                 Level(); //calls on the level method while the start bool is true so it is continuous.
 
                 limits();
-                //_=lives(); // Calls the function to calculate the lives.
+                _=lives(); // Calls the function to calculate the lives.
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();

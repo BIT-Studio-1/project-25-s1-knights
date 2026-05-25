@@ -11,7 +11,7 @@ using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
-
+using static gameproject.Intro;
 
 
 
@@ -36,7 +36,7 @@ namespace gameproject
 
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
-        public static bool start = false, moved = false, menuStart = true;
+        public static bool start = false, moved = false, menuStart = false;
 
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
 
@@ -73,8 +73,8 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            
 
+            initialScreen();
             startmenu();
             
             

@@ -11,7 +11,7 @@ using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
-
+using static gameproject.Intro;
 
 
 
@@ -36,15 +36,16 @@ namespace gameproject
 
         public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
-        public static bool start = false, moved = false, menuStart = true;
+        public static bool start = false, moved = false, menuStart = false;
 
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
 
-        
+        public static bool gameStarted = false;
 
         //Arjun - Variables declared in Invanders moved to here.
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, Life = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
+        public static int moveRate = 5; //for making invaders move slower
     }
     public class Bullet
     {
@@ -73,16 +74,27 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            
 
+            initialScreen();
             startmenu();
-            
-            
+
+          
+            gameStarted = true;
 
 
             while (start)
             {
+                //if (Life <= 0)
+                //{
+                //    start = false;
+                //    OutroAndDeath.ShowLose();
+                //}
 
+                //if (gameStarted &&Invaders.Count == 0)
+                //{
+                //    start = false;
+                //    OutroAndDeath.ShowWin();
+                //}
 
                 if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
                 {
@@ -91,7 +103,9 @@ namespace gameproject
                     Clear();
                 }
 
+
                 Level(); //calls on the level method while the start bool is true so it is continuous.
+                
 
                 limits();
                 _=lives(); // Calls the function to calculate the lives.
@@ -100,6 +114,8 @@ namespace gameproject
                 shoot();
                 //newInvader(); // removed because of async
                 updateinvaders();
+
+                
 
 
 

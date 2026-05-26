@@ -18,6 +18,7 @@ namespace gameproject
 
         public static void startmenu()
         {
+            SetCursorPosition(0,0);
             while (menuStart)
             {
                 Clear();
@@ -30,6 +31,8 @@ namespace gameproject
                     ResetColor();
                     WriteLine("  CONTROLS");
                     WriteLine("  EXIT    ");
+                    SetCursorPosition(0, WindowHeight / 2);
+                    WriteLine("DO NOT ZOOM IN WHEN PLAYING!!!!! IT WILL CRASH");
                 }
                 else if (option == 2)
                 {
@@ -39,6 +42,8 @@ namespace gameproject
                     WriteLine("> CONTROLS");
                     ResetColor();
                     WriteLine("  EXIT    ");
+                    SetCursorPosition(0, WindowHeight / 2);
+                    WriteLine("DO NOT ZOOM IN WHEN PLAYING!!!!! IT WILL CRASH");
                 }
                 else if (option == 3)
                 {
@@ -48,6 +53,8 @@ namespace gameproject
                     ForegroundColor = ConsoleColor.Black;
                     WriteLine("> EXIT    ");
                     ResetColor();
+                    SetCursorPosition(0, WindowHeight / 2);
+                    WriteLine("DO NOT ZOOM IN WHEN PLAYING!!!!! IT WILL CRASH");
                 }
                 ReadKey(true);
                 menuControl();

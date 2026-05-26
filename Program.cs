@@ -45,6 +45,7 @@ namespace gameproject
         //Arjun - Variables declared in Invanders moved to here.
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, Life = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
+        public static int moveRate = 5; //for making invaders move slower
     }
     public class Bullet
     {
@@ -102,7 +103,7 @@ namespace gameproject
                     Clear();
                 }
 
-                Thread.Sleep(50);
+
                 Level(); //calls on the level method while the start bool is true so it is continuous.
                 
 

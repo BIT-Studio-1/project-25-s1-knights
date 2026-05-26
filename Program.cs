@@ -105,7 +105,7 @@ namespace gameproject
 
 
 
-
+                 
                 SetCursorPosition(playerX, playerY);
                 Write('^');
                 await Task.Delay(15);

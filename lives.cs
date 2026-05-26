@@ -27,6 +27,8 @@ namespace gameproject
                 {
                     Life--;
                     // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
+                    // Explosion + destroy invader
+                    //await ExplosionAnimation(playerX, playerY);
                     await Task.Delay(1000);
                 }
             }

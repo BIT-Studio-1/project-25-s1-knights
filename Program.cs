@@ -40,7 +40,7 @@ namespace gameproject
 
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
 
-        
+        public static bool gameStarted = false;
 
         //Arjun - Variables declared in Invanders moved to here.
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
@@ -76,8 +76,9 @@ namespace gameproject
 
             initialScreen();
             startmenu();
-            
-            
+
+            SpawnInvaders();
+            gameStarted = true;
 
 
             while (start)
@@ -88,10 +89,9 @@ namespace gameproject
                     OutroAndDeath.ShowLose();
                 }
 
-                if (Invaders.Count == 0)
+                if (gameStarted &&Invaders.Count == 0)
                 {
                     start = false;
-
                     OutroAndDeath.ShowWin();
                 }
 

@@ -114,7 +114,7 @@ namespace gameproject
                  
                 SetCursorPosition(playerX, playerY);
                 Write('^');
-                await Task.Delay(15);
+                await Task.Delay(25);
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
                 if (IsKeyDown(Escape))

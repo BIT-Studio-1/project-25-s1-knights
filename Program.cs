@@ -77,7 +77,7 @@ namespace gameproject
             initialScreen();
             startmenu();
 
-            SpawnInvaders();
+          
             gameStarted = true;
 
 

@@ -18,7 +18,7 @@ namespace gameproject
     internal class Lives
     {
 
-        public static async Task lives()
+        public static void CheckLives()
         {
             for (int i = 0; i < Invaders.Count; i++)
             {
@@ -29,7 +29,7 @@ namespace gameproject
                     // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
                     // Explosion + destroy invader
                     //await ExplosionAnimation(playerX, playerY);
-                    await Task.Delay(1000);
+                    //await Task.Delay(1000);
                 }
             }
 

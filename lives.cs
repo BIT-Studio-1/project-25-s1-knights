@@ -20,12 +20,26 @@ namespace gameproject
 
         public static void CheckLives()
         {
-            for (int i = 0; i < Invaders.Count; i++)
+
+            //adding hit cooldown
+            if(hitCooldown > 0)
             {
-                if (Invaders[i].x == -1) continue; // skip destroyed Invaders
+                hitCooldown--;
+                string hud = $"Lives: {Life}";
+                SetCursorPosition(WindowWidth - hud.Length, 0);
+                Write(hud);
+                return; // skipping teh collision in this frame
+            }
+            for (int i = Invaders.Count - 1; i >= 0; i--) //chnaged teh logic to backward safe to remove
+            {
                 if (Invaders[i].x == playerX && Invaders[i].y == playerY)
                 {
+                    SetCursorPosition(Invaders[i].x, Invaders[i].y);
+                    Write(' ');
+                    Invaders.RemoveAt(i);//remove from the list
                     Life--;
+                    hitCooldown = 30;
+                    break;
                     // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
                     // Explosion + destroy invader
                     //await ExplosionAnimation(playerX, playerY);
@@ -33,11 +47,16 @@ namespace gameproject
                 }
             }
 
-            if (Life <= 0) start = false;
-
             string livesText = $"Lives: {Life}";
             SetCursorPosition(WindowWidth - livesText.Length, 0);
             Write(livesText);
+
+            if (Life <= 0) { 
+            start=false;
+                OutroAndDeath.ShowLose();
+            }
+
+            
         }
 
     }

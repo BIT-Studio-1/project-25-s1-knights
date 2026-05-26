@@ -46,6 +46,7 @@ namespace gameproject
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, Life = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
         public static int moveRate = 5; //for making invaders move slower
+        public static int hitCooldown = 0;
     }
     public class Bullet
     {

@@ -24,29 +24,18 @@ namespace gameproject
 
     public static class Globals // variables that any class or function can access
     {
-
-     
         // Level System Added
-        public static int level = 1;
-        public static int maxInvaders = 5;
-        public static int invaderSpeed = 10;
-        public static int spawnRate = 10;
-        public static int enemiesKilled = 0;
+        public static int level = 1, maxInvaders = 5,invaderSpeed = 10,spawnRate = 10,enemiesKilled = 0, bottomRow = WindowHeight - 1,
+                          farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5, hitCooldown = 0, spawnTimer = 0,
+                          shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
+                          moveRate = 5; //for making invaders move slower
         public static Random rand = new Random();
-
-        public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = false, moved = false, menuStart = false;
-
-        public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
-
-        public static bool gameStarted = false;
-
-        //Arjun - Variables declared in Invanders moved to here.
+        public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
-        public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, Life = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
-        public static int moveRate = 5; //for making invaders move slower
-        public static int hitCooldown = 0;
+        
+        
     }
     public class Bullet
     {
@@ -80,7 +69,7 @@ namespace gameproject
             startmenu();
 
           
-            gameStarted = true;
+            
 
 
             while (start)
@@ -91,7 +80,7 @@ namespace gameproject
                 //    OutroAndDeath.ShowLose();
                 //}
 
-                //if (gameStarted &&Invaders.Count == 0)
+                //if (start &&Invaders.Count == 0)
                 //{
                 //    start = false;
                 //    OutroAndDeath.ShowWin();
@@ -114,7 +103,7 @@ namespace gameproject
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();
                 //newInvader(); // removed because of async
-                updateinvaders();
+                _=updateinvaders();
 
                 
 

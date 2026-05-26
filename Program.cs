@@ -102,7 +102,9 @@ namespace gameproject
                     Clear();
                 }
 
+                Thread.Sleep(50);
                 Level(); //calls on the level method while the start bool is true so it is continuous.
+                
 
                 limits();
                 _=lives(); // Calls the function to calculate the lives.
@@ -111,6 +113,8 @@ namespace gameproject
                 shoot();
                 //newInvader(); // removed because of async
                 updateinvaders();
+
+                
 
 
 

@@ -109,7 +109,7 @@ namespace gameproject
                 
 
                 limits();
-                _=lives(); // Calls the function to calculate the lives.
+                CheckLives(); // Calls the function to calculate the lives.
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();

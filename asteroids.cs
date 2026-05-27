@@ -19,10 +19,10 @@ namespace gameproject
 
         public static void newAsteroids()
         {
-            asteroidMoveTimer++;
+            asteroidMoveTimer++;  
             asteroidSpawnTimer++;
 
-            if (level == 1)
+            if (level == 1)  //handles speed per level for asteroids, increasing move rate per level, need to do rest of code so it works properly
             {
                 asteroidMoveRate = 5;
             }

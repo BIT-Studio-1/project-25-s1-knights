@@ -65,64 +65,83 @@ namespace gameproject
         {
             CursorVisible = false;
 
-            initialScreen();
-            startmenu();
-
-            while (start)
+            while (true)
             {
+                start = false;
+                menuStart = false;
 
-                if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
+
+                initialScreen();
+                startmenu();
+
+                while (start)
                 {
-                    consoleWidth = WindowWidth;
-                    consoleHeight = WindowHeight;
-                    Clear();
+
+                    if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
+                    {
+                        consoleWidth = WindowWidth;
+                        consoleHeight = WindowHeight;
+                        Clear();
+                    }
+
+
+                    Level(); //calls on the level method while the start bool is true so it is continuous.
+
+
+                    limits();
+                    CheckLives(); // Calls the function to calculate the lives.
+
+                    //Lose Condition
+                    if (Life <= 0)
+                    {
+                        bool playAgain = OutroAndDeath.ShowLose();
+
+                        if (!playAgain)
+                            Environment.Exit(0);
+
+                        ResetGame();
+                        start = false;
+                        menuStart = true;
+                        break;
+                    }
+
+                    movement(); //calls on the movement method while the start bool is true so it is continuous.
+                    shoot();
+                    //newInvader(); // removed because of async
+                    _ = updateinvaders();
+
+
+
+
+
+
+
+
+                    DrawShip();
+                    await Task.Delay(25);
+                    // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
+
+                    if (IsKeyDown(Escape))
+                    {
+                        start = false;
+                        menuStart = true;
+                        
+                    } 
+
+                    if (level > 5)
+                    {
+                        bool playAgain = OutroAndDeath.ShowWin();
+
+                        if (!playAgain)
+                            Environment.Exit(0);
+
+                        ResetGame();
+                        start = false;
+                        menuStart = true;
+                        break;
+                    }
                 }
-
-
-                Level(); //calls on the level method while the start bool is true so it is continuous.
-                
-
-                limits();
-                CheckLives(); // Calls the function to calculate the lives.
-
-                //Lose Condition
-                if (Life <= 0)
-                {
-                    bool playAgain = OutroAndDeath.ShowLose();
-
-                    if (!playAgain)
-                        Environment.Exit(0);
-
-                    ResetGame();
-                    start = false;
-                    menuStart = true;
-                    break;
-                }
-
-                movement(); //calls on the movement method while the start bool is true so it is continuous.
-                shoot();
-                //newInvader(); // removed because of async
-                _=updateinvaders();
-
-                
-
-
-
-
-
-                 
-                DrawShip();
-                await Task.Delay(25);
-                // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
-
-                if (IsKeyDown(Escape))
-                {
-                    start = false;
-                    menuStart = true;
-                    startmenu();
-                } //pauses if you press escape
             }
-
 
         }
 

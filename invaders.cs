@@ -27,7 +27,7 @@ namespace gameproject
 
 
 
-
+            moveRate = invaderSpeed;// added this because it was overwriting what Stephanie had wrote in levels
             spawnTimer++;
             moveTimer++;
 

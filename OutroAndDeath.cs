@@ -34,6 +34,8 @@ namespace gameproject
         {
             Console.Clear();
             Console.WriteLine("YOU LOSE!");
+            Console.WriteLine("Press any key to continue....");
+            Console.ReadLine();
         }
 
     }

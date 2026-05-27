@@ -74,17 +74,7 @@ namespace gameproject
 
             while (start)
             {
-                //if (Life <= 0)
-                //{
-                //    start = false;
-                //    OutroAndDeath.ShowLose();
-                //}
-
-                //if (start &&Invaders.Count == 0)
-                //{
-                //    start = false;
-                //    OutroAndDeath.ShowWin();
-                //}
+                
 
                 if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
                 {

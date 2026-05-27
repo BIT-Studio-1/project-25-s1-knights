@@ -54,7 +54,7 @@ namespace gameproject
         public static bool ShowLose()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Red;
 
             Console.WriteLine(@"                                                                                                     
 ▄▄▄    ▄▄▄   ▄▄▄▄    ▄▄    ▄▄            ▄▄          ▄▄▄▄      ▄▄▄▄    ▄▄▄▄▄▄▄▄     ▄▄        ▄▄    

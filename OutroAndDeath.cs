@@ -33,6 +33,17 @@ namespace gameproject
         public static void ShowLose()
         {
             Console.Clear();
+
+            Console.WriteLine(@"                                                                                 
+▄▄▄    ▄▄▄                               ▄▄                                     
+ ██▄  ▄██                                ██                                     
+  ██▄▄██    ▄████▄   ██    ██            ██         ▄████▄   ▄▄█████▄   ▄████▄  
+   ▀██▀    ██▀  ▀██  ██    ██            ██        ██▀  ▀██  ██▄▄▄▄ ▀  ██▄▄▄▄██ 
+    ██     ██    ██  ██    ██            ██        ██    ██   ▀▀▀▀██▄  ██▀▀▀▀▀▀ 
+    ██     ▀██▄▄██▀  ██▄▄▄███            ██▄▄▄▄▄▄  ▀██▄▄██▀  █▄▄▄▄▄██  ▀██▄▄▄▄█ 
+    ▀▀       ▀▀▀▀     ▀▀▀▀ ▀▀            ▀▀▀▀▀▀▀▀    ▀▀▀▀     ▀▀▀▀▀▀     ▀▀▀▀▀  
+                                                                                
+                                                                                 ");
             Console.WriteLine("YOU LOSE!");
             Console.WriteLine("Press any key to continue....");
 

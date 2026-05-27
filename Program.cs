@@ -11,7 +11,7 @@ using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
-
+using static gameproject.Intro;
 
 
 
@@ -24,27 +24,18 @@ namespace gameproject
 
     public static class Globals // variables that any class or function can access
     {
-
-     
         // Level System Added
-        public static int level = 1;
-        public static int maxInvaders = 5;
-        public static int invaderSpeed = 10;
-        public static int spawnRate = 10;
-        public static int enemiesKilled = 0;
+        public static int level = 1, maxInvaders = 5,invaderSpeed = 10,spawnRate = 10,enemiesKilled = 0, bottomRow = WindowHeight - 1,
+                          farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5, hitCooldown = 0, spawnTimer = 0,
+                          shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
+                          moveRate = 5; //for making invaders move slower
         public static Random rand = new Random();
-
-        public static int bottomRow = WindowHeight - 1, farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5;
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
-        public static bool start = false, moved = false, menuStart = true;
-
-        public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets - saw this on reddit
-
-        
-
-        //Arjun - Variables declared in Invanders moved to here.
+        public static bool start = false, moved = false, menuStart = false;
+        public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
-        public static int spawnTimer = 0, shootCooldown = 0,moveTimer = 0, lives = 5, consoleWidth = Console.WindowWidth, consoleHeight = Console.WindowHeight;
+        
+        
     }
     public class Bullet
     {
@@ -73,16 +64,27 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
-            
 
+            initialScreen();
             startmenu();
-            
+
+          
             
 
 
             while (start)
             {
+                //if (Life <= 0)
+                //{
+                //    start = false;
+                //    OutroAndDeath.ShowLose();
+                //}
 
+                //if (start &&Invaders.Count == 0)
+                //{
+                //    start = false;
+                //    OutroAndDeath.ShowWin();
+                //}
 
                 if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
                 {
@@ -91,24 +93,28 @@ namespace gameproject
                     Clear();
                 }
 
+
                 Level(); //calls on the level method while the start bool is true so it is continuous.
+                
 
                 limits();
-                //_=lives(); // Calls the function to calculate the lives.
+                CheckLives(); // Calls the function to calculate the lives.
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();
                 //newInvader(); // removed because of async
-                updateinvaders();
+                _=updateinvaders();
+
+                
 
 
 
 
 
-
+                 
                 SetCursorPosition(playerX, playerY);
                 Write('^');
-                await Task.Delay(15);
+                await Task.Delay(25);
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
                 if (IsKeyDown(Escape))

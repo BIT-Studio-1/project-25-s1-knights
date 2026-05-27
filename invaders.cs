@@ -22,15 +22,42 @@ namespace gameproject
             
         
         
-        public static void updateinvaders()
+        public static async Task updateinvaders()
         {
 
 
 
 
             spawnTimer++;
-            
- 
+            moveTimer++;
+
+            if (level == 1)
+            {
+                moveRate = 5;
+            }
+
+            if (level == 2)
+            {
+                moveRate = 4;
+            }
+
+            if (level == 3)
+            {
+                moveRate = 3;
+            }
+
+            if (level == 4)
+            {
+                moveRate = 2;
+            }
+
+            if (level == 5)
+            {
+                moveRate = 1;
+            }
+
+
+
             if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
             {
                 Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
@@ -38,41 +65,58 @@ namespace gameproject
                 spawnTimer = 0;
             }
 
-            for (int i = Invaders.Count - 1; i >= 0; i--)
+            if (moveTimer >= moveRate) //moves invaders down each time moveTimer matches moveRate
+                                      //(levels also doesn't seem to be moving them faster each level progression)
             {
+                moveTimer = 0;
 
 
-                if (Invaders[i].x >= consoleWidth)
-                {
-                    Invaders[i].x = rand.Next(consoleWidth);
-                }
-
-                if (Invaders[i].y >= consoleHeight)
-                {
-                    Invaders[i].y = rand.Next(consoleHeight);
-                }
-
-                if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
+                for (int i = Invaders.Count - 1; i >= 0; i--)
                 {
 
-                    SetCursorPosition(Invaders[i].x, Invaders[i].y);
 
-                    Write(' ');
-                }
-                
-                Invaders[i].Move();
+                    if (Invaders[i].x >= consoleWidth)
+                    {
+                        Invaders[i].x = rand.Next(consoleWidth);
+                    }
 
-                if (Invaders[i].y >= consoleHeight)
-                {
-                    Invaders[i].y = 0;
+                    if (Invaders[i].y >= consoleHeight)
+                    {
+                        Invaders[i].y = rand.Next(consoleHeight);
+                    }
+
+                    if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
+                    {
+
+                        SetCursorPosition(Invaders[i].x, Invaders[i].y);
+
+                        Write("  ");
+
+
+                    }
+
+
+                    Invaders[i].Move();
+
+
+                    if (Invaders[i].y >= consoleHeight)
+                    {
+                        Invaders[i].y = 0;
+                    }
+
+                    if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
+                    {
+                        SetCursorPosition(Invaders[i].x, Invaders[i].y);
+
+                        Write("X");
+                    }
+
+
+
                 }
 
-                if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
-                {
-                    SetCursorPosition(Invaders[i].x, Invaders[i].y);
-                    Write("X");
-                }
             }
+
 
                 
             

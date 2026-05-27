@@ -18,25 +18,46 @@ namespace gameproject
     internal class Lives
     {
 
-        //public static async Task lives()
-        //{
-        //    for (int i = 0; i < spawned; i++)
-        //    {
-        //        if (invaderX[i] == -1) continue; // skip destroyed invaders
-        //        if (invaderX[i] == playerX && invaderY[i] == playerY)
-        //        {
-        //            lives--;
-        //            // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
-        //            await Task.Delay(1000);
-        //        }
-        //    }
+        public static void CheckLives()
+        {
 
-        //    if (lives <= 0) start = false;
+            //adding hit cooldown
+            if(hitCooldown > 0)
+            {
+                hitCooldown--;
+                string hud = $"Lives: {Life}";
+                SetCursorPosition(WindowWidth - hud.Length, 0);
+                Write(hud);
+                return; // skipping teh collision in this frame
+            }
+            for (int i = Invaders.Count - 1; i >= 0; i--) //chnaged teh logic to backward safe to remove
+            {
+                if (Invaders[i].x == playerX && Invaders[i].y == playerY)
+                {
+                    SetCursorPosition(Invaders[i].x, Invaders[i].y);
+                    Write(' ');
+                    Invaders.RemoveAt(i);//remove from the list
+                    Life--;
+                    hitCooldown = 30;
+                    break;
+                    // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
+                    // Explosion + destroy invader
+                    //await ExplosionAnimation(playerX, playerY);
+                    //await Task.Delay(1000);
+                }
+            }
 
-        //    string livesText = $"Lives: {lives}";
-        //    SetCursorPosition(WindowWidth - livesText.Length, 0);
-        //    Write(livesText);
-        //}
+            string livesText = $"Lives: {Life}";
+            SetCursorPosition(WindowWidth - livesText.Length, 0);
+            Write(livesText);
+
+            if (Life <= 0) { 
+            start=false;
+                OutroAndDeath.ShowLose();
+            }
+
+            
+        }
 
     }
 }

@@ -24,8 +24,7 @@ namespace gameproject
 
 
 
-            SetCursorPosition(playerX, playerY);
-            Write(' ');
+            ClearShip();
             //clear old position before moving
 
 
@@ -47,12 +46,13 @@ namespace gameproject
             }
             if (IsKeyDown(Spacebar) && shootCooldown == 0)
             {
-                PlayerBullets.Add(new Bullet { x = playerX, y = playerY - 1 });
+                PlayerBullets.Add(new Bullet { x = playerX - 3, y = playerY - 1 });
+                PlayerBullets.Add(new Bullet { x = playerX + 4, y = playerY - 1 });
                 shootCooldown = 5;
             }
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
 
-            if (playerY != WindowHeight - 5) playerY = WindowHeight - 5; 
+            if (playerY != WindowHeight - 8) playerY = WindowHeight - 8; 
 
 
         }
@@ -107,6 +107,34 @@ namespace gameproject
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write('|');
                 }
+            }
+        }
+        public static void DrawShip()//Drawing the ship
+        {
+            if (playerX >= 3 && playerX + 3 < consoleWidth)
+            {
+                SetCursorPosition(playerX - 3, playerY);
+                Write("I      I");
+                SetCursorPosition(playerX - 3, playerY + 1);
+                Write("| _  _ |");
+                SetCursorPosition(playerX - 3, playerY + 2);
+                Write("|/    \\|");
+                SetCursorPosition(playerX - 2, playerY + 3);
+                Write("\\____/");
+            }
+        }
+        public static void ClearShip()//clears the ship when moved
+        {
+            if (playerX >= 3 && playerX + 3 < consoleWidth)
+            {
+                SetCursorPosition(playerX - 3, playerY);
+                Write("        ");
+                SetCursorPosition(playerX - 3, playerY + 1);
+                Write("        ");
+                SetCursorPosition(playerX - 3, playerY + 2);
+                Write("        ");
+                SetCursorPosition(playerX - 2, playerY + 3);
+                Write("      ");
             }
         }
     }

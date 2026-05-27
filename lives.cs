@@ -30,9 +30,14 @@ namespace gameproject
                 Write(hud);
                 return; // skipping teh collision in this frame
             }
+            int hitboxLeft = playerX - 3;
+            int hitboxRight = playerX + 4;
+            int hitboxTop = playerY;
+            int hitboxBottom = playerY + 3;
+
             for (int i = Invaders.Count - 1; i >= 0; i--) //chnaged teh logic to backward safe to remove
             {
-                if (Invaders[i].x == playerX && Invaders[i].y == playerY)
+                if (Invaders[i].x >= hitboxLeft && Invaders[i].x <= hitboxRight && Invaders[i].y >= hitboxTop && Invaders[i].y >= hitboxBottom)//removes live if hit box of the ship is hit
                 {
                     SetCursorPosition(Invaders[i].x, Invaders[i].y);
                     Write(' ');

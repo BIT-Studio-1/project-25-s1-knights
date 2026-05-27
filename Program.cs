@@ -26,7 +26,7 @@ namespace gameproject
     {
         // Level System Added
         public static int level = 1, maxInvaders = 5,invaderSpeed = 10,spawnRate = 10,enemiesKilled = 0, bottomRow = WindowHeight - 1,
-                          farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 5, hitCooldown = 0, spawnTimer = 0,
+                          farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 8, hitCooldown = 0, spawnTimer = 0,
                           shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
                           moveRate = 5; //for making invaders move slower
         public static Random rand = new Random();
@@ -112,8 +112,7 @@ namespace gameproject
 
 
                  
-                SetCursorPosition(playerX, playerY);
-                Write('^');
+                DrawShip();
                 await Task.Delay(25);
                 // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
@@ -132,8 +131,8 @@ namespace gameproject
         {
             bottomRow = WindowHeight - 1;
             farRow = WindowWidth - 1;
-            playerX = Clamp(playerX, 0, farRow);
-            playerY = Clamp(playerY, 0, bottomRow - 1);
+            playerX = Clamp(playerX, 3, farRow - 4);
+            playerY = Clamp(playerY, 0, bottomRow - 4);
             
             // sets the player position every time it loops and makes it so that if the window maximizes and the minimizes it doesn't crash form out of bounds
         }

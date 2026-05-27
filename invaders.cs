@@ -31,8 +31,33 @@ namespace gameproject
             spawnTimer++;
             moveTimer++;
 
-            
- 
+            if (level == 1)
+            {
+                moveRate = 5;
+            }
+
+            if (level == 2)
+            {
+                moveRate = 4;
+            }
+
+            if (level == 3)
+            {
+                moveRate = 3;
+            }
+
+            if (level == 4)
+            {
+                moveRate = 2;
+            }
+
+            if (level == 5)
+            {
+                moveRate = 1;
+            }
+
+
+
             if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
             {
                 Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
@@ -40,7 +65,7 @@ namespace gameproject
                 spawnTimer = 0;
             }
 
-            if (moveTimer > moveRate) //moves invaders down each time moveTimer matches moveRate
+            if (moveTimer >= moveRate) //moves invaders down each time moveTimer matches moveRate
                                       //(levels also doesn't seem to be moving them faster each level progression)
             {
                 moveTimer = 0;
@@ -65,7 +90,9 @@ namespace gameproject
 
                         SetCursorPosition(Invaders[i].x, Invaders[i].y);
 
-                        Write(' ');
+                        Write("  ");
+
+
                     }
 
 
@@ -84,7 +111,10 @@ namespace gameproject
                         Write("X");
                     }
 
+
+
                 }
+
             }
 
 

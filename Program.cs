@@ -68,13 +68,8 @@ namespace gameproject
             initialScreen();
             startmenu();
 
-          
-            
-
-
             while (start)
             {
-                
 
                 if (WindowWidth != consoleWidth || WindowHeight != consoleHeight)
                 {
@@ -89,6 +84,20 @@ namespace gameproject
 
                 limits();
                 CheckLives(); // Calls the function to calculate the lives.
+
+                //Lose Condition
+                if (Life <= 0)
+                {
+                    bool playAgain = OutroAndDeath.ShowLose();
+
+                    if (!playAgain)
+                        Environment.Exit(0);
+
+                    ResetGame();
+                    start = false;
+                    menuStart = true;
+                    break;
+                }
 
                 movement(); //calls on the movement method while the start bool is true so it is continuous.
                 shoot();
@@ -114,6 +123,21 @@ namespace gameproject
                 } //pauses if you press escape
             }
 
+
+        }
+
+        //Reset Game
+        public static void ResetGame()
+        {
+            Life = 5;
+            level = 1;
+            enemiesKilled = 0;
+
+            Invaders.Clear();
+            PlayerBullets.Clear();
+
+            playerX = WindowWidth / 2;
+            playerY = WindowHeight - 8;
 
         }
 

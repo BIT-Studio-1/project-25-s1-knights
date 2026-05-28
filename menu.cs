@@ -18,7 +18,7 @@ namespace gameproject
 
         public static void startmenu()
         {
-            SetCursorPosition(0,0);
+            SetCursorPosition(0, 0);
             while (menuStart)
             {
                 Clear();
@@ -112,11 +112,12 @@ namespace gameproject
                 }
                 else if ((IsKeyDown(Spacebar) || IsKeyDown(Enter)) && (option == 3))
                 {
-
+                    start = false;
                     menuStart = false;
+                    Environment.Exit(0);
+
+
                 }
-
-
             }
         }
     }

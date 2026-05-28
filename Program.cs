@@ -105,8 +105,8 @@ namespace gameproject
                     {
                         start = false; //Stops game loop first 
 
-
-                        while (Console.KeyAvailable) // Clear the input buffer to prevent unintended key presses after the game ends
+                        //wait until keys are released
+                        while (IsKeyDown(ConsoleKey.Y) || IsKeyDown(ConsoleKey.N)) 
                         {
                             Console.ReadKey(true);
                         }
@@ -151,7 +151,8 @@ namespace gameproject
                     {
                         start = false; //stops game loop first
 
-                        while (Console.KeyAvailable) // Clear the input buffer to prevent unintended key presses after the game ends
+                        //wait until keys are released
+                        while (IsKeyDown(ConsoleKey.Y) || IsKeyDown(ConsoleKey.N))
                         {
                             Console.ReadKey(true);
                         }

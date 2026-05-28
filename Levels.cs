@@ -78,6 +78,9 @@ namespace gameproject
                 level++;
                 enemiesKilled = 0;
 
+                Invaders.Clear();
+                PlayerBullets.Clear();
+
                 Clear();
                 SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
                 Write($"Level {level}");

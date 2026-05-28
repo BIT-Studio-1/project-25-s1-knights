@@ -25,8 +25,8 @@ namespace gameproject
             ReadKey(true);
             Clear();
             introScreen();
-            StarWarsTheme();
-            new Thread(StarWarsTheme) { IsBackground = true }.Start();
+            introMusic();
+            new Thread(introMusic) { IsBackground = true }.Start();
         }
 
         static void introScreen()
@@ -36,7 +36,7 @@ namespace gameproject
             Thread.Sleep(1200);
             menuStart = true;
         }
-        public static void StarWarsTheme()
+        public static void introMusic()
         {
             // Star Wars Main Theme
             Beep(440, 500);   // A

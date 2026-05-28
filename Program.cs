@@ -35,8 +35,8 @@ namespace gameproject
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
-        
-        
+
+
     }
     public class Bullet
     {
@@ -74,14 +74,14 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
+            start = false;
+            menuStart = false;
+            initialScreen();
 
             while (true)
             {
-                start = false;
-                menuStart = false;
 
 
-                initialScreen();
                 startmenu();
 
                 while (start)
@@ -110,9 +110,11 @@ namespace gameproject
                             Environment.Exit(0);
 
                         ResetGame();
-                        start = false;
-                        menuStart = true;
-                        break;
+
+                        Clear();
+                        start = true;
+                        continue;
+                        
                     }
 
                     movement(); //calls on the movement method while the start bool is true so it is continuous.
@@ -128,15 +130,15 @@ namespace gameproject
 
 
                     DrawShip();
-                    await Task.Delay(25);
+                    await Task.Delay(20);
                     // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
                     if (IsKeyDown(Escape))
                     {
                         start = false;
                         menuStart = true;
-                        
-                    } 
+
+                    }
 
                     if (level > 5)
                     {
@@ -146,9 +148,11 @@ namespace gameproject
                             Environment.Exit(0);
 
                         ResetGame();
-                        start = false;
-                        menuStart = true;
-                        break;
+
+                        Clear();
+                        start = true;
+                        continue;
+                    
                     }
                 }
             }
@@ -177,11 +181,11 @@ namespace gameproject
             playerX = Clamp(playerX, 3, farRow - 5);
             playerY = Clamp(playerY, 0, bottomRow - 4);
 
-          
-            
+
+
             // sets the player position every time it loops and makes it so that if the window maximizes and the minimizes it doesn't crash form out of bounds
         }
-        
+
 
     }
 }

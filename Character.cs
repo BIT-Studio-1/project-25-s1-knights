@@ -34,12 +34,12 @@ namespace gameproject
 
 
 
-            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerX < farRow)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
+            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerX + 6 < consoleWidth)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
             {
                 playerX++;
                 moved = true;
             }
-            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerX > 0))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
+            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerX > 3))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
             {
                 playerX--;
                 moved = true;
@@ -111,6 +111,7 @@ namespace gameproject
         }
         public static void DrawShip()//Drawing the ship
         {
+
             if (playerX >= 3 && playerX + 3 < consoleWidth)
             {
                 SetCursorPosition(playerX - 3, playerY);
@@ -122,9 +123,11 @@ namespace gameproject
                 SetCursorPosition(playerX - 2, playerY + 3);
                 Write("\\____/");
             }
+
         }
         public static void ClearShip()//clears the ship when moved
         {
+
             if (playerX >= 3 && playerX + 3 < consoleWidth)
             {
                 SetCursorPosition(playerX - 3, playerY);
@@ -136,6 +139,7 @@ namespace gameproject
                 SetCursorPosition(playerX - 2, playerY + 3);
                 Write("      ");
             }
+
         }
     }
 }

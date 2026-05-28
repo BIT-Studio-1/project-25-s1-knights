@@ -174,8 +174,10 @@ namespace gameproject
         {
             bottomRow = WindowHeight - 1;
             farRow = WindowWidth - 1;
-            playerX = Clamp(playerX, 3, farRow - 4);
+            playerX = Clamp(playerX, 3, farRow - 5);
             playerY = Clamp(playerY, 0, bottomRow - 4);
+
+          
             
             // sets the player position every time it loops and makes it so that if the window maximizes and the minimizes it doesn't crash form out of bounds
         }

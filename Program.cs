@@ -77,14 +77,13 @@ namespace gameproject
         static async Task Main()
         {
             CursorVisible = false;
+
             start = false;
             menuStart = false;
             initialScreen();
 
             while (true)
             {
-
-
                 startmenu();
 
                 while (start)
@@ -107,6 +106,11 @@ namespace gameproject
                     //Lose Condition
                     if (Life <= 0)
                     {
+                        start = false; //Stops game loop first 
+
+                        while (Console.KeyAvailable)
+                            Console.ReadKey(true);
+
                         bool playAgain = OutroAndDeath.ShowLose();
 
                         if (!playAgain)
@@ -145,6 +149,12 @@ namespace gameproject
 
                     if (level > 5)
                     {
+                        start = false; //stops game loop first
+
+                        while (Console.KeyAvailable)
+                            Console.ReadKey(true);
+                        
+
                         bool playAgain = OutroAndDeath.ShowWin();
 
                         if (!playAgain)

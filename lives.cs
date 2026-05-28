@@ -50,8 +50,8 @@ namespace gameproject
                     Write(' ');
                     Invaders.RemoveAt(i);//remove from the list
                     Life--;
-                    hitCooldown = 30;
-                    break;
+                    hitCooldown = 30; //30-frame invincibility
+                    break; //stop checking after one hit
                     // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
                     // Explosion + destroy invader
                     //await ExplosionAnimation(playerX, playerY);

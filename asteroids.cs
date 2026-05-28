@@ -58,7 +58,18 @@ namespace gameproject
                 Asteroids.Add(new Asteroid { x = rand.Next(1, 5), y = 0 }); //spawn rate is 20, should be low enough to not have them spawn so frequently, also spawns asteroid in corner
                 asteroidSpawnTimer = 0;
             }
+            for (int i = Asteroids.Count -1; i >= 0; i--)
+            {
+                if (Asteroids[i].x >= consoleWidth)
+                {
+                    Asteroids[i].x = rand.Next(1, 5);
+                }
 
+                if (Asteroids[i].y >= consoleHeight)
+                {
+                    Asteroids[i].y = rand.Next(consoleHeight);
+                }
+            }
             
 
         }

@@ -105,10 +105,9 @@ namespace gameproject
                     {
                         start = false; //Stops game loop first 
 
-                        while (Console.KeyAvailable)
-                            Console.ReadKey(true);
-
                         bool playAgain = OutroAndDeath.ShowLose();
+
+                        WaitForKeyRelease();
 
                         if (!playAgain)
                             Environment.Exit(0);
@@ -137,7 +136,7 @@ namespace gameproject
                     await Task.Delay(20);
                     // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
-                    if (IsKeyDown(Escape))
+                    if (IsKeyDown(ConsoleKey.Escape))
                     {
                         start = false;
                         menuStart = true;
@@ -148,11 +147,9 @@ namespace gameproject
                     {
                         start = false; //stops game loop first
 
-                        while (Console.KeyAvailable)
-                            Console.ReadKey(true);
-                        
-
                         bool playAgain = OutroAndDeath.ShowWin();
+
+                        WaitForKeyRelease();
 
                         if (!playAgain)
                             Environment.Exit(0);
@@ -167,6 +164,14 @@ namespace gameproject
                 }
             }
 
+        }
+
+        public static void WaitForKeyRelease()
+        {
+            while(IsKeyDown(ConsoleKey.Y) || IsKeyDown(ConsoleKey.N))
+            {
+                Thread.Sleep(10);
+            }
         }
 
         //Reset Game

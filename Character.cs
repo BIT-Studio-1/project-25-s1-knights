@@ -52,7 +52,7 @@ namespace gameproject
             }
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
 
-            if (playerY != WindowHeight - 8) playerY = WindowHeight - 8; 
+            if (playerY != WindowHeight - 8) playerY = WindowHeight - 8;
 
 
         }
@@ -65,7 +65,7 @@ namespace gameproject
             {
                 if (PlayerBullets[i].y >= 0 && PlayerBullets[i].y < WindowHeight && PlayerBullets[i].x < WindowWidth) //check if the bullet is still within the window
                 {
-                    
+
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     Write(' '); // clear the old position
                 }
@@ -76,11 +76,11 @@ namespace gameproject
 
                 //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
                 bool hitSomething = false;
-                for (int e = Invaders.Count -1; e >= 0 && !hitSomething; e--) // loop through every invader
+                for (int e = Invaders.Count - 1; e >= 0 && !hitSomething; e--) // loop through every invader
                 {
-                   
 
-                    if ((PlayerBullets[i].x == Invaders[e].x + 1 || PlayerBullets[i].x == Invaders[e].x -1 || PlayerBullets[i].x == Invaders[e].x) && PlayerBullets[i].y == Invaders[e].y) // check if bullet is on same spot as this invader
+
+                    if ((PlayerBullets[i].x == Invaders[e].x + 1 || PlayerBullets[i].x == Invaders[e].x - 1 || PlayerBullets[i].x == Invaders[e].x) && PlayerBullets[i].y == Invaders[e].y) // check if bullet is on same spot as this invader
                     {
                         SetCursorPosition(Invaders[e].x, Invaders[e].y);
                         Write(' '); // erase invader from screen
@@ -103,9 +103,9 @@ namespace gameproject
 
                 else
                 {
-                    
+
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
-                    ForegroundColor = ConsoleColor.Green;
+                    ForegroundColor = ConsoleColor.Red;
                     Write('|');
                     ResetColor();
                 }
@@ -117,13 +117,19 @@ namespace gameproject
             if (playerX >= 3 && playerX + 3 < consoleWidth)
             {
                 SetCursorPosition(playerX - 3, playerY);
+                ForegroundColor = ConsoleColor.DarkGreen;
                 Write("I      I");
+                ResetColor();
                 SetCursorPosition(playerX - 3, playerY + 1);
                 Write("| _  _ |");
                 SetCursorPosition(playerX - 3, playerY + 2);
                 Write("|/    \\|");
                 SetCursorPosition(playerX - 2, playerY + 3);
                 Write("\\____/");
+                SetCursorPosition(playerX - 1, playerY + 4);
+                ForegroundColor = ConsoleColor.DarkYellow;
+                Write("Y  Y");
+                ResetColor();
             }
 
         }
@@ -140,6 +146,8 @@ namespace gameproject
                 Write("        ");
                 SetCursorPosition(playerX - 2, playerY + 3);
                 Write("      ");
+                SetCursorPosition(playerX - 1, playerY + 4);
+                Write("    ");
             }
 
         }

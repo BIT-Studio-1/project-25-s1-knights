@@ -102,6 +102,7 @@ namespace gameproject
                     if (Invaders[i].y >= consoleHeight)
                     {
                         Invaders[i].y = 0;
+                        Invaders[i].x = rand.Next(consoleWidth);
                     }
 
                     if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)

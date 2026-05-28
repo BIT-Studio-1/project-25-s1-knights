@@ -111,6 +111,7 @@ namespace gameproject
 
                         ResetGame();
 
+                        Clear();
                         start = true;
                         continue;
                         
@@ -148,6 +149,7 @@ namespace gameproject
 
                         ResetGame();
 
+                        Clear();
                         start = true;
                         continue;
                     

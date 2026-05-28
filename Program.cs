@@ -110,9 +110,10 @@ namespace gameproject
                             Environment.Exit(0);
 
                         ResetGame();
-                        start = false;
-                        menuStart = true;
-                        break;
+
+                        start = true;
+                        continue;
+                        
                     }
 
                     movement(); //calls on the movement method while the start bool is true so it is continuous.
@@ -146,9 +147,10 @@ namespace gameproject
                             Environment.Exit(0);
 
                         ResetGame();
-                        start = false;
-                        menuStart = true;
-                        break;
+
+                        start = true;
+                        continue;
+                    
                     }
                 }
             }

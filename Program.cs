@@ -103,6 +103,9 @@ namespace gameproject
                     //Lose Condition
                     if (Life <= 0)
                     {
+                        start = false; //Stops game loop first 
+
+
                         while (Console.KeyAvailable) // Clear the input buffer to prevent unintended key presses after the game ends
                         {
                             Console.ReadKey(true);
@@ -146,6 +149,8 @@ namespace gameproject
 
                     if (level > 5)
                     {
+                        start = false; //stops game loop first
+
                         while (Console.KeyAvailable) // Clear the input buffer to prevent unintended key presses after the game ends
                         {
                             Console.ReadKey(true);

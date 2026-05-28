@@ -105,7 +105,9 @@ namespace gameproject
                 {
                     
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
+                    ForegroundColor = ConsoleColor.Green;
                     Write('|');
+                    ResetColor();
                 }
             }
         }

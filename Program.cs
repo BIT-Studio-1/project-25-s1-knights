@@ -105,11 +105,8 @@ namespace gameproject
                     {
                         start = false; //Stops game loop first 
 
-                        //wait until keys are released
-                        while (IsKeyDown(ConsoleKey.Y) || IsKeyDown(ConsoleKey.N)) 
-                        {
+                        while (Console.KeyAvailable)
                             Console.ReadKey(true);
-                        }
 
                         bool playAgain = OutroAndDeath.ShowLose();
 
@@ -151,11 +148,9 @@ namespace gameproject
                     {
                         start = false; //stops game loop first
 
-                        //wait until keys are released
-                        while (IsKeyDown(ConsoleKey.Y) || IsKeyDown(ConsoleKey.N))
-                        {
+                        while (Console.KeyAvailable)
                             Console.ReadKey(true);
-                        }
+                        
 
                         bool playAgain = OutroAndDeath.ShowWin();
 

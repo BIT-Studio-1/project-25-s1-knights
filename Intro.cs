@@ -26,7 +26,7 @@ namespace gameproject
             Clear();
             introScreen();
             introMusic();
-            new Thread(introMusic) { IsBackground = true }.Start();
+            
         }
 
         static void introScreen()
@@ -39,25 +39,12 @@ namespace gameproject
         public static void introMusic()
         {
             // Star Wars Main Theme
-            Beep(440, 500);   // A
-            Beep(440, 500);   // A
-            Beep(440, 500);   // A
-            Beep(349, 350);   // F
-            Beep(523, 150);   // C
-            Beep(440, 500);   // A
-            Beep(349, 350);   // F
-            Beep(523, 150);   // C
-            Beep(440, 1000);  // A
-
-            Beep(659, 500);   // E
-            Beep(659, 500);   // E
-            Beep(659, 500);   // E
-            Beep(698, 350);   // F
-            Beep(523, 150);   // C
-            Beep(415, 500);   // G#
-            Beep(349, 350);   // F
-            Beep(523, 150);   // C
-            Beep(440, 1000);  // A
+            Beep(460, 700); //C 
+            Thread.Sleep(100);
+            Beep(460, 250); //C
+            Beep(350, 250); //B
+            Beep(320, 250); //A
+            Beep(295, 250); //G
         }
     }
 }

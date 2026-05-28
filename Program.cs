@@ -17,9 +17,10 @@ using static gameproject.Intro;
 
 
 
+
 namespace gameproject
 {
-
+    
 
 
     public static class Globals // variables that any class or function can access
@@ -64,6 +65,8 @@ namespace gameproject
 
     internal class Program
     {
+        
+
         [DllImport("user32.dll")] // imports a library for to make the movement smoother
         private static extern short GetAsyncKeyState(int vKey);
         public static bool IsKeyDown(ConsoleKey key) //method that registers while a key is pressed

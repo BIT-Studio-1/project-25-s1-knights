@@ -25,15 +25,16 @@ namespace gameproject
     public static class Globals // variables that any class or function can access
     {
         // Level System Added
-        public static int level = 1, maxInvaders = 5,invaderSpeed = 10,spawnRate = 10,enemiesKilled = 0, bottomRow = WindowHeight - 1,
+        public static int level = 1, maxInvaders = 5, invaderSpeed = 10, spawnRate = 10, enemiesKilled = 0, bottomRow = WindowHeight - 1,
                           farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 8, hitCooldown = 0, spawnTimer = 0,
                           shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
-                          moveRate = 5; //for making invaders move slower
+                          moveRate = 5, asteroidMoveRate = 5, asteroidMoveTimer = 0, asteroidSpawnRate = 10, asteroidSpawnTimer = 0; //for making invaders move slower
         public static Random rand = new Random();
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = false, moved = false, menuStart = false;
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
+        public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
         
         
     }
@@ -51,6 +52,15 @@ namespace gameproject
 
         public void Move() => y++;
     }
+
+    public class Asteroid
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public void Move() => y++;
+    }
+
 
     internal class Program
     {

@@ -25,6 +25,7 @@ namespace gameproject
         public static async Task updateinvaders()
         {
 
+            string drawInvaders = "V";
 
 
             moveRate = invaderSpeed;// added this because it was overwriting what Stephanie had wrote in levels
@@ -73,7 +74,7 @@ namespace gameproject
 
                 for (int i = Invaders.Count - 1; i >= 0; i--)
                 {
-
+                    
 
                     if (Invaders[i].x >= consoleWidth)
                     {
@@ -84,6 +85,7 @@ namespace gameproject
                     {
                         Invaders[i].y = rand.Next(consoleHeight);
                     }
+                   
 
                     if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
                     {
@@ -109,7 +111,7 @@ namespace gameproject
                     {
                         SetCursorPosition(Invaders[i].x, Invaders[i].y);
 
-                        Write("X");
+                        Write(drawInvaders);
                     }
 
 

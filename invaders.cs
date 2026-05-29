@@ -90,7 +90,7 @@ namespace gameproject
 
                         SetCursorPosition(Invaders[i].x, Invaders[i].y);
 
-                        Write("  ");
+                        Write(" ");
 
 
                     }

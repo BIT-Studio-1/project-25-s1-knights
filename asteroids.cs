@@ -74,9 +74,6 @@ namespace gameproject
                 asteroidMoveTimer = 0;
 
 
-
-
-
                 for (int i = Asteroids.Count - 1; i >= 0; i--)
                 {
 
@@ -88,10 +85,9 @@ namespace gameproject
                     }
 
 
-
                     if (Asteroids[i].x >= consoleWidth)
                     {
-                        Asteroids[i].x = rand.Next(1, 15);
+                        Asteroids[i].x = rand.Next(consoleWidth);
                     }
 
                     if (Asteroids[i].y >= consoleHeight)
@@ -102,18 +98,19 @@ namespace gameproject
                     Asteroids[i].y++;
                     Asteroids[i].x++;
 
-                    if (Asteroids[i].y >= consoleHeight)
+                    if ((Asteroids[i].y >= consoleHeight) || (Asteroids[i].x >= consoleWidth))
                     {
                         Asteroids[i].y = 0;
-                        Asteroids[i].x = rand.Next(1, 15);
+                        Asteroids[i].x = rand.Next(consoleWidth);
                     }
 
                     if ((Asteroids[i].x >= 0) && (Asteroids[i].y >= 0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))
                     {
                         SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
+                        ForegroundColor = ConsoleColor.Red;
 
                         Write("O");
-
+                        ResetColor();
                     }
                 }
 

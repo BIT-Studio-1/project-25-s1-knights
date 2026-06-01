@@ -110,9 +110,10 @@ namespace gameproject
                     if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
                     {
                         SetCursorPosition(Invaders[i].x, Invaders[i].y);
-
+                        ForegroundColor = ConsoleColor.Magenta;
 
                         Write(drawInvaders);
+                        ResetColor();
                     }
 
 

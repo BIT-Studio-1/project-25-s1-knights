@@ -50,27 +50,23 @@ namespace gameproject
             }
 
             // WIN GAME
-            if (level > 5)
+            if (level == 5 && enemiesKilled >= maxInvaders)
             {
-                Clear();
-
-                SetCursorPosition(WindowWidth / 2 - 5, WindowHeight / 2);
-                Write("You WIN! GAME COMPLETE!");
-
+                win = true;
                 start = false;
-                ReadKey();
+
+                Invaders.Clear();
+                PlayerBullets.Clear();
+                Clear();
+                string winText = "YOU WIN! GAME COMPLETE!";
+                SetCursorPosition(WindowWidth / 2 - winText.Length, WindowHeight / 2);
+                Write(winText);
+
+                ReadKey(true);
                 return;
             }
 
 
-            if (level <= 5)
-            {
-                //SHOW LEVEL
-                string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
-                SetCursorPosition(0, 0);
-                Write(levelText);
-
-            }
 
             //Level Progression: move to the next level.
             if (enemiesKilled >= maxInvaders && level <=5)
@@ -92,8 +88,17 @@ namespace gameproject
                 Thread.Sleep(500);
 
                 Clear();
+                return;
             }
 
+            if (level <= 5)
+            {
+                //SHOW LEVEL
+                string levelText = $"Level: {level} | Kills: {enemiesKilled}/{maxInvaders}";
+                SetCursorPosition(0, 0);
+                Write(levelText);
+
+            }
 
         }
 

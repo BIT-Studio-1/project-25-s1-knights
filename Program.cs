@@ -32,7 +32,7 @@ namespace gameproject
                           moveRate = 5, asteroidMoveRate = 5, asteroidMoveTimer = 0, asteroidSpawnRate = 10, asteroidSpawnTimer = 0; //for making invaders move slower
         public static Random rand = new Random();
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
-        public static bool start = false, moved = false, menuStart = false;
+        public static bool start = false, moved = false, menuStart = false, win = false;
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
@@ -134,9 +134,11 @@ namespace gameproject
 
 
 
-
-                    DrawShip();
-                    await Task.Delay(20);
+                    if (win == false)
+                    {
+                        DrawShip();
+                        await Task.Delay(20);
+                    }
                     // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
                     if (IsKeyDown(ConsoleKey.Escape))
@@ -146,10 +148,10 @@ namespace gameproject
 
                     }
 
-                    if (level > 5)
+                    if (level == 5 && enemiesKilled == maxInvaders)
                     {
                         start = false; //stops game loop first
-
+                        win = true;
                         bool playAgain = OutroAndDeath.ShowWin();
 
                         WaitForKeyRelease();

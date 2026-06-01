@@ -39,12 +39,19 @@ namespace gameproject
         public static void introMusic()
         {
             // Star Wars Main Theme
-            Beep(460, 700); //C 
+            Beep(460, 1000); //C 
             Thread.Sleep(100);
             Beep(460, 250); //C
             Beep(350, 250); //B
             Beep(320, 250); //A
+            Beep(295, 750); //G
+            Beep(350, 250); //B
+            Beep(350, 250); //B
+            Beep(460, 250); //C
             Beep(295, 250); //G
+            Beep(350, 250); //B
+            Beep(460, 500); //C
+
         }
     }
 }

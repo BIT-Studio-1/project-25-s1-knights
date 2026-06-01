@@ -182,6 +182,7 @@ namespace gameproject
             Life = 5;
             level = 1;
             enemiesKilled = 0;
+            
 
             Invaders.Clear();
             PlayerBullets.Clear();

@@ -66,7 +66,7 @@ namespace gameproject
                 bool withinX = Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight;
                 bool withinY = Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom;
 
-                if (Asteroids[i].x >=hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y >= hitboxBottom)
+                if (Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y >= hitboxBottom)
                 {
                     SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
                     Write(' ');

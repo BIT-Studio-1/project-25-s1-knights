@@ -69,6 +69,14 @@ namespace gameproject
                 {
                     Asteroids[i].y = rand.Next(consoleHeight);
                 }
+
+                if ((Asteroids[i].x >= 0) && (Asteroids[i].y >=0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))
+                {
+                    SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
+                    Write(" ");
+                    Asteroids[i].x += 1;
+                    Asteroids[i].y += 1;
+                }
             }
             
 

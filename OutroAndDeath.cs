@@ -31,7 +31,7 @@ namespace gameproject
             Console.WriteLine("YOU WIN!");
             Console.WriteLine();
             Console.WriteLine("Press any key to exit....");
-
+            Thread.Sleep(1000);
             Console.ReadKey(true);
             Environment.Exit(0);
 

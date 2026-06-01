@@ -12,18 +12,25 @@ using static gameproject.Character;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Asteroid;
+using System.Collections;
 
 namespace gameproject
 {
     internal class asteroids
 
     {
-        public int x;
-        public int y;
-        
-        public void moveAsteroids()
+        public static int x;
+        public static int y;
+
+        public static void moveAsteroidsRight()
         {
             x++;
+            y++;
+        }
+
+        public static void moveAsteroidsLeft()
+        {
+            x--;
             y++;
         }
 
@@ -32,6 +39,7 @@ namespace gameproject
             
             asteroidMoveTimer++;  
             asteroidSpawnTimer++;
+
 
             if (level == 1)  //handles speed per level for asteroids, increasing move rate per level, need to do rest of code so it works properly
             {
@@ -63,6 +71,8 @@ namespace gameproject
                 asteroidMoveRate = 1;
             }
 
+            
+
             if ((asteroidSpawnTimer >= asteroidSpawnRate) && (Asteroids.Count < maxAsteroids))
             {
                 Asteroids.Add(new Asteroid { x = rand.Next(1, 5), y = 0 }); //spawn rate is 20, should be low enough to not have them spawn so frequently, also spawns asteroid in corner
@@ -88,6 +98,7 @@ namespace gameproject
                     if (Asteroids[i].x >= consoleWidth)
                     {
                         Asteroids[i].x = rand.Next(consoleWidth);
+                      
                     }
 
                     if (Asteroids[i].y >= consoleHeight)
@@ -95,8 +106,10 @@ namespace gameproject
                         Asteroids[i].y = rand.Next(consoleHeight);
                     }
 
-                    Asteroids[i].y++;
                     Asteroids[i].x++;
+                    Asteroids[i].y++;
+                    
+
 
                     if ((Asteroids[i].y >= consoleHeight) || (Asteroids[i].x >= consoleWidth))
                     {

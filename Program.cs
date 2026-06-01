@@ -163,11 +163,11 @@ namespace gameproject
                             Environment.Exit(0);
 
                         ResetGame();
-
+                        
                         Clear();
                         start = true;
                         continue;
-                    
+                                          
                     }
                 }
             }

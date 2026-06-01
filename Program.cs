@@ -109,8 +109,6 @@ namespace gameproject
                     {
                         start = false; //Stops game loop first 
 
-                        WaitForKeyRelease();
-
                         bool playAgain = OutroAndDeath.ShowLose();
 
                         if (!playAgain)

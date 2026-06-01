@@ -72,7 +72,7 @@ namespace gameproject
                     Write(' ');
                     Asteroids.RemoveAt(i);//remove from the list
                     Life--;
-                    hitCooldown = 15; //30-frame invincibility
+                    hitCooldown = 15; //15-frame invincibility
                     
                 }
             }

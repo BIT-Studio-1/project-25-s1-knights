@@ -158,7 +158,7 @@ namespace gameproject
 
                         OutroAndDeath.ShowWin();
 
-                        Environment.Exit(0);
+                        
 
                        
                     

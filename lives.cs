@@ -38,7 +38,7 @@ namespace gameproject
             int hitboxBottom = playerY + 3;
 
             //loop backwards so removal is safe
-            for (int i = Invaders.Count - 1; i >= 0; i--) //chnaged teh logic to backward safe to remove
+            for (int i = Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
             {
                 bool withinX = Invaders[i].x >= hitboxLeft && Invaders[i].x <= hitboxRight;
                 bool withinY = Invaders[i].y >= hitboxTop && Invaders[i].y <= hitboxBottom;
@@ -50,12 +50,30 @@ namespace gameproject
                     Write(' ');
                     Invaders.RemoveAt(i);//remove from the list
                     Life--;
-                    hitCooldown = 30; //30-frame invincibility
-                    break; //stop checking after one hit
+                    hitCooldown = 15; //30-frame invincibility
+                     //stop checking after one hit
                     // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
                     // Explosion + destroy invader
                     //await ExplosionAnimation(playerX, playerY);
                     //await Task.Delay(1000);
+                }
+
+                
+            }
+
+            for (int i = Asteroids.Count - 1; i >= 0; i--)
+            {
+                bool withinX = Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight;
+                bool withinY = Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom;
+
+                if (Asteroids[i].x >=hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y >= hitboxBottom)
+                {
+                    SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
+                    Write(' ');
+                    Asteroids.RemoveAt(i);//remove from the list
+                    Life--;
+                    hitCooldown = 15; //30-frame invincibility
+                    
                 }
             }
 

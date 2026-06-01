@@ -52,7 +52,6 @@ namespace gameproject
             // WIN GAME
             if (level == 5 && enemiesKilled >= maxInvaders)
             {
-                win = true;
                 start = false;
 
                 Invaders.Clear();

@@ -110,8 +110,7 @@ namespace gameproject
                     if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
                     {
                         SetCursorPosition(Invaders[i].x, Invaders[i].y);
-                        Invaders[i].x+=5;
-                        Invaders[i].y++;
+
 
                         Write(drawInvaders);
                     }

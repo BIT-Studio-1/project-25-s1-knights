@@ -144,7 +144,7 @@ namespace gameproject
                     
                     // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
-                    if (IsKeyDown(ConsoleKey.Escape))
+                    if (IsKeyDown(Escape))
                     {
                         start = false;
                         menuStart = true;

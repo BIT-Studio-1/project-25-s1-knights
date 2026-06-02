@@ -119,7 +119,7 @@ namespace gameproject
 
                         bool playAgain = OutroAndDeath.ShowLose();
 
-                        if (!playAgain)
+                        if (playAgain == false)
                             Environment.Exit(0);
 
                         ResetGame();

@@ -54,7 +54,7 @@ namespace gameproject
 
             if (playerY != WindowHeight - 8) playerY = WindowHeight - 8;
 
-
+            
         }
 
 

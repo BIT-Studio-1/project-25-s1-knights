@@ -136,6 +136,7 @@ namespace gameproject
                     //newInvader(); // removed because of async
                     updateinvaders();
                     newAsteroids();
+                    UpdateDrops(); //add update drops function into the gameloop
                     
 
 

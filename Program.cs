@@ -38,12 +38,12 @@ namespace gameproject
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
-<<<<<<< HEAD
+
         public static bool isDead = false;
-=======
+
         public static List<LifeDrop> lifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
 
->>>>>>> bb381095bfb1b4cb3b9556c12d4908fe84e1e1a1
+
 
     }
     public class Bullet
@@ -68,9 +68,7 @@ namespace gameproject
 
         public void Move() => y++;
     }
-<<<<<<< HEAD
-    
-=======
+
 
     public class LifeDrop
     {
@@ -78,7 +76,7 @@ namespace gameproject
         public int y { get; set; }
         public void Move() => y++; //falls down like invaders
     }
->>>>>>> bb381095bfb1b4cb3b9556c12d4908fe84e1e1a1
+
 
     internal class Program
     {
@@ -136,6 +134,7 @@ namespace gameproject
                         while(Console.KeyAvailable)
                            Console.ReadKey(true);
 
+                        bool playAgain = OutroAndDeath.ShowLose();
                         if (playAgain == false)
                             Environment.Exit(0);
 
@@ -154,8 +153,7 @@ namespace gameproject
                     //newInvader(); // removed because of async
                     updateinvaders();
                     newAsteroids();
-<<<<<<< HEAD
-=======
+
                     UpdateDrops(); //add update drops function into the gameloop
                     
 
@@ -164,7 +162,6 @@ namespace gameproject
 
 
 
->>>>>>> bb381095bfb1b4cb3b9556c12d4908fe84e1e1a1
 
                    
                     DrawShip();

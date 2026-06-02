@@ -90,5 +90,10 @@ namespace gameproject
             
         }
 
+        public static void UpdateDrops()
+        {
+            //TODO: move drops, draw drops, check player collection
+        }
+
     }
 }

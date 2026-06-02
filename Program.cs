@@ -63,6 +63,12 @@ namespace gameproject
         public void Move() => y++;
     }
 
+    public class LifeDrop
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+        public void Move() => y++; //falls down like invaders
+    }
 
     internal class Program
     {

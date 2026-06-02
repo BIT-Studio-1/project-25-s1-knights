@@ -37,6 +37,7 @@ namespace gameproject
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
+        public static List<LifeDrop> lifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
 
 
     }

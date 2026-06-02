@@ -37,7 +37,7 @@ namespace gameproject
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
-
+        public static bool isDead = false;
 
     }
     public class Bullet
@@ -62,7 +62,7 @@ namespace gameproject
 
         public void Move() => y++;
     }
-
+    
 
     internal class Program
     {
@@ -83,9 +83,17 @@ namespace gameproject
             menuStart = false;
             initialScreen();
 
+            startmenu();
+
             while (true)
             {
-                startmenu();
+                Console.Clear();
+                if (menuStart)
+                {
+                    startmenu();
+                    menuStart = false;
+
+                }
 
                 while (start)
                 {
@@ -99,42 +107,38 @@ namespace gameproject
 
 
                     Level(); //calls on the level method while the start bool is true so it is continuous.
-
-
                     limits();
                     CheckLives(); // Calls the function to calculate the lives.
 
                     //Lose Condition
-                    if (Life <= 0)
+                    if (Life <= 0 && !isDead)
                     {
+                        isDead = true;
                         start = false; //Stops game loop first 
 
-                        bool playAgain = OutroAndDeath.ShowLose();
+                        await Task.Delay(500);
+                        while(Console.KeyAvailable)
+                           Console.ReadKey(true);
 
+                        bool playAgain = OutroAndDeath.ShowLose();
                         if (!playAgain)
                             Environment.Exit(0);
 
                         ResetGame();
-
+                        //Clear();
+                        await Task.Delay(100);
                         Clear();
                         start = true;
-                        continue;
-
-                        
+                        //continue;
+                        break;
+                        //return;
                     }
-
+                
                     movement(); //calls on the movement method while the start bool is true so it is continuous.
                     shoot();
                     //newInvader(); // removed because of async
                     updateinvaders();
                     newAsteroids();
-                    
-
-
-
-
-
-
 
                    
                     DrawShip();
@@ -155,13 +159,22 @@ namespace gameproject
                         start = false; //stops game loop first
 
                         OutroAndDeath.ShowWin();
-
-                        
-
-                       
                     
                     }
                 }
+
+
+                //if (isDead)
+                //{
+                //    await Task.Delay(500);
+                //    while (Console.KeyAvailable)
+                //        Console.ReadKey(true);
+                //    OutroAndDeath.ShowLose();
+                //    return;
+
+
+
+                //}
             }
 
         }
@@ -187,6 +200,9 @@ namespace gameproject
 
             playerX = WindowWidth / 2;
             playerY = WindowHeight - 8;
+
+            isDead = false;
+            //Clear();
 
         }
 

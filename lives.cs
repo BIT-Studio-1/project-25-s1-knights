@@ -81,11 +81,11 @@ namespace gameproject
             SetCursorPosition(WindowWidth - livesText.Length, 0);
             Write(livesText);
 
-            if (Life <= 0) { 
-            start=false;
-                OutroAndDeath.ShowLose();
-                //next fuction goes here.
-            }
+            //if (Life <= 0) { 
+            //start=false;
+            //    OutroAndDeath.ShowLose();
+            //    //next fuction goes here.
+            //}
 
             
         }

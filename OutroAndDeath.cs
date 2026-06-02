@@ -64,21 +64,69 @@ namespace gameproject
             Console.WriteLine("[Y] Play Again");
             Console.WriteLine("[N] Exit Game");
 
+            while(Program.IsKeyDown(ConsoleKey.Y) || Program.IsKeyDown(ConsoleKey.N) || Program.IsKeyDown(ConsoleKey.LeftArrow) || Program.IsKeyDown(ConsoleKey.Spacebar) || Program.IsKeyDown(ConsoleKey.RightArrow))
+            {
+                Thread.Sleep(10);
+            }
+
+            Thread.Sleep(100);
+            while(Console.KeyAvailable)
+                Console.ReadKey(true);
+
             while (true)
             {
                 ConsoleKey key = Console.ReadKey(true).Key;
-
-                if (key == ConsoleKey.Y)
-                {
-                    return true;
-                }
-
-                if (key == ConsoleKey.N)
-                {
-                    return false;
-                }
-
+                if (key == ConsoleKey.Y) return true;
+                if (key == ConsoleKey.N) return false;
             }
+
+            //Thread.Sleep(1000);
+            //Console.ReadKey(true);
+            //Environment.Exit(0);
+
+            //while (Console.KeyAvailable)
+            //    Console.ReadKey(true);
+
+            ////while(Program.IsKeyDown(ConsoleKey.LeftArrow) || Program.IsKeyDown(ConsoleKey.RightArrow) || Program.IsKeyDown(ConsoleKey.UpArrow) || Program.IsKeyDown(ConsoleKey.DownArrow))
+            ////{
+            ////    Thread.Sleep(20);
+            ////}
+
+            //Thread.Sleep(100);
+
+            //while (true)
+            //{
+
+
+            //    ConsoleKey key = Console.ReadKey(true).Key;
+            //    if (key == ConsoleKey.Y)
+            //        return true;
+            //    if (key == ConsoleKey.N)
+            //        return false;
+            //    //char input = Console.ReadKey(true).KeyChar;
+            //    //if (input == 'y' || input == 'Y')
+            //    //    return true;
+            //    //if (input == 'n' || input == 'N')
+            //    //    return false;
+            //    //}
+
+            //    //while (Program.IsKeyDown(ConsoleKey.Y) || Program.IsKeyDown(ConsoleKey.N))
+            //    //{
+            //    //    Thread.Sleep(10);
+            //    //}
+
+            //    //while (true)
+            //    //{ 
+
+            //    //if (Program.IsKeyDown(ConsoleKey.Y))
+            //    //    return true;
+
+            //    //if (Program.IsKeyDown(ConsoleKey.N))
+            //    //    return false;
+
+            //    //Thread.Sleep(10);
+
+            //}
 
 
             //Console.ReadKey(true);

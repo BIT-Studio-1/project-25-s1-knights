@@ -22,7 +22,7 @@ namespace gameproject
             
         
         
-        public static async Task updateinvaders()
+        public static void updateinvaders()
         {
 
             string drawInvaders = "V";

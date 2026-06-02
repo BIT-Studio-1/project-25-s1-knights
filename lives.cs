@@ -66,13 +66,13 @@ namespace gameproject
                 bool withinX = Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight;
                 bool withinY = Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom;
 
-                if (Asteroids[i].x >=hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y >= hitboxBottom)
+                if (Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y >= hitboxBottom)
                 {
                     SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
                     Write(' ');
                     Asteroids.RemoveAt(i);//remove from the list
                     Life--;
-                    hitCooldown = 15; //30-frame invincibility
+                    hitCooldown = 15; //15-frame invincibility
                     
                 }
             }
@@ -88,6 +88,11 @@ namespace gameproject
             //}
 
             
+        }
+
+        public static void UpdateDrops()
+        {
+            //TODO: move drops, draw drops, check player collection
         }
 
     }

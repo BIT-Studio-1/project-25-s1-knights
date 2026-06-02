@@ -30,14 +30,20 @@ namespace gameproject
         public static int level = 1, maxInvaders = 5, invaderSpeed = 10, spawnRate = 10, enemiesKilled = 0, bottomRow = WindowHeight - 1,
                           farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 8, hitCooldown = 0, spawnTimer = 0,
                           shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
-                          moveRate = 5, asteroidMoveRate = 6, asteroidMoveTimer = 0, asteroidSpawnRate = 10, asteroidSpawnTimer = 0, maxAsteroids = 4; //for making invaders move slower
+                          moveRate = 5, asteroidMoveRate = 6, asteroidMoveTimer = 0, asteroidSpawnRate = 10, asteroidSpawnTimer = 0, maxAsteroids = 4, //for making invaders move slower
+                          dropMoveTime = 0, dropMoveRate = 8; //added drop move time and drop move rate to globals
         public static Random rand = new Random();
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = false, moved = false, menuStart = false;
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
+<<<<<<< HEAD
         public static bool isDead = false;
+=======
+        public static List<LifeDrop> lifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
+
+>>>>>>> bb381095bfb1b4cb3b9556c12d4908fe84e1e1a1
 
     }
     public class Bullet
@@ -62,7 +68,17 @@ namespace gameproject
 
         public void Move() => y++;
     }
+<<<<<<< HEAD
     
+=======
+
+    public class LifeDrop
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+        public void Move() => y++; //falls down like invaders
+    }
+>>>>>>> bb381095bfb1b4cb3b9556c12d4908fe84e1e1a1
 
     internal class Program
     {
@@ -139,6 +155,17 @@ namespace gameproject
                     //newInvader(); // removed because of async
                     updateinvaders();
                     newAsteroids();
+<<<<<<< HEAD
+=======
+                    UpdateDrops(); //add update drops function into the gameloop
+                    
+
+
+
+
+
+
+>>>>>>> bb381095bfb1b4cb3b9556c12d4908fe84e1e1a1
 
                    
                     DrawShip();

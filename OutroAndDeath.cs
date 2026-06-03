@@ -77,8 +77,6 @@ namespace gameproject
             while (true)
             {
                 
-                
-                
                 if (IsKeyDown(Y))
                 {
                     return true;

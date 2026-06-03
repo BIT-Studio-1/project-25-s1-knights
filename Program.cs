@@ -19,6 +19,7 @@ using static gameproject.asteroids;
 
 
 
+
 namespace gameproject
 {
     
@@ -38,8 +39,6 @@ namespace gameproject
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
         public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
-
-        public static bool isDead = false;
 
         public static List<LifeDrop> LifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
 
@@ -127,9 +126,8 @@ namespace gameproject
                     CheckLives(); // Calls the function to calculate the lives.
 
                     //Lose Condition
-                    if (Life <= 0 && !isDead)
+                    if (Life <= 0)
                     {
-                        isDead = true;
                         start = false; //Stops game loop first 
 
                         await Task.Delay(500);
@@ -159,14 +157,6 @@ namespace gameproject
 
                     UpdateDrops(); //add update drops function into the gameloop
                     
-
-
-
-
-
-
-
-                   
                     
                     await Task.Delay(20);
                     
@@ -189,18 +179,6 @@ namespace gameproject
                     }
                 }
 
-
-                //if (isDead)
-                //{
-                //    await Task.Delay(500);
-                //    while (Console.KeyAvailable)
-                //        Console.ReadKey(true);
-                //    OutroAndDeath.ShowLose();
-                //    return;
-
-
-
-                //}
             }
 
         }
@@ -228,7 +206,7 @@ namespace gameproject
             playerX = WindowWidth / 2;
             playerY = WindowHeight - 8;
 
-            isDead = false;
+            //isDead = false;
             //Clear();
 
         }

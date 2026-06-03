@@ -13,6 +13,7 @@ using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Asteroid;
 using System.Collections;
+using System.ComponentModel;
 
 namespace gameproject
 {
@@ -75,7 +76,7 @@ namespace gameproject
 
             if ((asteroidSpawnTimer >= asteroidSpawnRate) && (Asteroids.Count < maxAsteroids))
             {
-                Asteroids.Add(new Asteroid { x = rand.Next(1, 5), y = 0 }); //spawn rate is 20, should be low enough to not have them spawn so frequently, also spawns asteroid in corner
+                Asteroids.Add(new Asteroid { x = rand.Next(consoleWidth), y = 0, asteroidDirection = rand.Next(1, 2) }); //spawn rate is 20, should be low enough to not have them spawn so frequently, also spawns asteroid in corner
                 asteroidSpawnTimer = 0;
             }
 
@@ -83,9 +84,10 @@ namespace gameproject
             {
                 asteroidMoveTimer = 0;
 
-
+                
                 for (int i = Asteroids.Count - 1; i >= 0; i--)
                 {
+                   
 
                     if ((Asteroids[i].x >= 0) && (Asteroids[i].y >= 0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))
                     {
@@ -106,15 +108,26 @@ namespace gameproject
                         Asteroids[i].y = rand.Next(consoleHeight);
                     }
 
-                    Asteroids[i].x++;
+                   
                     Asteroids[i].y++;
+
+                    if (Asteroids[i].asteroidDirection == 1)
+                    {
+                        Asteroids[i].x++;
+                    }
+
+                    else
+                    {
+                        Asteroids[i].x--;
+                    }
                     
 
 
-                    if ((Asteroids[i].y >= consoleHeight) || (Asteroids[i].x >= consoleWidth))
+                    if (((Asteroids[i].y >= consoleHeight) || (Asteroids[i].x >= consoleWidth)) || (Asteroids[i].x <= 0))
                     {
                         Asteroids[i].y = 0;
                         Asteroids[i].x = rand.Next(consoleWidth);
+                        Asteroids[i].asteroidDirection = rand.Next(2);
                     }
 
                     if ((Asteroids[i].x >= 0) && (Asteroids[i].y >= 0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))

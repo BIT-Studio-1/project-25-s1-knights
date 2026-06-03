@@ -66,6 +66,8 @@ namespace gameproject
         public int x { get; set; }
         public int y { get; set; }
 
+        public int asteroidDirection;
+
         public void Move() => y++;
     }
 

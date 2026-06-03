@@ -222,6 +222,7 @@ namespace gameproject
 
             Invaders.Clear();
             PlayerBullets.Clear();
+            LifeDrops.Clear();
 
             playerX = WindowWidth / 2;
             playerY = WindowHeight - 8;

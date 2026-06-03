@@ -97,7 +97,7 @@ namespace gameproject
                     }
 
 
-                    if (Asteroids[i].x >= consoleWidth)
+                    if ((Asteroids[i].x >= consoleWidth) || (Asteroids[i].x < 0))
                     {
                         Asteroids[i].x = rand.Next(consoleWidth);
                       

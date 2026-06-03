@@ -22,9 +22,9 @@ namespace gameproject
         public static void movement() //James
         {
 
+            int oldx = playerX;
 
-
-            ClearShip();
+            
             //clear old position before moving
 
 
@@ -53,6 +53,12 @@ namespace gameproject
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
 
             if (playerY != WindowHeight - 8) playerY = WindowHeight - 8;
+
+            if (moved)
+            {
+                ClearShip(oldx);
+                DrawShip();
+            }
 
             
         }
@@ -142,21 +148,21 @@ namespace gameproject
             }
 
         }
-        public static void ClearShip()//clears the ship when moved
+        public static void ClearShip(int x)//clears the ship when moved
         {
 
-            if (playerX >= 3 && playerX + 3 < consoleWidth)
+            if (x >= 3 && x + 3 < consoleWidth)
             {
-                SetCursorPosition(playerX - 3, playerY);
-                Write("        ");
-                SetCursorPosition(playerX - 3, playerY + 1);
-                Write("        ");
-                SetCursorPosition(playerX - 3, playerY + 2);
-                Write("        ");
-                SetCursorPosition(playerX - 2, playerY + 3);
-                Write("      ");
-                SetCursorPosition(playerX - 2, playerY + 4);
-                Write("    ");
+                SetCursorPosition(x - 3, playerY);
+                Write("         ");
+                SetCursorPosition(x - 3, playerY + 1);
+                Write("         ");
+                SetCursorPosition(x - 3, playerY + 2);
+                Write("         ");
+                SetCursorPosition(x - 2, playerY + 3);
+                Write("       ");
+                SetCursorPosition(x - 1, playerY + 4);
+                Write("     ");
             }
 
         }

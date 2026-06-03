@@ -152,6 +152,7 @@ namespace gameproject
                 
                     movement(); //calls on the movement method while the start bool is true so it is continuous.
                     shoot();
+                    DrawShip();
                     //newInvader(); // removed because of async
                     updateinvaders();
                     newAsteroids();
@@ -166,7 +167,7 @@ namespace gameproject
 
 
                    
-                    DrawShip();
+                    
                     await Task.Delay(20);
                     
                     // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.

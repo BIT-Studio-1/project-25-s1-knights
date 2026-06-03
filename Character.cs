@@ -85,12 +85,21 @@ namespace gameproject
                         SetCursorPosition(Invaders[e].x, Invaders[e].y);
                         Write(' '); // erase invader from screen
 
+                        int dropX = Invaders[e].x; //save position before removing
+                        int dropY= Invaders[e].y;
+
                         Invaders.RemoveAt(e); //removes invaders from list
 
                         enemiesKilled++; // Increase kill count for level progression
 
                         PlayerBullets.RemoveAt(i); // remove the bullet
                         hitSomething = true; // stops the loop since this bullet is used up
+
+                        //1 in 3 chance to spawn a life booster drop
+                        if (rand.Next(3)==0)
+                        {
+                            LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
+                        }
                     }
                 }
                 if (hitSomething) continue; // skip to next bullet since this one is gone

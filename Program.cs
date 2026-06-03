@@ -166,7 +166,7 @@ namespace gameproject
 
 
                    
-                    DrawShip();
+                    
                     await Task.Delay(20);
                     
                     // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.

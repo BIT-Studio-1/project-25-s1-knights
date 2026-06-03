@@ -54,8 +54,13 @@ namespace gameproject
 
             if (playerY != WindowHeight - 8) playerY = WindowHeight - 8;
 
-            ClearShip(oldx);
-            DrawShip();
+            if (moved)
+            {
+                ClearShip(oldx);
+                DrawShip();
+            }
+
+            
         }
 
 

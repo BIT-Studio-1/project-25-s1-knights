@@ -93,7 +93,32 @@ namespace gameproject
         public static void UpdateDrops()
         {
             //TODO: move drops, draw drops, check player collection
+           for(int i= LifeDrops.Count - 1; i >= 0;i--)
+            {
+                if (dropMoveTimer >= dropMoveRate)
+                {
+                    //erase old position
+                    if (LifeDrops[i].x >=0 && LifeDrops[i].y >=0 &&
+                        LifeDrops[i].x < consoleWidth && LifeDrops[i].y < consoleHeight)
+                    {
+                        SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                        Write(" ");
+                    }
+
+                    LifeDrops[i].Move(); //fall one row down
+
+                    //remove if off screen
+                    if (LifeDrops[i].y >= consoleHeight)
+                    {
+                        LifeDrops.RemoveAt(i);
+                        continue;
+                    }
+                }
+            }
+            if (dropMoveTimer >= dropMoveRate) dropMoveTimer = 0;
+
         }
+         
 
     }
 }

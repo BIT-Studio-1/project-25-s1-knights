@@ -31,7 +31,7 @@ namespace gameproject
                           farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 8, hitCooldown = 0, spawnTimer = 0,
                           shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
                           moveRate = 5, asteroidMoveRate = 6, asteroidMoveTimer = 0, asteroidSpawnRate = 10, asteroidSpawnTimer = 0, maxAsteroids = 4, //for making invaders move slower
-                          dropMoveTime = 0, dropMoveRate = 8; //added drop move time and drop move rate to globals
+                          dropMoveTimer = 0, dropMoveRate = 8; //added drop move time and drop move rate to globals
         public static Random rand = new Random();
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = false, moved = false, menuStart = false;
@@ -41,7 +41,7 @@ namespace gameproject
 
         public static bool isDead = false;
 
-        public static List<LifeDrop> lifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
+        public static List<LifeDrop> LifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
 
 
 

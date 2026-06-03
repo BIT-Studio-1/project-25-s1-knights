@@ -114,6 +114,16 @@ namespace gameproject
                         continue;
                     }
                 }
+
+                //draw + at current position
+                if (LifeDrops[i].x >=0 && LifeDrops[i].y >0 &&
+                    LifeDrops[i].x < consoleWidth && LifeDrops[i].y <= consoleHeight)
+                {
+                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y );
+                    ForegroundColor = ConsoleColor.Cyan;
+                    Write('+');
+                    ResetColor();
+                }
             }
             if (dropMoveTimer >= dropMoveRate) dropMoveTimer = 0;
 

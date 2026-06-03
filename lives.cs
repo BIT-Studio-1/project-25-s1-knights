@@ -66,7 +66,7 @@ namespace gameproject
                 bool withinX = Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight;
                 bool withinY = Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom;
 
-                if (Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y >= hitboxBottom)
+                if (Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom)
                 {
                     SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
                     Write(' ');
@@ -98,23 +98,24 @@ namespace gameproject
             {
                 // check if ships collects the drop
                 int hitboxLeft = playerX - 3;
-                int hitboxRight = playerY + 4;
+                int hitboxRight = playerX + 4;
                 int hitboxTop = playerY;
                 int hitboxBottom = playerY + 4;
 
                 bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
                 bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;
 
-                if (inX && inY)
+                if (LifeDrops[i].x >= hitboxLeft && LifeDrops[i].x <= hitboxRight && LifeDrops[i].y >= hitboxTop && LifeDrops[i].y <= hitboxBottom)
                 {
                     SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
                     Write(' ');// erase from screen
                     LifeDrops.RemoveAt(i);
                     Life++;  //give playeran extra life
-                    string livesText =  "Lives: {Life}";
+                    string livesText =  $"Lives: {Life}";
                     SetCursorPosition(WindowWidth - livesText.Length, 0);
                     Write(livesText); // update  HUD immediately
                     continue;
+                    
                 }
                 if (dropMoveTimer >= dropMoveRate)
                 {
@@ -124,6 +125,7 @@ namespace gameproject
                     {
                         SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
                         Write(" ");
+
                     }
 
                     LifeDrops[i].Move(); //fall one row down

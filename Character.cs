@@ -146,7 +146,7 @@ namespace gameproject
                 Write("        ");
                 SetCursorPosition(playerX - 2, playerY + 3);
                 Write("      ");
-                SetCursorPosition(playerX - 1, playerY + 4);
+                SetCursorPosition(playerX - 2, playerY + 4);
                 Write("    ");
             }
 

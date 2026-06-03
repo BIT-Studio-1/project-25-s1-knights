@@ -95,6 +95,26 @@ namespace gameproject
             //TODO: move drops, draw drops, check player collection
            for(int i= LifeDrops.Count - 1; i >= 0;i--)
             {
+                // check if ships collects the drop
+                int hitboxLeft = playerX - 3;
+                int hitboxRight = playerY + 4;
+                int hitboxTop = playerY;
+                int hitboxBottom = playerY + 4;
+
+                bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
+                bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;
+
+                if (inX && inY)
+                {
+                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                    Write(' ');// erase from screen
+                    LifeDrops.RemoveAt(i);
+                    Life++;  //give playeran extra life
+                    string livesText =  "Lives: {Life}";
+                    SetCursorPosition(WindowWidth - livesText.Length, 0);
+                    Write(livesText); // update  HUD immediately
+                    continue;
+                }
                 if (dropMoveTimer >= dropMoveRate)
                 {
                     //erase old position

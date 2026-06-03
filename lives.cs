@@ -92,6 +92,7 @@ namespace gameproject
 
         public static void UpdateDrops()
         {
+            dropMoveTimer++;
             //TODO: move drops, draw drops, check player collection
            for(int i= LifeDrops.Count - 1; i >= 0;i--)
             {

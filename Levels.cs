@@ -23,12 +23,15 @@ namespace gameproject
                 maxInvaders = 5;
                 invaderSpeed = 10; // was 300
                 spawnRate = 10;
+                dropMoveRate = 5;
+                
             }
             else if (level == 2)
             {
                 maxInvaders = 8;
                 invaderSpeed =3;
                 spawnRate = 8;
+               
             }
             else if (level == 3)
             {

@@ -12,25 +12,18 @@ using static gameproject.Character;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Asteroid;
-using System.Collections;
 
 namespace gameproject
 {
     internal class asteroids
 
     {
-        public static int x;
-        public static int y;
-
-        public static void moveAsteroidsRight()
+        public int x;
+        public int y;
+        
+        public void moveAsteroids()
         {
             x++;
-            y++;
-        }
-
-        public static void moveAsteroidsLeft()
-        {
-            x--;
             y++;
         }
 
@@ -39,7 +32,6 @@ namespace gameproject
             
             asteroidMoveTimer++;  
             asteroidSpawnTimer++;
-
 
             if (level == 1)  //handles speed per level for asteroids, increasing move rate per level, need to do rest of code so it works properly
             {
@@ -71,8 +63,6 @@ namespace gameproject
                 asteroidMoveRate = 1;
             }
 
-            
-
             if ((asteroidSpawnTimer >= asteroidSpawnRate) && (Asteroids.Count < maxAsteroids))
             {
                 Asteroids.Add(new Asteroid { x = rand.Next(1, 5), y = 0 }); //spawn rate is 20, should be low enough to not have them spawn so frequently, also spawns asteroid in corner
@@ -84,6 +74,9 @@ namespace gameproject
                 asteroidMoveTimer = 0;
 
 
+
+
+
                 for (int i = Asteroids.Count - 1; i >= 0; i--)
                 {
 
@@ -91,14 +84,14 @@ namespace gameproject
                     {
                         SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
                         Write(" ");
-
+                         
                     }
+
 
 
                     if (Asteroids[i].x >= consoleWidth)
                     {
-                        Asteroids[i].x = rand.Next(consoleWidth);
-                      
+                        Asteroids[i].x = rand.Next(1, 15);
                     }
 
                     if (Asteroids[i].y >= consoleHeight)
@@ -106,24 +99,21 @@ namespace gameproject
                         Asteroids[i].y = rand.Next(consoleHeight);
                     }
 
-                    Asteroids[i].x++;
                     Asteroids[i].y++;
-                    
+                    Asteroids[i].x++;
 
-
-                    if ((Asteroids[i].y >= consoleHeight) || (Asteroids[i].x >= consoleWidth))
+                    if (Asteroids[i].y >= consoleHeight)
                     {
                         Asteroids[i].y = 0;
-                        Asteroids[i].x = rand.Next(consoleWidth);
+                        Asteroids[i].x = rand.Next(1, 15);
                     }
 
                     if ((Asteroids[i].x >= 0) && (Asteroids[i].y >= 0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))
                     {
                         SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
-                        ForegroundColor = ConsoleColor.Red;
 
                         Write("O");
-                        ResetColor();
+
                     }
                 }
 

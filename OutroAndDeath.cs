@@ -19,7 +19,7 @@ namespace gameproject
 {
     internal class OutroAndDeath
     {
-        public static void ShowWin()
+        public static bool ShowWin()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -41,14 +41,27 @@ namespace gameproject
             Console.WriteLine();
             Console.WriteLine("YOU WIN!");
             Console.WriteLine();
-            Console.WriteLine("Press any key to exit....");
-            Thread.Sleep(1000);
-            Console.ReadKey(true);
-            Environment.Exit(0);
 
-            
+            Console.WriteLine("[Y] Play Again");
+            Console.WriteLine("[N] Exit Game");
+            while (true)
+            {
 
-            
+                if (IsKeyDown(Y))
+                {
+                    return true;
+
+                }
+                else if (IsKeyDown(N))
+                {
+                    return false;
+                }
+
+
+            }
+
+
+
         }
 
         public static bool ShowLose()

@@ -131,8 +131,8 @@ namespace gameproject
                         start = false; //Stops game loop first 
 
                         await Task.Delay(500);
-                        while(Console.KeyAvailable)
-                           Console.ReadKey(true);
+                        while (Console.KeyAvailable)
+                            Console.ReadKey(true);
 
                         bool playAgain = OutroAndDeath.ShowLose();
                         if (playAgain == false)
@@ -147,7 +147,7 @@ namespace gameproject
                         break;
                         //return;
                     }
-                
+
                     movement(); //calls on the movement method while the start bool is true so it is continuous.
                     shoot();
                     DrawShip();
@@ -156,10 +156,10 @@ namespace gameproject
                     newAsteroids();
 
                     UpdateDrops(); //add update drops function into the gameloop
-                    
-                    
+
+
                     await Task.Delay(20);
-                    
+
                     // When the move bool is set to true, it clears the current screen and rewrites the player at the new postition.
 
                     if (IsKeyDown(Escape))
@@ -170,13 +170,36 @@ namespace gameproject
                     }
 
                     //Win Condition
+                    //if (level == 5 && enemiesKilled == maxInvaders)
+                    //{
+                    //    start = false; //stops game loop first
+
+                    //    OutroAndDeath.ShowWin();
+
+                    //}
+
+                    //Win Condition
                     if (level == 5 && enemiesKilled == maxInvaders)
                     {
                         start = false; //stops game loop first
 
-                        OutroAndDeath.ShowWin();
-                    
+                        await Task.Delay(500);
+                        while (Console.KeyAvailable)
+                            Console.ReadKey(true);
+
+                        bool playAgain = OutroAndDeath.ShowWin();
+
+                        if (!playAgain)
+                            Environment.Exit(0);
+
+                        ResetGame();
+
+                        await Task.Delay(100);
+                        Clear();
+                        start = true;
+                        break;
                     }
+
                 }
 
             }

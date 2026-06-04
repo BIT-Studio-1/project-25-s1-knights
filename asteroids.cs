@@ -123,8 +123,9 @@ namespace gameproject
                     if ((Asteroids[i].x >= 0) && (Asteroids[i].y >= 0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))
                     {
                         SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
-
+                        ForegroundColor = ConsoleColor.Red;
                         Write("O");
+                        ResetColor();  
 
                     }
                 }

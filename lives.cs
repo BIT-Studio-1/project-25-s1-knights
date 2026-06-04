@@ -105,6 +105,32 @@ namespace gameproject
                 bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
                 bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;
 
+                if (level == 1)
+                {
+                    dropMoveRate = 5;
+                }
+
+                if (level == 2)
+                {
+                    dropMoveRate = 4;
+                }
+
+                if (level == 3)
+                {
+                    dropMoveRate = 3;
+                }
+
+                if (level == 4)
+                {
+                    dropMoveRate = 2;
+                }
+
+                if (level == 5)
+                {
+                    dropMoveRate = 2;
+                }
+
+
                 if (LifeDrops[i].x >= hitboxLeft && LifeDrops[i].x <= hitboxRight && LifeDrops[i].y >= hitboxTop && LifeDrops[i].y <= hitboxBottom)
                 {
                     SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);

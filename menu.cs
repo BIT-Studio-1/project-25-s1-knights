@@ -31,7 +31,9 @@ namespace gameproject
                     ResetColor();
                     WriteLine("  CONTROLS");
                     WriteLine("  EXIT    ");
-                    
+                    SetCursorPosition(0, WindowHeight / 2);
+                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
+
                 }
                 else if (option == 2)
                 {
@@ -41,7 +43,9 @@ namespace gameproject
                     WriteLine("> CONTROLS");
                     ResetColor();
                     WriteLine("  EXIT    ");
-                    
+                    SetCursorPosition(0, WindowHeight / 2);
+                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
+
                 }
                 else if (option == 3)
                 {
@@ -51,6 +55,8 @@ namespace gameproject
                     ForegroundColor = ConsoleColor.Black;
                     WriteLine("> EXIT    ");
                     ResetColor();
+                    SetCursorPosition(0, WindowHeight / 2);
+                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
                     
                 }
                 ReadKey(true);

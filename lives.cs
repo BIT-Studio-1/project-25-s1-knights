@@ -66,7 +66,7 @@ namespace gameproject
                 bool withinX = Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight;
                 bool withinY = Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom;
 
-                if (Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y >= hitboxBottom)
+                if (Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom)
                 {
                     SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
                     Write(' ');
@@ -81,14 +81,77 @@ namespace gameproject
             SetCursorPosition(WindowWidth - livesText.Length, 0);
             Write(livesText);
 
-            if (Life <= 0) { 
-            start=false;
-                OutroAndDeath.ShowLose();
-                //next fuction goes here.
-            }
+            //if (Life <= 0) { 
+            //start=false;
+            //    OutroAndDeath.ShowLose();
+            //    //next fuction goes here.
+            //}
 
             
         }
+
+        public static void UpdateDrops()
+        {
+            dropMoveTimer++;
+            //TODO: move drops, draw drops, check player collection
+           for(int i= LifeDrops.Count - 1; i >= 0;i--)
+            {
+                // check if ships collects the drop
+                int hitboxLeft = playerX - 3;
+                int hitboxRight = playerX + 4;
+                int hitboxTop = playerY;
+                int hitboxBottom = playerY + 4;
+
+                bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
+                bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;
+
+                if (LifeDrops[i].x >= hitboxLeft && LifeDrops[i].x <= hitboxRight && LifeDrops[i].y >= hitboxTop && LifeDrops[i].y <= hitboxBottom)
+                {
+                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                    Write(' ');// erase from screen
+                    LifeDrops.RemoveAt(i);
+                    Life++;  //give playeran extra life
+                    string livesText =  $"Lives: {Life}";
+                    SetCursorPosition(WindowWidth - livesText.Length, 0);
+                    Write(livesText); // update  HUD immediately
+                    continue;
+                    
+                }
+                if (dropMoveTimer >= dropMoveRate)
+                {
+                    //erase old position
+                    if (LifeDrops[i].x >=0 && LifeDrops[i].y >=0 &&
+                        LifeDrops[i].x < consoleWidth && LifeDrops[i].y < consoleHeight)
+                    {
+                        SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                        Write(" ");
+
+                    }
+
+                    LifeDrops[i].Move(); //fall one row down
+
+                    //remove if off screen
+                    if (LifeDrops[i].y >= consoleHeight)
+                    {
+                        LifeDrops.RemoveAt(i);
+                        continue;
+                    }
+                }
+
+                //draw + at current position
+                if (LifeDrops[i].x >=0 && LifeDrops[i].y >0 &&
+                    LifeDrops[i].x < consoleWidth && LifeDrops[i].y <= consoleHeight)
+                {
+                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y );
+                    ForegroundColor = ConsoleColor.Cyan;
+                    Write('+');
+                    ResetColor();
+                }
+            }
+            if (dropMoveTimer >= dropMoveRate) dropMoveTimer = 0;
+
+        }
+         
 
     }
 }

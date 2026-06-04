@@ -22,9 +22,9 @@ namespace gameproject
         public static void movement() //James
         {
 
+            int oldx = playerX;
 
-
-            ClearShip();
+            
             //clear old position before moving
 
 
@@ -54,7 +54,13 @@ namespace gameproject
 
             if (playerY != WindowHeight - 8) playerY = WindowHeight - 8;
 
+            if (moved)
+            {
+                ClearShip(oldx);
+                DrawShip();
+            }
 
+            
         }
 
 
@@ -85,12 +91,21 @@ namespace gameproject
                         SetCursorPosition(Invaders[e].x, Invaders[e].y);
                         Write(' '); // erase invader from screen
 
+                        int dropX = Invaders[e].x; //save position before removing
+                        int dropY= Invaders[e].y;
+
                         Invaders.RemoveAt(e); //removes invaders from list
 
                         enemiesKilled++; // Increase kill count for level progression
 
                         PlayerBullets.RemoveAt(i); // remove the bullet
                         hitSomething = true; // stops the loop since this bullet is used up
+
+                        //1 in 3 chance to spawn a life booster drop
+                        if (rand.Next(10)==0)
+                        {
+                            LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
+                        }
                     }
                 }
                 if (hitSomething) continue; // skip to next bullet since this one is gone
@@ -133,21 +148,21 @@ namespace gameproject
             }
 
         }
-        public static void ClearShip()//clears the ship when moved
+        public static void ClearShip(int x)//clears the ship when moved
         {
 
-            if (playerX >= 3 && playerX + 3 < consoleWidth)
+            if (x >= 3 && x + 3 < consoleWidth)
             {
-                SetCursorPosition(playerX - 3, playerY);
-                Write("        ");
-                SetCursorPosition(playerX - 3, playerY + 1);
-                Write("        ");
-                SetCursorPosition(playerX - 3, playerY + 2);
-                Write("        ");
-                SetCursorPosition(playerX - 2, playerY + 3);
-                Write("      ");
-                SetCursorPosition(playerX - 1, playerY + 4);
-                Write("    ");
+                SetCursorPosition(x - 3, playerY);
+                Write("         ");
+                SetCursorPosition(x - 3, playerY + 1);
+                Write("         ");
+                SetCursorPosition(x - 3, playerY + 2);
+                Write("         ");
+                SetCursorPosition(x - 2, playerY + 3);
+                Write("       ");
+                SetCursorPosition(x - 1, playerY + 4);
+                Write("     ");
             }
 
         }

@@ -50,6 +50,11 @@ namespace gameproject
                 PlayerBullets.Add(new Bullet { x = playerX + 4, y = playerY - 1 });
                 shootCooldown = 5;
             }
+            if (IsKeyDown(R))
+            {
+                playerRocket.Add(new Rocket { x = playerX, y = playerY });
+            }
+
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
 
             if (playerY != WindowHeight - 8) playerY = WindowHeight - 8;

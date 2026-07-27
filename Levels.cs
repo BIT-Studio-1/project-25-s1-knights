@@ -20,7 +20,7 @@ namespace gameproject
             //LEVEL 1
             if (level == 1)
             {
-                maxInvaders = 5;
+                maxInvaders = 7;
                 invaderSpeed = 10; // was 300
                 spawnRate = 10;
                 dropMoveRate = 5;
@@ -28,26 +28,26 @@ namespace gameproject
             }
             else if (level == 2)
             {
-                maxInvaders = 8;
+                maxInvaders = 10;
                 invaderSpeed =3;
                 spawnRate = 8;
                
             }
             else if (level == 3)
             {
-                maxInvaders = 10;
+                maxInvaders = 15;
                 invaderSpeed = 8;
                 spawnRate = 6;
             }
             else if (level == 4)
             {
-                maxInvaders = 12;
+                maxInvaders = 18;
                 invaderSpeed = 7;
                 spawnRate = 5;
             }
             else if (level == 5)
             {
-                maxInvaders = 15;
+                maxInvaders = 20;
                 invaderSpeed = 6;
                 spawnRate = 3;
             }

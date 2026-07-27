@@ -29,16 +29,15 @@ namespace gameproject
     {
         // Level System Added
         public static int level = 1, maxInvaders = 5, invaderSpeed = 10, spawnRate = 10, enemiesKilled = 0, bottomRow = WindowHeight - 1,
-                          farRow = WindowWidth - 1, playerX = WindowWidth / 2, playerY = WindowHeight - 8, hitCooldown = 0, spawnTimer = 0,
+                          farRow = WindowWidth - 1, hitCooldown = 0, spawnTimer = 0,
                           shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
-                          moveRate = 5, asteroidMoveRate = 6, asteroidMoveTimer = 0, asteroidSpawnRate = 10, asteroidSpawnTimer = 0, maxAsteroids = 4, //for making invaders move slower
-                          dropMoveTimer = 0, dropMoveRate = 3; //added drop move time and drop move rate to globals.
+                          moveRate = 5, dropMoveTimer = 0, dropMoveRate = 3; 
         public static Random rand = new Random();
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = false, moved = false, menuStart = false;
         public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
         public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
-        public static List<Asteroid> Asteroids = new List<Asteroid>(); // creates new list for asteroids
+
 
         public static List<LifeDrop> LifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
 
@@ -60,15 +59,7 @@ namespace gameproject
         public void Move() => y++;
     }
 
-    public class Asteroid
-    {
-        public int x { get; set; }
-        public int y { get; set; }
-
-        public int asteroidDirection;
-
-        public void Move() => y++;
-    }
+    
 
 
     public class LifeDrop
@@ -102,7 +93,7 @@ namespace gameproject
 
             while (true)
             {
-                Console.Clear();
+                Clear();
                 if (menuStart)
                 {
                     startmenu();
@@ -226,8 +217,8 @@ namespace gameproject
             PlayerBullets.Clear();
             LifeDrops.Clear();
 
-            playerX = WindowWidth / 2;
-            playerY = WindowHeight - 8;
+            playerInfo.playerX = WindowWidth / 2;
+            playerInfo.playerY = WindowHeight - 8;
 
             //isDead = false;
             //Clear();
@@ -238,8 +229,8 @@ namespace gameproject
         {
             bottomRow = WindowHeight - 1;
             farRow = WindowWidth - 1;
-            playerX = Clamp(playerX, 3, farRow - 5);
-            playerY = Clamp(playerY, 0, bottomRow - 4);
+            playerInfo.playerX = Clamp(playerInfo.playerX, 3, farRow - 5);
+            playerInfo.playerY = Clamp(playerInfo.playerY, 0, bottomRow - 4);
 
 
 

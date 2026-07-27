@@ -12,10 +12,18 @@ using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
+using static gameproject.playerInfo;
 using System.Numerics;
 
 namespace gameproject
 {
+
+    public static class playerInfo
+    {
+        public static int playerX = WindowWidth / 2, playerY = WindowHeight - 8;
+    }
+
+
     internal class Character
     {
 

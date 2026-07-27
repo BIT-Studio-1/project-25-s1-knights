@@ -32,10 +32,10 @@ namespace gameproject
                 return; // skipping teh collision in this frame
             }
             //player hitbox
-            int hitboxLeft = playerX - 3;
-            int hitboxRight = playerX + 4;
-            int hitboxTop = playerY;
-            int hitboxBottom = playerY + 3;
+            int hitboxLeft = playerInfo.playerX - 3;
+            int hitboxRight = playerInfo.playerX + 4;
+            int hitboxTop = playerInfo.playerY;
+            int hitboxBottom = playerInfo.playerY + 3;
 
             //loop backwards so removal is safe
             for (int i = Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
@@ -61,16 +61,16 @@ namespace gameproject
                 
             }
 
-            for (int i = Asteroids.Count - 1; i >= 0; i--)
+            for (int i = asteroidInfo.Asteroids.Count - 1; i >= 0; i--)
             {
-                bool withinX = Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight;
-                bool withinY = Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom;
+                bool withinX = asteroidInfo.Asteroids[i].x >= hitboxLeft && asteroidInfo.Asteroids[i].x <= hitboxRight;
+                bool withinY = asteroidInfo.Asteroids[i].y >= hitboxTop && asteroidInfo.Asteroids[i].y <= hitboxBottom;
 
-                if (Asteroids[i].x >= hitboxLeft && Asteroids[i].x <= hitboxRight && Asteroids[i].y >= hitboxTop && Asteroids[i].y <= hitboxBottom)
+                if (asteroidInfo.Asteroids[i].x >= hitboxLeft && asteroidInfo.Asteroids[i].x <= hitboxRight && asteroidInfo.Asteroids[i].y >= hitboxTop && asteroidInfo.Asteroids[i].y <= hitboxBottom)
                 {
-                    SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
+                    SetCursorPosition(asteroidInfo.Asteroids[i].x, asteroidInfo.Asteroids[i].y);
                     Write(' ');
-                    Asteroids.RemoveAt(i);//remove from the list
+                    asteroidInfo.Asteroids.RemoveAt(i);//remove from the list
                     Life--;
                     hitCooldown = 15; //15-frame invincibility
                     
@@ -97,10 +97,10 @@ namespace gameproject
            for(int i= LifeDrops.Count - 1; i >= 0;i--)
             {
                 // check if ships collects the drop
-                int hitboxLeft = playerX - 3;
-                int hitboxRight = playerX + 4;
-                int hitboxTop = playerY;
-                int hitboxBottom = playerY + 4;
+                int hitboxLeft = playerInfo.playerX - 3;
+                int hitboxRight = playerInfo.playerX + 4;
+                int hitboxTop = playerInfo.playerY;
+                int hitboxBottom = playerInfo.playerY + 4;
 
                 bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
                 bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;

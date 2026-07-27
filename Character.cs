@@ -50,9 +50,11 @@ namespace gameproject
                 PlayerBullets.Add(new Bullet { x = playerX + 4, y = playerY - 1 });
                 shootCooldown = 5;
             }
-            if (IsKeyDown(R))
+            if (IsKeyDown(R) && shootCooldown == 0)
             {
-                playerRocket.Add(new Rocket { x = playerX, y = playerY });
+                playerRocket.Add(new Rocket { x = playerX - 3, y = playerY - 1 });
+                playerRocket.Add(new Rocket { x = playerX + 4, y = playerY - 1 });
+                shootCooldown = 20;
             }
 
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
@@ -127,6 +129,70 @@ namespace gameproject
                     SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
                     ForegroundColor = ConsoleColor.Red;
                     Write('|');
+                    ResetColor();
+                }
+            }
+        }
+        public static void rocketshoot()
+        {
+            for (int i = playerRocket.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
+            {
+                if (playerRocket[i].y >= 0 && playerRocket[i].y < WindowHeight && playerRocket[i].x < WindowWidth) //check if the bullet is still within the window
+                {
+
+                    SetCursorPosition(playerRocket[i].x, playerRocket[i].y);
+                    Write(' '); // clear the old position
+                    Write(' ');
+                }
+
+
+                playerRocket[i].Move();
+
+
+                //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
+                bool hitSomething = false;
+                for (int e = Invaders.Count - 1; e >= 0 && !hitSomething; e--) // loop through every invader
+                {
+
+
+                    if ((playerRocket[i].x == Invaders[e].x + 1 || playerRocket[i].x == Invaders[e].x - 1 || playerRocket[i].x == Invaders[e].x) && playerRocket[i].y == Invaders[e].y) // check if bullet is on same spot as this invader
+                    {
+                        SetCursorPosition(Invaders[e].x, Invaders[e].y);
+                        Write(' '); // erase invader from screen
+
+                        int dropX = Invaders[e].x; //save position before removing
+                        int dropY = Invaders[e].y;
+
+                        Invaders.RemoveAt(e); //removes invaders from list
+
+                        enemiesKilled++; // Increase kill count for level progression
+
+                        playerRocket.RemoveAt(i); // remove the bullet
+                        hitSomething = true; // stops the loop since this bullet is used up
+
+                        //1 in 3 chance to spawn a life booster drop
+                        if (rand.Next(10) == 0)
+                        {
+                            LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
+                        }
+                    }
+                }
+                if (hitSomething) continue; // skip to next bullet since this one is gone
+
+
+                if (playerRocket[i].y < 0 || playerRocket[i].y > WindowHeight || playerRocket[i].x > WindowWidth)
+                {
+                    playerRocket.RemoveAt(i); //remove if off screen otherwise draw
+                }
+
+                else
+                {
+
+                    SetCursorPosition(playerRocket[i].x, playerRocket[i].y);
+                    ForegroundColor = ConsoleColor.Blue;
+                    Write('^');
+                    
+
                     ResetColor();
                 }
             }

@@ -157,6 +157,7 @@ namespace gameproject
 
                     movement(); //calls on the movement method while the start bool is true so it is continuous.
                     shoot();
+                    rocketshoot();
                     DrawShip();
                     //newInvader(); // removed because of async
                     updateinvaders();

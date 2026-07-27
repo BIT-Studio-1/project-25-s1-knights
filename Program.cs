@@ -28,47 +28,12 @@ namespace gameproject
     public static class Globals // variables that any class or function can access
     {
         // Level System Added
-        public static int level = 1, maxInvaders = 5, invaderSpeed = 10, spawnRate = 10, enemiesKilled = 0, bottomRow = WindowHeight - 1,
-                          farRow = WindowWidth - 1, hitCooldown = 0, spawnTimer = 0,
-                          shootCooldown = 0, moveTimer = 0, Life = 5, consoleWidth = WindowWidth, consoleHeight = WindowHeight,
-                          moveRate = 5, dropMoveTimer = 0, dropMoveRate = 3; 
+        public static int level = 1, enemiesKilled = 0, bottomRow = WindowHeight - 1,
+                          farRow = WindowWidth - 1, moveTimer = 0, consoleWidth = WindowWidth, consoleHeight = WindowHeight; 
         public static Random rand = new Random();
         public static HashSet<ConsoleKey> PressedKeys = new HashSet<ConsoleKey>();
         public static bool start = false, moved = false, menuStart = false;
-        public static List<Bullet> PlayerBullets = new List<Bullet>(); //creates the list to hold the bullets
-        public static List<Invader> Invaders = new List<Invader>(); //creates list to hold invaders
-
-
-        public static List<LifeDrop> LifeDrops = new List<LifeDrop>(); // creates new list for lifedrops
-
-
-
     }
-    public class Bullet
-    {
-        public int x { get; set; }
-        public int y { get; set; }
-        public void Move() => y--;
-    }
-
-    public class Invader
-    {
-        public int x { get; set; }
-        public int y { get; set; }
-
-        public void Move() => y++;
-    }
-
-    
-
-
-    public class LifeDrop
-    {
-        public int x { get; set; }
-        public int y { get; set; }
-        public void Move() => y++; //falls down like invaders
-    }
-
 
     internal class Program
     {
@@ -117,7 +82,7 @@ namespace gameproject
                     CheckLives(); // Calls the function to calculate the lives.
 
                     //Lose Condition
-                    if (Life <= 0)
+                    if (lifeInfo.Life <= 0)
                     {
                         start = false; //Stops game loop first 
 
@@ -170,7 +135,7 @@ namespace gameproject
                     //}
 
                     //Win Condition
-                    if (level == 5 && enemiesKilled == maxInvaders)
+                    if (level == 5 && enemiesKilled == invaderInfo.maxInvaders)
                     {
                         start = false; //stops game loop first
 
@@ -208,14 +173,14 @@ namespace gameproject
         //Reset Game
         public static void ResetGame()
         {
-            Life = 5;
+            lifeInfo.Life = 5;
             level = 1;
             enemiesKilled = 0;
             
 
-            Invaders.Clear();
-            PlayerBullets.Clear();
-            LifeDrops.Clear();
+            invaderInfo.Invaders.Clear();
+            playerInfo.PlayerBullets.Clear();
+            lifeInfo.LifeDrops.Clear();
 
             playerInfo.playerX = WindowWidth / 2;
             playerInfo.playerY = WindowHeight - 8;

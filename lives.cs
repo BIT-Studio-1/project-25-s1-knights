@@ -12,9 +12,23 @@ using static gameproject.Character;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
+using static gameproject.lifeInfo;
 
 namespace gameproject
 {
+    public static class lifeInfo
+    {
+        public static int Life = 5, hitCooldown = 0, dropMoveTimer = 0, dropMoveRate = 3;
+        public static List<LifeDrop> LifeDrops = new List<LifeDrop>();
+    }
+
+    public class LifeDrop
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+        public void Move() => y++; //falls down like invaders
+    }
+
     internal class Lives
     {
 
@@ -38,17 +52,17 @@ namespace gameproject
             int hitboxBottom = playerInfo.playerY + 3;
 
             //loop backwards so removal is safe
-            for (int i = Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
+            for (int i = invaderInfo.Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
             {
-                bool withinX = Invaders[i].x >= hitboxLeft && Invaders[i].x <= hitboxRight;
-                bool withinY = Invaders[i].y >= hitboxTop && Invaders[i].y <= hitboxBottom;
+                bool withinX = invaderInfo.Invaders[i].x >= hitboxLeft && invaderInfo.Invaders[i].x <= hitboxRight;
+                bool withinY = invaderInfo.Invaders[i].y >= hitboxTop && invaderInfo.Invaders[i].y <= hitboxBottom;
                 
 
-                if (Invaders[i].x >= hitboxLeft && Invaders[i].x <= hitboxRight && Invaders[i].y >= hitboxTop && Invaders[i].y >= hitboxBottom)//removes live if hit box of the ship is hit
+                if (invaderInfo.Invaders[i].x >= hitboxLeft && invaderInfo.Invaders[i].x <= hitboxRight && invaderInfo.Invaders[i].y >= hitboxTop && invaderInfo.Invaders[i].y >= hitboxBottom)//removes live if hit box of the ship is hit
                 {
-                    SetCursorPosition(Invaders[i].x, Invaders[i].y);
+                    SetCursorPosition(invaderInfo.Invaders[i].x, invaderInfo.Invaders[i].y);
                     Write(' ');
-                    Invaders.RemoveAt(i);//remove from the list
+                    invaderInfo.Invaders.RemoveAt(i);//remove from the list
                     Life--;
                     hitCooldown = 15; //30-frame invincibility
                      //stop checking after one hit

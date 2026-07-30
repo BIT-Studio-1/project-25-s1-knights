@@ -189,7 +189,7 @@ namespace gameproject
                     if ((impactX == Invaders[e].x + 1 || impactX == Invaders[e].x - 1 || impactX == Invaders[e].x) && impactY == Invaders[e].y)
                     {
                         hitSomething = true;
-                        break; // Impact detected! Proceed to trigger the explosion radius
+                        // Impact detected! Proceed to trigger the explosion radius
                     }
                 }
 

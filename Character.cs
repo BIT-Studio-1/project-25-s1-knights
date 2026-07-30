@@ -12,10 +12,24 @@ using static gameproject.Lives;
 using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
+using static gameproject.playerInfo;
 using System.Numerics;
 
 namespace gameproject
 {
+
+    public static class playerInfo
+    {
+        public static int playerX = WindowWidth / 2, playerY = WindowHeight - 8, shootCooldown = 0;
+        public static List<Bullet> PlayerBullets = new List<Bullet>();
+    }
+    public class Bullet
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+        public void Move() => y--;
+    }
+
     internal class Character
     {
 
@@ -82,19 +96,19 @@ namespace gameproject
 
                 //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
                 bool hitSomething = false;
-                for (int e = Invaders.Count - 1; e >= 0 && !hitSomething; e--) // loop through every invader
+                for (int e = invaderInfo.Invaders.Count - 1; e >= 0 && !hitSomething; e--) // loop through every invader
                 {
 
 
-                    if ((PlayerBullets[i].x == Invaders[e].x + 1 || PlayerBullets[i].x == Invaders[e].x - 1 || PlayerBullets[i].x == Invaders[e].x) && PlayerBullets[i].y == Invaders[e].y) // check if bullet is on same spot as this invader
+                    if ((PlayerBullets[i].x == invaderInfo.Invaders[e].x + 1 || PlayerBullets[i].x == invaderInfo.Invaders[e].x - 1 || PlayerBullets[i].x == invaderInfo.Invaders[e].x) && PlayerBullets[i].y == invaderInfo.Invaders[e].y) // check if bullet is on same spot as this invader
                     {
-                        SetCursorPosition(Invaders[e].x, Invaders[e].y);
+                        SetCursorPosition(invaderInfo.Invaders[e].x, invaderInfo.Invaders[e].y);
                         Write(' '); // erase invader from screen
 
-                        int dropX = Invaders[e].x; //save position before removing
-                        int dropY= Invaders[e].y;
+                        int dropX = invaderInfo.Invaders[e].x; //save position before removing
+                        int dropY= invaderInfo.Invaders[e].y;
 
-                        Invaders.RemoveAt(e); //removes invaders from list
+                        invaderInfo.Invaders.RemoveAt(e); //removes invaders from list
 
                         enemiesKilled++; // Increase kill count for level progression
 
@@ -104,7 +118,7 @@ namespace gameproject
                         //1 in 3 chance to spawn a life booster drop
                         if (rand.Next(10)==0)
                         {
-                            LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
+                            lifeInfo.LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
                         }
                     }
                 }

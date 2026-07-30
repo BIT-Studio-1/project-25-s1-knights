@@ -87,8 +87,8 @@ namespace gameproject
                         start = false; //Stops game loop first 
 
                         await Task.Delay(500);
-                        while (Console.KeyAvailable)
-                            Console.ReadKey(true);
+                        while (KeyAvailable)
+                            ReadKey(true);
 
                         bool playAgain = OutroAndDeath.ShowLose();
                         if (playAgain == false)
@@ -140,8 +140,8 @@ namespace gameproject
                         start = false; //stops game loop first
 
                         await Task.Delay(500);
-                        while (Console.KeyAvailable)
-                            Console.ReadKey(true);
+                        while (KeyAvailable)
+                            ReadKey(true);
 
                         bool playAgain = OutroAndDeath.ShowWin();
 
@@ -182,8 +182,8 @@ namespace gameproject
             playerInfo.PlayerBullets.Clear();
             lifeInfo.LifeDrops.Clear();
 
-            playerInfo.playerX = WindowWidth / 2;
-            playerInfo.playerY = WindowHeight - 8;
+            playerInfo.playerPosition.X = WindowWidth / 2;
+            playerInfo.playerPosition.Y = WindowHeight - 8;
 
             //isDead = false;
             //Clear();
@@ -194,8 +194,8 @@ namespace gameproject
         {
             bottomRow = WindowHeight - 1;
             farRow = WindowWidth - 1;
-            playerInfo.playerX = Clamp(playerInfo.playerX, 3, farRow - 5);
-            playerInfo.playerY = Clamp(playerInfo.playerY, 0, bottomRow - 4);
+            playerInfo.playerPosition.X = Clamp(playerInfo.playerPosition.X, 3, farRow - 5);
+            playerInfo.playerPosition.Y = Clamp(playerInfo.playerPosition.Y, 0, bottomRow - 4);
 
 
 

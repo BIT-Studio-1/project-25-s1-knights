@@ -46,10 +46,10 @@ namespace gameproject
                 return; // skipping teh collision in this frame
             }
             //player hitbox
-            int hitboxLeft = playerInfo.playerX - 3;
-            int hitboxRight = playerInfo.playerX + 4;
-            int hitboxTop = playerInfo.playerY;
-            int hitboxBottom = playerInfo.playerY + 3;
+            int hitboxLeft = Convert.ToInt32(playerInfo.playerPosition.X - 3);
+            int hitboxRight = Convert.ToInt32(playerInfo.playerPosition.X + 4);
+            int hitboxTop = Convert.ToInt32(playerInfo.playerPosition.Y);
+            int hitboxBottom = Convert.ToInt32(playerInfo.playerPosition.Y + 3);
 
             //loop backwards so removal is safe
             for (int i = invaderInfo.Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
@@ -111,10 +111,10 @@ namespace gameproject
            for(int i= LifeDrops.Count - 1; i >= 0;i--)
             {
                 // check if ships collects the drop
-                int hitboxLeft = playerInfo.playerX - 3;
-                int hitboxRight = playerInfo.playerX + 4;
-                int hitboxTop = playerInfo.playerY;
-                int hitboxBottom = playerInfo.playerY + 4;
+                int hitboxLeft = Convert.ToInt32(playerInfo.playerPosition.X - 3);
+                int hitboxRight = Convert.ToInt32(playerInfo.playerPosition.X + 4);
+                int hitboxTop = Convert.ToInt32(playerInfo.playerPosition.Y);
+                int hitboxBottom = Convert.ToInt32(playerInfo.playerPosition.Y + 4);
 
                 bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
                 bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;

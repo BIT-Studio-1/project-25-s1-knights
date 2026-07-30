@@ -20,7 +20,8 @@ namespace gameproject
 
     public static class playerInfo
     {
-        public static int playerX = WindowWidth / 2, playerY = WindowHeight - 8, shootCooldown = 0;
+        public static Vector2 playerPosition = new Vector2(WindowWidth / 2, WindowHeight - 8);
+        public static int shootCooldown = 0;
         public static List<Bullet> PlayerBullets = new List<Bullet>();
     }
     public class Bullet
@@ -35,7 +36,7 @@ namespace gameproject
         public static void movement() //James
         {
 
-            int oldx = playerX;
+            int oldx = Convert.ToInt32(playerPosition.X);
 
             
             //clear old position before moving
@@ -47,25 +48,25 @@ namespace gameproject
 
 
 
-            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerX + 6 < consoleWidth)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
+            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerPosition.X + 6 < consoleWidth)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
             {
-                playerX++;
+                playerPosition.X++;
                 moved = true;
             }
-            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerX > 3))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
+            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerPosition.X > 3))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
             {
-                playerX--;
+                playerPosition.X--;
                 moved = true;
             }
             if (IsKeyDown(Spacebar) && shootCooldown == 0)
             {
-                PlayerBullets.Add(new Bullet { bullet = new Vector2( playerX - 3, playerY - 1 )});
-                PlayerBullets.Add(new Bullet {bullet = new Vector2(playerX + 4, playerY - 1) });
+                PlayerBullets.Add(new Bullet { bullet = new Vector2( playerPosition.X - 3, playerPosition.Y - 1 )});
+                PlayerBullets.Add(new Bullet {bullet = new Vector2(playerPosition.X + 4, playerPosition.Y - 1) });
                 shootCooldown = 5;
             }
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
 
-            if (playerY != WindowHeight - 8) playerY = WindowHeight - 8;
+            if (playerPosition.Y != WindowHeight - 8) playerPosition.Y = WindowHeight - 8;
 
             if (moved)
             {
@@ -142,19 +143,19 @@ namespace gameproject
         public static void DrawShip()//Drawing the ship
         {
 
-            if (playerX >= 3 && playerX + 3 < consoleWidth)
+            if (playerPosition.X >= 3 && playerPosition.X + 3 < consoleWidth)
             {
-                SetCursorPosition(playerX - 3, playerY);
+                SetCursorPosition(Convert.ToInt32(playerPosition.X - 3), Convert.ToInt32(playerPosition.Y));
                 ForegroundColor = ConsoleColor.DarkGreen;
                 Write("I      I");
                 ResetColor();
-                SetCursorPosition(playerX - 3, playerY + 1);
+                SetCursorPosition(Convert.ToInt32(playerPosition.X - 3), Convert.ToInt32(playerPosition.Y + 1));
                 Write("| _  _ |");
-                SetCursorPosition(playerX - 3, playerY + 2);
+                SetCursorPosition(Convert.ToInt32(playerPosition.X - 3), Convert.ToInt32(playerPosition.Y + 2));
                 Write("|/    \\|");
-                SetCursorPosition(playerX - 2, playerY + 3);
+                SetCursorPosition(Convert.ToInt32(playerPosition.X - 2), Convert.ToInt32(playerPosition.Y + 3));
                 Write("\\____/");
-                SetCursorPosition(playerX - 1, playerY + 4);
+                SetCursorPosition(Convert.ToInt32(playerPosition.X - 1), Convert.ToInt32(playerPosition.Y + 4));
                 ForegroundColor = ConsoleColor.DarkYellow;
                 Write("Y  Y");
                 ResetColor();
@@ -166,15 +167,15 @@ namespace gameproject
 
             if (x >= 3 && x + 3 < consoleWidth)
             {
-                SetCursorPosition(x - 3, playerY);
+                SetCursorPosition(x - 3, Convert.ToInt32(playerPosition.Y));
                 Write("         ");
-                SetCursorPosition(x - 3, playerY + 1);
+                SetCursorPosition(x - 3, Convert.ToInt32(playerPosition.Y + 1));
                 Write("         ");
-                SetCursorPosition(x - 3, playerY + 2);
+                SetCursorPosition(x - 3, Convert.ToInt32(playerPosition.Y + 2));
                 Write("         ");
-                SetCursorPosition(x - 2, playerY + 3);
+                SetCursorPosition(x - 2, Convert.ToInt32(playerPosition.Y + 3));
                 Write("       ");
-                SetCursorPosition(x - 1, playerY + 4);
+                SetCursorPosition(x - 1, Convert.ToInt32(playerPosition.Y + 4));
                 Write("     ");
             }
 

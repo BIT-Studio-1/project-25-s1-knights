@@ -11,10 +11,24 @@ using static gameproject.Program;
 using static gameproject.Character;
 using static gameproject.Levels;
 using static gameproject.Menu;
+using static gameproject.invaderInfo;
 
 
 namespace gameproject
 {
+    public static class invaderInfo
+    {
+        public static int spawnTimer = 0, moveRate = 5, maxInvaders = 5, invaderSpeed = 10, spawnRate = 10;
+        public static List<Invader> Invaders = new List<Invader>();
+    }
+    public class Invader
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public void Move() => y++;
+    }
+
     internal class invaders
     {
 

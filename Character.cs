@@ -25,9 +25,8 @@ namespace gameproject
     }
     public class Bullet
     {
-        public int x { get; set; }
-        public int y { get; set; }
-        public void Move() => y--;
+        public Vector2 bullet { get; set; }
+        public void Move() => bullet = new Vector2(bullet.X, bullet.Y - 1);
     }
 
     internal class Character
@@ -60,8 +59,8 @@ namespace gameproject
             }
             if (IsKeyDown(Spacebar) && shootCooldown == 0)
             {
-                PlayerBullets.Add(new Bullet { x = playerX - 3, y = playerY - 1 });
-                PlayerBullets.Add(new Bullet { x = playerX + 4, y = playerY - 1 });
+                PlayerBullets.Add(new Bullet { bullet = new Vector2( playerX - 3, playerY - 1 )});
+                PlayerBullets.Add(new Bullet {bullet = new Vector2(playerX + 4, playerY - 1) });
                 shootCooldown = 5;
             }
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
@@ -83,10 +82,10 @@ namespace gameproject
 
             for (int i = PlayerBullets.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
             {
-                if (PlayerBullets[i].y >= 0 && PlayerBullets[i].y < WindowHeight && PlayerBullets[i].x < WindowWidth) //check if the bullet is still within the window
+                if (PlayerBullets[i].bullet.Y >= 0 && PlayerBullets[i].bullet.Y < WindowHeight && PlayerBullets[i].bullet.X < WindowWidth) //check if the bullet is still within the window
                 {
 
-                    SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
+                    SetCursorPosition(Convert.ToInt32(PlayerBullets[i].bullet.X), Convert.ToInt32(PlayerBullets[i].bullet.Y));
                     Write(' '); // clear the old position
                 }
 
@@ -100,7 +99,7 @@ namespace gameproject
                 {
 
 
-                    if ((PlayerBullets[i].x == invaderInfo.Invaders[e].x + 1 || PlayerBullets[i].x == invaderInfo.Invaders[e].x - 1 || PlayerBullets[i].x == invaderInfo.Invaders[e].x) && PlayerBullets[i].y == invaderInfo.Invaders[e].y) // check if bullet is on same spot as this invader
+                    if ((PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].x + 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].x - 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].x) && PlayerBullets[i].bullet.Y == invaderInfo.Invaders[e].y) // check if bullet is on same spot as this invader
                     {
                         SetCursorPosition(invaderInfo.Invaders[e].x, invaderInfo.Invaders[e].y);
                         Write(' '); // erase invader from screen
@@ -125,7 +124,7 @@ namespace gameproject
                 if (hitSomething) continue; // skip to next bullet since this one is gone
 
 
-                if (PlayerBullets[i].y < 0 || PlayerBullets[i].y > WindowHeight || PlayerBullets[i].x > WindowWidth)
+                if (PlayerBullets[i].bullet.Y < 0 || PlayerBullets[i].bullet.Y > WindowHeight || PlayerBullets[i].bullet.X > WindowWidth)
                 {
                     PlayerBullets.RemoveAt(i); //remove if off screen otherwise draw
                 }
@@ -133,7 +132,7 @@ namespace gameproject
                 else
                 {
 
-                    SetCursorPosition(PlayerBullets[i].x, PlayerBullets[i].y);
+                    SetCursorPosition(Convert.ToInt32(PlayerBullets[i].bullet.X), Convert.ToInt32(PlayerBullets[i].bullet.Y));
                     ForegroundColor = ConsoleColor.Red;
                     Write('|');
                     ResetColor();

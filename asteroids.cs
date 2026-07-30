@@ -12,11 +12,28 @@ using static gameproject.Character;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Asteroid;
+using static gameproject.asteroidInfo;
 using System.Collections;
 using System.ComponentModel;
 
 namespace gameproject
 {
+
+    public class Asteroid
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public int asteroidDirection;
+
+        public void Move() => y++;
+    }
+
+    public class asteroidInfo
+    {
+        public static int asteroidSpawnTimer = 0, maxAsteroids = 4, asteroidMoveRate = 6, asteroidMoveTimer = 0, asteroidSpawnRate = 10;
+        public static List<Asteroid> Asteroids = new List<Asteroid>();
+    }
     internal class asteroids
 
     {

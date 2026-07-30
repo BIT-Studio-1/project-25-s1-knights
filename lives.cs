@@ -54,13 +54,13 @@ namespace gameproject
             //loop backwards so removal is safe
             for (int i = invaderInfo.Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
             {
-                bool withinX = invaderInfo.Invaders[i].x >= hitboxLeft && invaderInfo.Invaders[i].x <= hitboxRight;
-                bool withinY = invaderInfo.Invaders[i].y >= hitboxTop && invaderInfo.Invaders[i].y <= hitboxBottom;
+                bool withinX = invaderInfo.Invaders[i].invaderPos.X >= hitboxLeft && invaderInfo.Invaders[i].invaderPos.X <= hitboxRight;
+                bool withinY = invaderInfo.Invaders[i].invaderPos.Y >= hitboxTop && invaderInfo.Invaders[i].invaderPos.Y <= hitboxBottom;
                 
 
-                if (invaderInfo.Invaders[i].x >= hitboxLeft && invaderInfo.Invaders[i].x <= hitboxRight && invaderInfo.Invaders[i].y >= hitboxTop && invaderInfo.Invaders[i].y >= hitboxBottom)//removes live if hit box of the ship is hit
+                if (invaderInfo.Invaders[i].invaderPos.X >= hitboxLeft && invaderInfo.Invaders[i].invaderPos.X <= hitboxRight && invaderInfo.Invaders[i].invaderPos.Y >= hitboxTop && invaderInfo.Invaders[i].invaderPos.Y >= hitboxBottom)//removes live if hit box of the ship is hit
                 {
-                    SetCursorPosition(invaderInfo.Invaders[i].x, invaderInfo.Invaders[i].y);
+                    SetCursorPosition(Convert.ToInt32(invaderInfo.Invaders[i].invaderPos.X), Convert.ToInt32(invaderInfo.Invaders[i].invaderPos.Y));
                     Write(' ');
                     invaderInfo.Invaders.RemoveAt(i);//remove from the list
                     Life--;

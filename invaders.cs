@@ -12,6 +12,7 @@ using static gameproject.Character;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.invaderInfo;
+using System.Numerics;
 
 
 namespace gameproject
@@ -23,10 +24,9 @@ namespace gameproject
     }
     public class Invader
     {
-        public int x { get; set; }
-        public int y { get; set; }
+        public Vector2 invaderPos {get; set;} 
 
-        public void Move() => y++;
+        public void Move() => invaderPos = new Vector2(invaderPos.X, invaderPos.Y -1);
     }
 
     internal class invaders
@@ -75,7 +75,7 @@ namespace gameproject
 
             if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
             {
-                Invaders.Add(new Invader{ x = rand.Next(consoleWidth), y = 0}); // Spaawning randomly along x axis at 0 y position
+                Invaders.Add(new Invader{ invaderPos = new Vector2(rand.Next(consoleWidth), 0)}); // Spaawning randomly along x axis at 0 y position
 
                 spawnTimer = 0;
             }
@@ -90,21 +90,21 @@ namespace gameproject
                 {
                     
 
-                    if (Invaders[i].x >= consoleWidth)
+                    if (Invaders[i].invaderPos.X >= consoleWidth)
                     {
-                        Invaders[i].x = rand.Next(consoleWidth);
+                        Invaders[i].invaderPos = new Vector2(rand.Next(consoleWidth), Invaders[i].invaderPos.Y);
                     }
 
-                    if (Invaders[i].y >= consoleHeight)
+                    if (Invaders[i].invaderPos.Y >= consoleHeight)
                     {
-                        Invaders[i].y = rand.Next(consoleHeight);
+                        Invaders[i].invaderPos = new Vector2(Invaders[i].invaderPos.X, rand.Next(consoleHeight));
                     }
                    
 
-                    if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
+                    if (Invaders[i].invaderPos.X >= 0 && Invaders[i].invaderPos.Y >= 0 && Invaders[i].invaderPos.X < consoleWidth && Invaders[i].invaderPos.X < consoleHeight)
                     {
 
-                        SetCursorPosition(Invaders[i].x, Invaders[i].y);
+                        SetCursorPosition(Convert.ToInt32(Invaders[i].invaderPos.X), Convert.ToInt32(Invaders[i].invaderPos.Y));
 
                         Write(" ");
 
@@ -115,15 +115,15 @@ namespace gameproject
                     Invaders[i].Move();
 
 
-                    if (Invaders[i].y >= consoleHeight)
+                    if (Invaders[i].invaderPos.Y >= consoleHeight)
                     {
-                        Invaders[i].y = 0;
-                        Invaders[i].x = rand.Next(consoleWidth);
+                        Invaders[i].invaderPos = new Vector2(Invaders[i].invaderPos.X, 0);
+                        Invaders[i].invaderPos = new Vector2(rand.Next(consoleWidth), Invaders[i].invaderPos.Y);
                     }
 
-                    if (Invaders[i].x >= 0 && Invaders[i].y >= 0 && Invaders[i].x < consoleWidth && Invaders[i].y < consoleHeight)
+                    if (Invaders[i].invaderPos.X >= 0 && Invaders[i].invaderPos.Y >= 0 && Invaders[i].invaderPos.Y < consoleWidth && Invaders[i].invaderPos.Y < consoleHeight)
                     {
-                        SetCursorPosition(Invaders[i].x, Invaders[i].y);
+                        SetCursorPosition(Convert.ToInt32(Invaders[i].invaderPos.X), Convert.ToInt32(Invaders[i].invaderPos.Y));
                         ForegroundColor = ConsoleColor.Magenta;
 
                         Write(drawInvaders);

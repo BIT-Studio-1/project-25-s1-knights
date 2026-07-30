@@ -48,12 +48,12 @@ namespace gameproject
 
 
 
-            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerPosition.X + 6 < consoleWidth)) // if the key pressed is the right arrow key or the D key, it sets the move bool to true and adds one to the playerX variable if it isnt too close to the edge
+            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerPosition.X + 6 < consoleWidth)) 
             {
                 playerPosition.X++;
                 moved = true;
             }
-            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerPosition.X > 3))  // if the key pressed is the left arrow key or the A key, it sets the move bool to true and removes one from the playerX variable if it isnt too close to the edge
+            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerPosition.X > 3))  
             {
                 playerPosition.X--;
                 moved = true;
@@ -100,13 +100,13 @@ namespace gameproject
                 {
 
 
-                    if ((PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].x + 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].x - 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].x) && PlayerBullets[i].bullet.Y == invaderInfo.Invaders[e].y) // check if bullet is on same spot as this invader
+                    if ((PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].invaderPos.X + 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].invaderPos.X - 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].invaderPos.X) && PlayerBullets[i].bullet.Y == invaderInfo.Invaders[e].invaderPos.Y) // check if bullet is on same spot as this invader
                     {
-                        SetCursorPosition(invaderInfo.Invaders[e].x, invaderInfo.Invaders[e].y);
+                        SetCursorPosition(Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.X), Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.Y));
                         Write(' '); // erase invader from screen
 
-                        int dropX = invaderInfo.Invaders[e].x; //save position before removing
-                        int dropY= invaderInfo.Invaders[e].y;
+                        int dropX = Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.X); //save position before removing
+                        int dropY= Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.Y);
 
                         invaderInfo.Invaders.RemoveAt(e); //removes invaders from list
 

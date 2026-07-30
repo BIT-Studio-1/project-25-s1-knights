@@ -98,7 +98,8 @@ namespace gameproject
                         //Clear();
                         await Task.Delay(100);
                         Clear();
-                        start = true;
+                        start = false;
+                        menuStart = true;
                         //continue;
                         break;
                         //return;
@@ -152,7 +153,9 @@ namespace gameproject
 
                         await Task.Delay(100);
                         Clear();
-                        start = true;
+                        start = false;
+                        menuStart = true;
+
                         break;
                     }
 

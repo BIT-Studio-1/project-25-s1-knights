@@ -7,6 +7,7 @@ using static System.ConsoleKey;
 using static System.Math;
 using System.Diagnostics;
 using static gameproject.Bullet;
+using static gameproject.Rocket;
 using static gameproject.Program;
 using static gameproject.Character;
 using static gameproject.Levels;
@@ -29,7 +30,7 @@ namespace gameproject
         public void Move() => y++;
     }
 
-    internal class invaders
+    internal static class invaders
     {
 
 

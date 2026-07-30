@@ -13,6 +13,7 @@ using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.playerInfo;
+using static gameproject.invaderInfo;
 using System.Numerics;
 
 namespace gameproject
@@ -22,8 +23,15 @@ namespace gameproject
     {
         public static int playerX = WindowWidth / 2, playerY = WindowHeight - 8, shootCooldown = 0;
         public static List<Bullet> PlayerBullets = new List<Bullet>();
+        public static List<Rocket> playerRocket = new List<Rocket>();
     }
     public class Bullet
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+        public void Move() => y--;
+    }
+    public class Rocket
     {
         public int x { get; set; }
         public int y { get; set; }
@@ -203,17 +211,13 @@ namespace gameproject
                                 Write(' '); // Erase exploded invader from screen
                             }
 
-                            int dropX = Invaders[e].x;
-                            int dropY = Invaders[e].y;
+                            
 
                             Invaders.RemoveAt(e);
                             enemiesKilled++;
 
-                            // 1 in 10 chance to spawn a booster drop per destroyed alien
-                            if (rand.Next(10) == 0)
-                            {
-                                LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
-                            }
+                            
+                            
                         }
                     }
                     continue; // Skip drawing this rocket since it exploded

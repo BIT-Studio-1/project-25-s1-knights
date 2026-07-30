@@ -11,12 +11,13 @@ using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Globals;
 using static System.Console;
+
 namespace gameproject
 {
     internal class Bigger_Threats
     {
 
-        public static class BigShipsInfo
+        public static class BigShipsInfo   //sets up things live movement speed and the max bigships
         {
             public static int bigShipSpawnTimer = 0, bigShipMoveRate = 10, maxBigShips = 2, bigShipSpeed = 10, bigShipSpawnRate = 10, bigShipMoveTimer = 0;
             public static List<BigShip> BiggerShips = new List<BigShip>();
@@ -42,7 +43,7 @@ namespace gameproject
                 bigShipSpawnTimer++;
                 bigShipMoveTimer++;
 
-                if (level == 1)
+                if (level == 1)        //sets max ships and the move speed of the ships per level
                 {
                     maxBigShips = 1;
                     bigShipMoveRate = 10;
@@ -79,7 +80,7 @@ namespace gameproject
                     bigShipSpawnTimer = 0;
                 }
 
-                if (bigShipMoveTimer >= bigShipMoveRate)
+                if (bigShipMoveTimer >= bigShipMoveRate)   //everytime the move timer meets the moverate specified, move it back to zero
                 {
                     bigShipMoveTimer = 0;
 
@@ -95,14 +96,14 @@ namespace gameproject
                             BiggerShips[i].x = rand.Next(consoleWidth);
                         }
 
-                        if (BiggerShips[i].x >= 0 && BiggerShips[i].y >= 0 && BiggerShips[i].x + shipLength < consoleWidth && BiggerShips[i].y < consoleHeight)
+                        if (BiggerShips[i].x >= 0 && BiggerShips[i].y >= 0 && BiggerShips[i].x + shipLength < consoleWidth && BiggerShips[i].y < consoleHeight)  //writes over the old position against the variable shipLength
                         {
                             SetCursorPosition(BiggerShips[i].x, BiggerShips[i].y);
 
                             Write(new string(' ', shipLength));
                         }
 
-                        BiggerShips[i].Move();
+                        BiggerShips[i].Move();             //calls the method to move the threat ship downwards
 
                         if (BiggerShips[i].y >= consoleHeight)
                         {
@@ -111,6 +112,9 @@ namespace gameproject
                         }
 
                         if (BiggerShips[i].x >= 0 && BiggerShips[i].y >= 0 && BiggerShips[i].x + shipLength < consoleWidth && BiggerShips[i].y < consoleHeight)
+                        //writes in clear space the threat ship against the length of the variable shipLength 
+                        // and then prints in the clear space the variable drawBigShip. 
+
                         {
                             SetCursorPosition(BiggerShips[i].x, BiggerShips[i].y);
                             ForegroundColor = ConsoleColor.White;
@@ -121,12 +125,9 @@ namespace gameproject
                     }
                 }
 
-
-
-
-
-
             }
+
+       
 
         }
 

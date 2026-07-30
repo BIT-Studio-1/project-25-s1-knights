@@ -135,68 +135,84 @@ namespace gameproject
         }
         public static void rocketshoot()
         {
+            int aoeradius = 7;
             for (int i = playerRocket.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
             {
+
                 if (playerRocket[i].y >= 0 && playerRocket[i].y < WindowHeight && playerRocket[i].x < WindowWidth) //check if the bullet is still within the window
                 {
 
                     SetCursorPosition(playerRocket[i].x, playerRocket[i].y);
                     Write(' '); // clear the old position
-                    Write(' ');
+
                 }
 
 
                 playerRocket[i].Move();
 
-
-                //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
-                bool hitSomething = false;
-                for (int e = Invaders.Count - 1; e >= 0 && !hitSomething; e--) // loop through every invader
+                if (playerRocket[i].y < 0 || playerRocket[i].y >= WindowHeight || playerRocket[i].x < 0 || playerRocket[i].x >= WindowWidth)
                 {
+                    playerRocket.RemoveAt(i);
+                    continue;
+
+                }
+
+                bool hitSomething = false;
+                int impactX = playerRocket[i].x;
+                int impactY = playerRocket[i].y;
 
 
-                    if ((playerRocket[i].x == Invaders[e].x + 1 || playerRocket[i].x == Invaders[e].x - 1 || playerRocket[i].x == Invaders[e].x) && playerRocket[i].y == Invaders[e].y) // check if bullet is on same spot as this invader
+                for (int e = Invaders.Count - 1; e >= 0; e--)
+                {
+                    if ((impactX == Invaders[e].x + 1 || impactX == Invaders[e].x - 1 || impactX == Invaders[e].x) && impactY == Invaders[e].y)
                     {
-                        SetCursorPosition(Invaders[e].x, Invaders[e].y);
-                        Write(' '); // erase invader from screen
-
-                        int dropX = Invaders[e].x; //save position before removing
-                        int dropY = Invaders[e].y;
-
-                        Invaders.RemoveAt(e); //removes invaders from list
-
-                        enemiesKilled++; // Increase kill count for level progression
-
-                        playerRocket.RemoveAt(i); // remove the bullet
-                        hitSomething = true; // stops the loop since this bullet is used up
-
-                        //1 in 3 chance to spawn a life booster drop
-                        if (rand.Next(10) == 0)
-                        {
-                            LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
-                        }
+                        hitSomething = true;
+                        break; // Impact detected! Proceed to trigger the explosion radius
                     }
                 }
-                if (hitSomething) continue; // skip to next bullet since this one is gone
 
-
-                if (playerRocket[i].y < 0 || playerRocket[i].y > WindowHeight || playerRocket[i].x > WindowWidth)
+                // 2. If an impact occurred, trigger the explosion to clear surrounding enemies
+                if (hitSomething)
                 {
-                    playerRocket.RemoveAt(i); //remove if off screen otherwise draw
+                    // Remove the rocket projectile first
+                    playerRocket.RemoveAt(i);
+
+                    // Loop backwards through all invaders to safely remove everything in the blast zone
+                    for (int e = Invaders.Count - 1; e >= 0; e--)
+                    {
+                        // Check if the invader is within the Y plane and the horizontal blast radius
+                        if (Invaders[e].y == impactY && Math.Abs(Invaders[e].x - impactX) <= aoeradius)
+                        {
+                            if (Invaders[e].y >= 0 && Invaders[e].y < WindowHeight && Invaders[e].x >= 0 && Invaders[e].x < WindowWidth)
+                            {
+                                SetCursorPosition(Invaders[e].x, Invaders[e].y);
+                                Write(' '); // Erase exploded invader from screen
+                            }
+
+                            int dropX = Invaders[e].x;
+                            int dropY = Invaders[e].y;
+
+                            Invaders.RemoveAt(e);
+                            enemiesKilled++;
+
+                            // 1 in 10 chance to spawn a booster drop per destroyed alien
+                            if (rand.Next(10) == 0)
+                            {
+                                LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
+                            }
+                        }
+                    }
+                    continue; // Skip drawing this rocket since it exploded
                 }
 
-                else
-                {
-
-                    SetCursorPosition(playerRocket[i].x, playerRocket[i].y);
-                    ForegroundColor = ConsoleColor.Blue;
-                    Write('^');
-                    
-
-                    ResetColor();
-                }
+                // Safe to draw moving rocket if no impact occurred
+                SetCursorPosition(playerRocket[i].x, playerRocket[i].y);
+                ForegroundColor = ConsoleColor.Blue;
+                Write('^');
+                ResetColor();
             }
         }
+
         public static void DrawShip()//Drawing the ship
         {
 

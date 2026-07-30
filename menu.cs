@@ -30,6 +30,7 @@ namespace gameproject
                     WriteLine("> PLAY    ");
                     ResetColor();
                     WriteLine("  CONTROLS");
+                    WriteLine("  INSTRUCTIONS");
                     WriteLine("  EXIT    ");
                     SetCursorPosition(0, WindowHeight / 2);
                     WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
@@ -42,6 +43,7 @@ namespace gameproject
                     ForegroundColor = ConsoleColor.Black;
                     WriteLine("> CONTROLS");
                     ResetColor();
+                    WriteLine("  INSTRUCTIONS");
                     WriteLine("  EXIT    ");
                     SetCursorPosition(0, WindowHeight / 2);
                     WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
@@ -51,6 +53,20 @@ namespace gameproject
                 {
                     WriteLine("  PLAY    ");
                     WriteLine("  CONTROLS");
+                    BackgroundColor = ConsoleColor.White;
+                    ForegroundColor = ConsoleColor.Black;
+                    WriteLine("> INSTRUCTIONS");
+                    ResetColor();
+                    WriteLine(" EXIT    ");
+                    SetCursorPosition(0, WindowHeight / 2);
+                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
+
+                }
+                else if (option == 4)
+                {
+                    WriteLine("  PLAY    ");
+                    WriteLine("  CONTROLS");
+                    WriteLine("  INSTRUCTIONS");
                     BackgroundColor = ConsoleColor.White;
                     ForegroundColor = ConsoleColor.Black;
                     WriteLine("> EXIT    ");

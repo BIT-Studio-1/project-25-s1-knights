@@ -14,17 +14,8 @@ using static gameproject.Menu;
 using static gameproject.Intro;
 using static gameproject.asteroids;
 
-
-
-
-
-
-
 namespace gameproject
 {
-    
-
-
     public static class Globals // variables that any class or function can access
     {
         // Level System Added

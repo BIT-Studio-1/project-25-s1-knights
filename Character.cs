@@ -116,7 +116,7 @@ namespace gameproject
                         hitSomething = true; // stops the loop since this bullet is used up
 
                         //1 in 3 chance to spawn a life booster drop
-                        if (rand.Next(10)==0)
+                        if (rand.Next(10) == 0)
                         {
                             lifeInfo.LifeDrops.Add(new LifeDrop {lifeDropPos = invaderDropPos});
                         }

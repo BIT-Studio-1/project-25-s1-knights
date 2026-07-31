@@ -46,32 +46,26 @@ namespace gameproject
             spawnTimer++;
             moveTimer++;
 
-            if (level == 1)
+            switch (level)
             {
-                moveRate = 5;
+                case 1:
+                    moveRate = 5
+                        ; break;
+                case 2:
+                    moveRate = 4;
+                    break;
+                case 3:
+                    moveRate = 3;
+                    break;
+                case 4:
+                    moveRate = 2;
+                    break;
+                case 5:
+                    moveRate = 1;
+                    break;
+                default:
+                    break;
             }
-
-            if (level == 2)
-            {
-                moveRate = 4;
-            }
-
-            if (level == 3)
-            {
-                moveRate = 3;
-            }
-
-            if (level == 4)
-            {
-                moveRate = 2;
-            }
-
-            if (level == 5)
-            {
-                moveRate = 1;
-            }
-
-
 
             if (spawnTimer >= spawnRate && Invaders.Count < maxInvaders)
             {

@@ -13,6 +13,7 @@ using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.lifeInfo;
+using System.Numerics;
 
 namespace gameproject
 {
@@ -24,9 +25,8 @@ namespace gameproject
 
     public class LifeDrop
     {
-        public int x { get; set; }
-        public int y { get; set; }
-        public void Move() => y++; //falls down like invaders
+        public Vector2 lifeDropPos { get; set; }
+        public void Move() => lifeDropPos = new Vector2(lifeDropPos.X, lifeDropPos.Y + 1); //falls down like invaders
     }
 
     internal class Lives
@@ -116,8 +116,8 @@ namespace gameproject
                 int hitboxTop = Convert.ToInt32(playerInfo.playerPosition.Y);
                 int hitboxBottom = Convert.ToInt32(playerInfo.playerPosition.Y + 4);
 
-                bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
-                bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;
+                bool inX = LifeDrops[i].lifeDropPos.X >= hitboxLeft && LifeDrops[i].lifeDropPos.X <= hitboxRight;
+                bool inY = LifeDrops[i].lifeDropPos.Y >= hitboxTop && LifeDrops[i].lifeDropPos.Y <= hitboxBottom;
 
                 if (level == 1)
                 {
@@ -145,9 +145,9 @@ namespace gameproject
                 }
 
 
-                if (LifeDrops[i].x >= hitboxLeft && LifeDrops[i].x <= hitboxRight && LifeDrops[i].y >= hitboxTop && LifeDrops[i].y <= hitboxBottom)
+                if (LifeDrops[i].lifeDropPos.X >= hitboxLeft && LifeDrops[i].lifeDropPos.X <= hitboxRight && LifeDrops[i].lifeDropPos.Y >= hitboxTop && LifeDrops[i].lifeDropPos.Y <= hitboxBottom)
                 {
-                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                    SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
                     Write(' ');// erase from screen
                     LifeDrops.RemoveAt(i);
                     Life++;  //give playeran extra life
@@ -160,10 +160,10 @@ namespace gameproject
                 if (dropMoveTimer >= dropMoveRate)
                 {
                     //erase old position
-                    if (LifeDrops[i].x >=0 && LifeDrops[i].y >=0 &&
-                        LifeDrops[i].x < consoleWidth && LifeDrops[i].y < consoleHeight)
+                    if (LifeDrops[i].lifeDropPos.X >=0 && LifeDrops[i].lifeDropPos.Y >=0 &&
+                        LifeDrops[i].lifeDropPos.X < consoleWidth && LifeDrops[i].lifeDropPos.Y < consoleHeight)
                     {
-                        SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                        SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
                         Write(" ");
 
                     }
@@ -171,7 +171,7 @@ namespace gameproject
                     LifeDrops[i].Move(); //fall one row down
 
                     //remove if off screen
-                    if (LifeDrops[i].y >= consoleHeight)
+                    if (LifeDrops[i].lifeDropPos.Y >= consoleHeight)
                     {
                         LifeDrops.RemoveAt(i);
                         continue;
@@ -179,10 +179,10 @@ namespace gameproject
                 }
 
                 //draw + at current position
-                if (LifeDrops[i].x >=0 && LifeDrops[i].y >0 &&
-                    LifeDrops[i].x < consoleWidth && LifeDrops[i].y <= consoleHeight)
+                if (LifeDrops[i].lifeDropPos.X >=0 && LifeDrops[i].lifeDropPos.Y >0 &&
+                    LifeDrops[i].lifeDropPos.X < consoleWidth && LifeDrops[i].lifeDropPos.Y <= consoleHeight)
                 {
-                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y );
+                    SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
                     ForegroundColor = ConsoleColor.Cyan;
                     Write('+');
                     ResetColor();

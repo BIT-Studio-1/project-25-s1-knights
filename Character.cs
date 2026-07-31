@@ -105,8 +105,8 @@ namespace gameproject
                         SetCursorPosition(Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.X), Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.Y));
                         Write(' '); // erase invader from screen
 
-                        int dropX = Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.X); //save position before removing
-                        int dropY= Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.Y);
+                        Vector2 invaderDropPos = invaderInfo.Invaders[e].invaderPos; //save position before removing
+                        
 
                         invaderInfo.Invaders.RemoveAt(e); //removes invaders from list
 
@@ -118,7 +118,7 @@ namespace gameproject
                         //1 in 3 chance to spawn a life booster drop
                         if (rand.Next(10)==0)
                         {
-                            lifeInfo.LifeDrops.Add(new LifeDrop { x = dropX, y = dropY });
+                            lifeInfo.LifeDrops.Add(new LifeDrop {lifeDropPos = invaderDropPos});
                         }
                     }
                 }

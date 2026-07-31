@@ -40,8 +40,6 @@ namespace gameproject
     internal class asteroids
 
     {
-        
-
         public static void newAsteroids()
         {
             
@@ -142,16 +140,8 @@ namespace gameproject
 
                     }
                 }
-
-
-
-
             }
-            
-            
-
         }
-
     }
 }
 

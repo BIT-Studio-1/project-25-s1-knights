@@ -80,8 +80,7 @@ namespace gameproject
                 spawnTimer = 0;
             }
 
-            if (moveTimer >= moveRate) //moves invaders down each time moveTimer matches moveRate
-                                      //(levels also doesn't seem to be moving them faster each level progression)
+            if (moveTimer >= moveRate) 
             {
                 moveTimer = 0;
 

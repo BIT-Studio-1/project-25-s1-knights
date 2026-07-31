@@ -15,36 +15,32 @@ using static gameproject.Asteroid;
 using static gameproject.asteroidInfo;
 using System.Collections;
 using System.ComponentModel;
+using System.Numerics;
 
 namespace gameproject
 {
 
     public class Asteroid
     {
-        public int x { get; set; }
-        public int y { get; set; }
+        public Vector2 asteroidPos {  get; set; }
 
         public int asteroidDirection;
-
-        public void Move() => y++;
+        public void MoveDown() => asteroidPos = new Vector2(asteroidPos.X, asteroidPos.Y + 1);
+        public void MoveRight() => asteroidPos = new Vector2(asteroidPos.X + 1, asteroidPos.Y);
+        public void MoveLeft() => asteroidPos = new Vector2(asteroidPos.X -1, asteroidPos.Y);
     }
 
     public class asteroidInfo
     {
         public static int asteroidSpawnTimer = 0, maxAsteroids = 4, asteroidMoveRate = 6, asteroidMoveTimer = 0, asteroidSpawnRate = 10;
         public static List<Asteroid> Asteroids = new List<Asteroid>();
+
+        
     }
     internal class asteroids
 
     {
-        public int x;
-        public int y;
         
-        public void moveAsteroids()
-        {
-            x++;
-            y++;
-        }
 
         public static void newAsteroids()
         {
@@ -84,7 +80,7 @@ namespace gameproject
 
             if ((asteroidSpawnTimer >= asteroidSpawnRate) && (Asteroids.Count < maxAsteroids))
             {
-                Asteroids.Add(new Asteroid { x = rand.Next(consoleWidth), y = 0, asteroidDirection = rand.Next(1, 2) }); //spawn rate is 20, should be low enough to not have them spawn so frequently, also spawns asteroid in corner
+                Asteroids.Add(new Asteroid { asteroidPos = new Vector2(rand.Next(consoleWidth), 0), asteroidDirection = rand.Next(1, 2) }); //spawn rate is 20, should be low enough to not have them spawn so frequently, also spawns asteroid in corner
                 asteroidSpawnTimer = 0;
             }
 
@@ -97,49 +93,49 @@ namespace gameproject
                 {
                    
 
-                    if ((Asteroids[i].x >= 0) && (Asteroids[i].y >= 0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))
+                    if ((Asteroids[i].asteroidPos.X >= 0) && (Asteroids[i].asteroidPos.Y >= 0) && (Asteroids[i].asteroidPos.X < consoleWidth) && (Asteroids[i].asteroidPos.Y < consoleHeight))
                     {
-                        SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
+                        SetCursorPosition(Convert.ToInt32(Asteroids[i].asteroidPos.X), Convert.ToInt32(Asteroids[i].asteroidPos.Y));
                         Write(" ");
                          
                     }
 
 
-                    if ((Asteroids[i].x >= consoleWidth) || (Asteroids[i].x < 0))
+                    if ((Asteroids[i].asteroidPos.X >= consoleWidth) || (Asteroids[i].asteroidPos.X < 0))
                     {
-                        Asteroids[i].x = rand.Next(1, 15);
+                        Asteroids[i].asteroidPos = new Vector2(rand.Next(1, 15), Asteroids[i].asteroidPos.Y);
                     }
 
-                    if (Asteroids[i].y >= consoleHeight)
+                    if (Asteroids[i].asteroidPos.Y >= consoleHeight)
                     {
-                        Asteroids[i].y = rand.Next(consoleHeight);
+                        Asteroids[i].asteroidPos = new Vector2(Asteroids[i].asteroidPos.X, rand.Next(consoleHeight));
                     }
 
-                   
-                    Asteroids[i].y++;
+
+                    Asteroids[i].MoveDown();
 
                     if (Asteroids[i].asteroidDirection == 1)
                     {
-                        Asteroids[i].x++;
+                        Asteroids[i].MoveRight();
                     }
 
                     else
                     {
-                        Asteroids[i].x--;
+                        Asteroids[i].MoveLeft();
                     }
                     
 
 
-                    if (((Asteroids[i].y >= consoleHeight) || (Asteroids[i].x >= consoleWidth)) || (Asteroids[i].x <= 0))
+                    if (((Asteroids[i].asteroidPos.Y >= consoleHeight) || (Asteroids[i].asteroidPos.X >= consoleWidth)) || (Asteroids[i].asteroidPos.X <= 0))
                     {
-                        Asteroids[i].y = 0;
-                        Asteroids[i].x = rand.Next(consoleWidth);
+                        Asteroids[i].asteroidPos = new Vector2(Asteroids[i].asteroidPos.X, 0);
+                        Asteroids[i].asteroidPos =new Vector2(rand.Next(consoleWidth), Asteroids[i].asteroidPos.Y);
                         Asteroids[i].asteroidDirection = rand.Next(2);
                     }
 
-                    if ((Asteroids[i].x >= 0) && (Asteroids[i].y >= 0) && (Asteroids[i].x < consoleWidth) && (Asteroids[i].y < consoleHeight))
+                    if ((Asteroids[i].asteroidPos.X >= 0) && (Asteroids[i].asteroidPos.Y >= 0) && (Asteroids[i].asteroidPos.X < consoleWidth) && (Asteroids[i].asteroidPos.Y < consoleHeight))
                     {
-                        SetCursorPosition(Asteroids[i].x, Asteroids[i].y);
+                        SetCursorPosition(Convert.ToInt32(Asteroids[i].asteroidPos.X), Convert.ToInt32(Asteroids[i].asteroidPos.Y));
                         ForegroundColor = ConsoleColor.Red;
                         Write("O");
                         ResetColor();  

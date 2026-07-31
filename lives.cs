@@ -77,12 +77,12 @@ namespace gameproject
 
             for (int i = asteroidInfo.Asteroids.Count - 1; i >= 0; i--)
             {
-                bool withinX = asteroidInfo.Asteroids[i].x >= hitboxLeft && asteroidInfo.Asteroids[i].x <= hitboxRight;
-                bool withinY = asteroidInfo.Asteroids[i].y >= hitboxTop && asteroidInfo.Asteroids[i].y <= hitboxBottom;
+                bool withinX = asteroidInfo.Asteroids[i].asteroidPos.X >= hitboxLeft && asteroidInfo.Asteroids[i].asteroidPos.X <= hitboxRight;
+                bool withinY = asteroidInfo.Asteroids[i].asteroidPos.Y >= hitboxTop && asteroidInfo.Asteroids[i].asteroidPos.Y <= hitboxBottom;
 
-                if (asteroidInfo.Asteroids[i].x >= hitboxLeft && asteroidInfo.Asteroids[i].x <= hitboxRight && asteroidInfo.Asteroids[i].y >= hitboxTop && asteroidInfo.Asteroids[i].y <= hitboxBottom)
+                if (asteroidInfo.Asteroids[i].asteroidPos.X >= hitboxLeft && asteroidInfo.Asteroids[i].asteroidPos.X <= hitboxRight && asteroidInfo.Asteroids[i].asteroidPos.Y >= hitboxTop && asteroidInfo.Asteroids[i].asteroidPos.Y <= hitboxBottom)
                 {
-                    SetCursorPosition(asteroidInfo.Asteroids[i].x, asteroidInfo.Asteroids[i].y);
+                    SetCursorPosition(Convert.ToInt32(asteroidInfo.Asteroids[i].asteroidPos.X), Convert.ToInt32(asteroidInfo.Asteroids[i].asteroidPos.Y));
                     Write(' ');
                     asteroidInfo.Asteroids.RemoveAt(i);//remove from the list
                     Life--;

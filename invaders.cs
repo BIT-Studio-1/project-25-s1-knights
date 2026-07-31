@@ -26,7 +26,7 @@ namespace gameproject
     {
         public Vector2 invaderPos {get; set;} 
 
-        public void Move() => invaderPos = new Vector2(invaderPos.X, invaderPos.Y -1);
+        public void Move() => invaderPos = new Vector2(invaderPos.X, invaderPos.Y +1);
     }
 
     internal class invaders

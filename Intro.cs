@@ -25,7 +25,7 @@ namespace gameproject
             ReadKey(true);
             Clear();
             introScreen();
-            introMusic();
+            // introMusic();
             
         }
 

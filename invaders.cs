@@ -101,7 +101,7 @@ namespace gameproject
                     }
                    
 
-                    if (Invaders[i].invaderPos.X >= 0 && Invaders[i].invaderPos.Y >= 0 && Invaders[i].invaderPos.X < consoleWidth && Invaders[i].invaderPos.X < consoleHeight)
+                    if (Invaders[i].invaderPos.X >= 0 && Invaders[i].invaderPos.Y >= 0 && Invaders[i].invaderPos.X < consoleWidth && Invaders[i].invaderPos.Y < consoleHeight)
                     {
 
                         SetCursorPosition(Convert.ToInt32(Invaders[i].invaderPos.X), Convert.ToInt32(Invaders[i].invaderPos.Y));

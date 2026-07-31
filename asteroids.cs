@@ -46,35 +46,32 @@ namespace gameproject
             asteroidMoveTimer++;  
             asteroidSpawnTimer++;
 
-            if (level == 1)  //handles speed per level for asteroids, increasing move rate per level, need to do rest of code so it works properly
+            switch (level)
             {
-                maxAsteroids = 1;
-                asteroidMoveRate = 5;
+                case 1:
+                    maxAsteroids = 1;
+                    asteroidMoveRate = 5;
+                    break;
+                case 2:
+                    maxAsteroids = 2;
+                    asteroidMoveRate = 4;
+                    break;
+                case 3:
+                    maxAsteroids = 3;
+                    asteroidMoveRate = 3;
+                    break;
+                case 4:
+                    maxAsteroids = 4;
+                    asteroidMoveRate = 2;
+                    break;
+                case 5:
+                    maxAsteroids = 5;
+                    asteroidMoveRate = 1;
+                    break;
+                default:
+                    break;
             }
 
-            if (level == 2)
-            {
-                maxAsteroids = 2;
-                asteroidMoveRate = 4;
-            }
-
-            if (level == 3)
-            {
-                maxAsteroids = 3;
-                asteroidMoveRate = 3;
-            }
-
-            if (level == 4)
-            {
-                maxAsteroids = 3;
-                asteroidMoveRate = 2;
-            }
-
-            if (level == 5)
-            {
-                maxAsteroids = 3;
-                asteroidMoveRate = 1;
-            }
 
             if ((asteroidSpawnTimer >= asteroidSpawnRate) && (Asteroids.Count < maxAsteroids))
             {

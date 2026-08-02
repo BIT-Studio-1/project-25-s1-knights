@@ -13,6 +13,9 @@ using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Intro;
 using static gameproject.asteroids;
+using System.Collections.Concurrent;
+using static gameproject.keyboard;
+using System.Threading.Tasks;
 
 namespace gameproject
 {
@@ -26,17 +29,57 @@ namespace gameproject
         public static bool start = false, moved = false, menuStart = false;
     }
 
-    internal class Program
+    public static class keyboard
     {
-        
-
         [DllImport("user32.dll")] // imports a library for to make the movement smoother
         private static extern short GetAsyncKeyState(int vKey);
+
+        private static readonly ConcurrentDictionary<ConsoleKey, DateTime> _linuxKeyTimestamps = new();
+        private static bool _isInitialized = false;
+        private static readonly object _lock = new();
+        private const int keyReleaseTimeMs = 30;
         public static bool IsKeyDown(ConsoleKey key) //method that registers while a key is pressed
         {
-            return (GetAsyncKeyState((int)key) & 0x8000) != 0;
+            if (OperatingSystem.IsLinux() && !_isInitialized) 
+            {
+                lock (_lock)
+                {
+                    if (!_isInitialized)
+                    {
+                        Task.Run(() => otherInputProcessor());
+                        _isInitialized = true;
+                    }
+                }
+            }
+            
+            if (OperatingSystem.IsWindows()) return (GetAsyncKeyState((int)key) & 0x8000) != 0;
+            else if (OperatingSystem.IsLinux())
+            {
+                if (_linuxKeyTimestamps.TryGetValue(key, out DateTime lastKey))
+                {
+                    return (DateTime.UtcNow - lastKey).TotalMilliseconds < keyReleaseTimeMs;
+                }
+            }
+            return false;
         }
 
+        private static void otherInputProcessor()
+        {
+            while (true)
+            {
+                TreatControlCAsInput = true;
+                if (KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = ReadKey(true);
+                    _linuxKeyTimestamps[keyInfo.Key] = DateTime.UtcNow;
+                }
+            }
+        } 
+
+    }
+
+    internal class Program
+    {
         static async Task Main()
         {
             CursorVisible = false;

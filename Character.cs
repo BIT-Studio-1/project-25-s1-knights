@@ -13,6 +13,7 @@ using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.playerInfo;
+using static gameproject.keyboard;
 using System.Numerics;
 
 namespace gameproject

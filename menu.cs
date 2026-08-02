@@ -76,13 +76,13 @@ namespace gameproject
 
                 if ((IsKeyDown(DownArrow) || IsKeyDown(S)) && (option < 3))
                 {
-                    Thread.Sleep(30);
+                    Thread.Sleep(releaseRelation);
                     option++;
                     notReset = false;
                 }
                 else if ((IsKeyDown(UpArrow) || IsKeyDown(W)) && (option > 1))
                 {
-                    Thread.Sleep(30);
+                    Thread.Sleep(releaseRelation);
                     option--;
                     notReset = false;
                 }

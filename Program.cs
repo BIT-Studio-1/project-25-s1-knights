@@ -37,7 +37,8 @@ namespace gameproject
         private static readonly ConcurrentDictionary<ConsoleKey, DateTime> _linuxKeyTimestamps = new();
         private static bool _isInitialized = false;
         private static readonly object _lock = new();
-        private const int keyReleaseTimeMs = 30;
+        private const int keyReleaseTimeMs = 80;
+        public const int releaseRelation = keyReleaseTimeMs;
         public static bool IsKeyDown(ConsoleKey key) //method that registers while a key is pressed
         {
             if (OperatingSystem.IsLinux() && !_isInitialized) 
@@ -82,6 +83,7 @@ namespace gameproject
     {
         static async Task Main()
         {
+          
             CursorVisible = false;
 
             start = false;
@@ -159,14 +161,7 @@ namespace gameproject
 
                     }
 
-                    //Win Condition
-                    //if (level == 5 && enemiesKilled == maxInvaders)
-                    //{
-                    //    start = false; //stops game loop first
-
-                    //    OutroAndDeath.ShowWin();
-
-                    //}
+                    
 
                     //Win Condition
                     if (level == 5 && enemiesKilled == invaderInfo.maxInvaders)
@@ -219,8 +214,7 @@ namespace gameproject
             playerInfo.playerPosition.X = WindowWidth / 2;
             playerInfo.playerPosition.Y = WindowHeight - 8;
 
-            //isDead = false;
-            //Clear();
+            
 
         }
 

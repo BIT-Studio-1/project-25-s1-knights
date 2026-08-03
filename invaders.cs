@@ -110,11 +110,10 @@ namespace gameproject
 
                     if (Invaders[i].invaderPos.Y >= consoleHeight)
                     {
-                        Invaders[i].invaderPos = new Vector2(Invaders[i].invaderPos.X, 0);
-                        Invaders[i].invaderPos = new Vector2(rand.Next(consoleWidth), Invaders[i].invaderPos.Y);
+                        Invaders[i].invaderPos = new Vector2(rand.Next(consoleWidth), 0);
                     }
 
-                    if (Invaders[i].invaderPos.X >= 0 && Invaders[i].invaderPos.Y >= 0 && Invaders[i].invaderPos.Y < consoleWidth && Invaders[i].invaderPos.Y < consoleHeight)
+                    if (Invaders[i].invaderPos.X >= 0 && Invaders[i].invaderPos.Y >= 0 && Invaders[i].invaderPos.X < consoleWidth && Invaders[i].invaderPos.Y < consoleHeight)
                     {
                         SetCursorPosition(Convert.ToInt32(Invaders[i].invaderPos.X), Convert.ToInt32(Invaders[i].invaderPos.Y));
                         ForegroundColor = ConsoleColor.Magenta;

@@ -123,8 +123,7 @@ namespace gameproject
 
                     if (((Asteroids[i].asteroidPos.Y >= consoleHeight) || (Asteroids[i].asteroidPos.X >= consoleWidth)) || (Asteroids[i].asteroidPos.X <= 0))
                     {
-                        Asteroids[i].asteroidPos = new Vector2(Asteroids[i].asteroidPos.X, 0);
-                        Asteroids[i].asteroidPos =new Vector2(rand.Next(consoleWidth), Asteroids[i].asteroidPos.Y);
+                        Asteroids[i].asteroidPos =new Vector2(rand.Next(consoleWidth), 0);
                         Asteroids[i].asteroidDirection = rand.Next(2);
                     }
 

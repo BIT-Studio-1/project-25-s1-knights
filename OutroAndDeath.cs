@@ -14,6 +14,7 @@ using static gameproject.Menu;
 using static gameproject.Intro;
 using static gameproject.asteroids;
 using static gameproject.Program;
+using static gameproject.keyboard;
 
 namespace gameproject
 {

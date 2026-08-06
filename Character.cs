@@ -186,7 +186,7 @@ namespace gameproject
 
                 for (int e = Invaders.Count - 1; e >= 0; e--)
                 {
-                    if ((impactX == Invaders[e].x + 1 || impactX == Invaders[e].x - 1 || impactX == Invaders[e].x) && impactY == Invaders[e].y)
+                    if ((impactX == Invaders[e].x  || impactX == Invaders[e].x  || impactX == Invaders[e].x) && impactY == Invaders[e].y)
                     {
                         hitSomething = true;
                         // Impact detected! Proceed to trigger the explosion radius
@@ -205,7 +205,7 @@ namespace gameproject
                         // Check if the invader is within the Y plane and the horizontal blast radius
                         if (Invaders[e].y == impactY && Math.Abs(Invaders[e].x - impactX) <= aoeradius)
                         {
-                            if (Invaders[e].y >= 0 && Invaders[e].y < WindowHeight && Invaders[e].x >= 0 && Invaders[e].x < WindowWidth)
+                            if (Invaders[e].y >= 0 && Invaders[e].y < WindowHeight && Invaders[e].x  >= 0 && Invaders[e].x < WindowWidth)
                             {
                                 SetCursorPosition(Invaders[e].x, Invaders[e].y);
                                 Write(' '); // Erase exploded invader from screen

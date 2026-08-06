@@ -76,7 +76,7 @@ namespace gameproject
             {
                 playerRocket.Add(new Rocket { x = playerX - 3, y = playerY - 1 });
                 playerRocket.Add(new Rocket { x = playerX + 4, y = playerY - 1 });
-                shootCooldown = 20;
+                shootCooldown = 35;
             }
 
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets
@@ -157,7 +157,7 @@ namespace gameproject
         }
         public static void rocketshoot()
         {
-            int aoeradius = 7;
+            int aoeradius = 12;
             for (int i = playerRocket.Count - 1; i >= 0; i--) //update the players bullets by looping backwards
             {
 
@@ -186,7 +186,7 @@ namespace gameproject
 
                 for (int e = Invaders.Count - 1; e >= 0; e--)
                 {
-                    if ((impactX == Invaders[e].x  || impactX == Invaders[e].x  || impactX == Invaders[e].x) && impactY == Invaders[e].y)
+                    if (Abs(impactX - Invaders[e].x) <= 3 && impactY == Invaders[e].y)
                     {
                         hitSomething = true;
                         // Impact detected! Proceed to trigger the explosion radius

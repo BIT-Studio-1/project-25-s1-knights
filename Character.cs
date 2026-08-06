@@ -41,42 +41,40 @@ namespace gameproject
 
     internal class Character
     {
+        // Small helpers to avoid repeated Convert.ToInt32 calls
+        private static int ToX(Vector2 v) => Convert.ToInt32(v.X);
+        private static int ToY(Vector2 v) => Convert.ToInt32(v.Y);
 
         public static void movement() //James
         {
 
             int oldx = Convert.ToInt32(playerPosition.X);
 
-            
-            //clear old position before moving
-
-
-
-
             moved = false; //sets the move bool to false at the start of each loop so the movement isnt continuous
 
-
-
-            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerPosition.X + 6 < consoleWidth)) 
+            if ((IsKeyDown(RightArrow) || IsKeyDown(D)) && (playerPosition.X + 6 < consoleWidth))
             {
                 playerPosition.X++;
                 moved = true;
             }
-            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerPosition.X > 3))  
+            if ((IsKeyDown(LeftArrow) || IsKeyDown(A)) && (playerPosition.X > 3))
             {
                 playerPosition.X--;
                 moved = true;
             }
             if (IsKeyDown(Spacebar) && shootCooldown == 0)
             {
-                PlayerBullets.Add(new Bullet { bullet = new Vector2( playerPosition.X - 3, playerPosition.Y - 1 )});
-                PlayerBullets.Add(new Bullet {bullet = new Vector2(playerPosition.X + 4, playerPosition.Y - 1) });
+                PlayerBullets.Add(new Bullet { bullet = new Vector2(playerPosition.X - 3, playerPosition.Y - 1) });
+                PlayerBullets.Add(new Bullet { bullet = new Vector2(playerPosition.X + 4, playerPosition.Y - 1) });
                 shootCooldown = 5;
             }
             if (IsKeyDown(R) && shootCooldown == 0)
             {
-                playerRocket.Add(new Rocket { x = playerX - 3, y = playerY - 1 });
-                playerRocket.Add(new Rocket { x = playerX + 4, y = playerY - 1 });
+                // Use playerPosition (converted to ints) instead of undefined playerX/playerY
+                int px = ToX(playerPosition);
+                int py = ToY(playerPosition);
+                playerRocket.Add(new Rocket { x = px - 3, y = py - 1 });
+                playerRocket.Add(new Rocket { x = px + 4, y = py - 1 });
                 shootCooldown = 35;
             }
 
@@ -89,8 +87,6 @@ namespace gameproject
                 ClearShip(oldx);
                 DrawShip();
             }
-
-            
         }
 
 
@@ -106,23 +102,19 @@ namespace gameproject
                     Write(' '); // clear the old position
                 }
 
-
                 PlayerBullets[i].Move();
 
-
-                //Arjun - now the variables invanderX and InvanderY are array, thats why this code is breaking.
                 bool hitSomething = false;
                 for (int e = invaderInfo.Invaders.Count - 1; e >= 0 && !hitSomething; e--) // loop through every invader
                 {
-
-
-                    if ((PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].invaderPos.X + 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].invaderPos.X - 1 || PlayerBullets[i].bullet.X == invaderInfo.Invaders[e].invaderPos.X) && PlayerBullets[i].bullet.Y == invaderInfo.Invaders[e].invaderPos.Y) // check if bullet is on same spot as this invader
+                    // Use invaderPos for position checks
+                    var invPos = invaderInfo.Invaders[e].invaderPos;
+                    if ((PlayerBullets[i].bullet.X == invPos.X + 1 || PlayerBullets[i].bullet.X == invPos.X - 1 || PlayerBullets[i].bullet.X == invPos.X) && PlayerBullets[i].bullet.Y == invPos.Y) // check if bullet is on same spot as this invader
                     {
-                        SetCursorPosition(Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.X), Convert.ToInt32(invaderInfo.Invaders[e].invaderPos.Y));
+                        SetCursorPosition(ToX(invPos), ToY(invPos));
                         Write(' '); // erase invader from screen
 
-                        Vector2 invaderDropPos = invaderInfo.Invaders[e].invaderPos; //save position before removing
-                        
+                        Vector2 invaderDropPos = invPos; //save position before removing
 
                         invaderInfo.Invaders.RemoveAt(e); //removes invaders from list
 
@@ -131,24 +123,21 @@ namespace gameproject
                         PlayerBullets.RemoveAt(i); // remove the bullet
                         hitSomething = true; // stops the loop since this bullet is used up
 
-                        //1 in 3 chance to spawn a life booster drop
+                        //1 in 10 chance to spawn a life booster drop
                         if (rand.Next(10) == 0)
                         {
-                            lifeInfo.LifeDrops.Add(new LifeDrop {lifeDropPos = invaderDropPos});
+                            lifeInfo.LifeDrops.Add(new LifeDrop { lifeDropPos = invaderDropPos });
                         }
                     }
                 }
                 if (hitSomething) continue; // skip to next bullet since this one is gone
 
-
                 if (PlayerBullets[i].bullet.Y < 0 || PlayerBullets[i].bullet.Y > WindowHeight || PlayerBullets[i].bullet.X > WindowWidth)
                 {
                     PlayerBullets.RemoveAt(i); //remove if off screen otherwise draw
                 }
-
                 else
                 {
-
                     SetCursorPosition(Convert.ToInt32(PlayerBullets[i].bullet.X), Convert.ToInt32(PlayerBullets[i].bullet.Y));
                     ForegroundColor = ConsoleColor.Red;
                     Write('|');
@@ -156,6 +145,7 @@ namespace gameproject
                 }
             }
         }
+
         public static void rocketshoot()
         {
             int aoeradius = 12;
@@ -164,12 +154,9 @@ namespace gameproject
 
                 if (playerRocket[i].y >= 0 && playerRocket[i].y < WindowHeight && playerRocket[i].x < WindowWidth) //check if the bullet is still within the window
                 {
-
                     SetCursorPosition(playerRocket[i].x, playerRocket[i].y);
                     Write(' '); // clear the old position
-
                 }
-
 
                 playerRocket[i].Move();
 
@@ -177,17 +164,17 @@ namespace gameproject
                 {
                     playerRocket.RemoveAt(i);
                     continue;
-
                 }
 
                 bool hitSomething = false;
                 int impactX = playerRocket[i].x;
                 int impactY = playerRocket[i].y;
 
-
                 for (int e = Invaders.Count - 1; e >= 0; e--)
                 {
-                    if (Abs(impactX - Invaders[e].x) <= 3 && impactY == Invaders[e].y)
+                    int invX = ToX(Invaders[e].invaderPos);
+                    int invY = ToY(Invaders[e].invaderPos);
+                    if (Abs(impactX - invX) <= 3 && impactY == invY)
                     {
                         hitSomething = true;
                         // Impact detected! Proceed to trigger the explosion radius
@@ -203,22 +190,20 @@ namespace gameproject
                     // Loop backwards through all invaders to safely remove everything in the blast zone
                     for (int e = Invaders.Count - 1; e >= 0; e--)
                     {
+                        int invX = ToX(Invaders[e].invaderPos);
+                        int invY = ToY(Invaders[e].invaderPos);
+
                         // Check if the invader is within the Y plane and the horizontal blast radius
-                        if (Invaders[e].y == impactY && Math.Abs(Invaders[e].x - impactX) <= aoeradius)
+                        if (invY == impactY && Math.Abs(invX - impactX) <= aoeradius)
                         {
-                            if (Invaders[e].y >= 0 && Invaders[e].y < WindowHeight && Invaders[e].x  >= 0 && Invaders[e].x < WindowWidth)
+                            if (invY >= 0 && invY < WindowHeight && invX >= 0 && invX < WindowWidth)
                             {
-                                SetCursorPosition(Invaders[e].x, Invaders[e].y);
+                                SetCursorPosition(invX, invY);
                                 Write(' '); // Erase exploded invader from screen
                             }
 
-                            
-
                             Invaders.RemoveAt(e);
                             enemiesKilled++;
-
-                            
-                            
                         }
                     }
                     continue; // Skip drawing this rocket since it exploded

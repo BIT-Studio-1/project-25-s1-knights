@@ -13,18 +13,12 @@ using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Intro;
 using static gameproject.asteroids;
-
-
-
-
-
-
+using System.Collections.Concurrent;
+using static gameproject.keyboard;
+using System.Threading.Tasks;
 
 namespace gameproject
 {
-    
-
-
     public static class Globals // variables that any class or function can access
     {
         // Level System Added
@@ -35,19 +29,61 @@ namespace gameproject
         public static bool start = false, moved = false, menuStart = false;
     }
 
-    internal class Program
+    public static class keyboard
     {
-        
-
         [DllImport("user32.dll")] // imports a library for to make the movement smoother
         private static extern short GetAsyncKeyState(int vKey);
+
+        private static readonly ConcurrentDictionary<ConsoleKey, DateTime> _linuxKeyTimestamps = new();
+        private static bool _isInitialized = false;
+        private static readonly object _lock = new();
+        private const int keyReleaseTimeMs = 80;
+        public const int releaseRelation = keyReleaseTimeMs;
         public static bool IsKeyDown(ConsoleKey key) //method that registers while a key is pressed
         {
-            return (GetAsyncKeyState((int)key) & 0x8000) != 0;
+            if (OperatingSystem.IsLinux() && !_isInitialized) 
+            {
+                lock (_lock)
+                {
+                    if (!_isInitialized)
+                    {
+                        Task.Run(() => otherInputProcessor());
+                        _isInitialized = true;
+                    }
+                }
+            }
+            
+            if (OperatingSystem.IsWindows()) return (GetAsyncKeyState((int)key) & 0x8000) != 0;
+            else if (OperatingSystem.IsLinux())
+            {
+                if (_linuxKeyTimestamps.TryGetValue(key, out DateTime lastKey))
+                {
+                    return (DateTime.UtcNow - lastKey).TotalMilliseconds < keyReleaseTimeMs;
+                }
+            }
+            return false;
         }
 
+        private static void otherInputProcessor()
+        {
+            while (true)
+            {
+                TreatControlCAsInput = true;
+                if (KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = ReadKey(true);
+                    _linuxKeyTimestamps[keyInfo.Key] = DateTime.UtcNow;
+                }
+            }
+        } 
+
+    }
+
+    internal class Program
+    {
         static async Task Main()
         {
+          
             CursorVisible = false;
 
             start = false;
@@ -87,8 +123,8 @@ namespace gameproject
                         start = false; //Stops game loop first 
 
                         await Task.Delay(500);
-                        while (Console.KeyAvailable)
-                            Console.ReadKey(true);
+                        while (KeyAvailable)
+                            ReadKey(true);
 
                         bool playAgain = OutroAndDeath.ShowLose();
                         if (playAgain == false)
@@ -98,7 +134,8 @@ namespace gameproject
                         //Clear();
                         await Task.Delay(100);
                         Clear();
-                        start = true;
+                        start = false;
+                        menuStart = true;
                         //continue;
                         break;
                         //return;
@@ -126,14 +163,7 @@ namespace gameproject
 
                     }
 
-                    //Win Condition
-                    //if (level == 5 && enemiesKilled == maxInvaders)
-                    //{
-                    //    start = false; //stops game loop first
-
-                    //    OutroAndDeath.ShowWin();
-
-                    //}
+                    
 
                     //Win Condition
                     if (level == 5 && enemiesKilled == invaderInfo.maxInvaders)
@@ -141,8 +171,8 @@ namespace gameproject
                         start = false; //stops game loop first
 
                         await Task.Delay(500);
-                        while (Console.KeyAvailable)
-                            Console.ReadKey(true);
+                        while (KeyAvailable)
+                            ReadKey(true);
 
                         bool playAgain = OutroAndDeath.ShowWin();
 
@@ -153,7 +183,9 @@ namespace gameproject
 
                         await Task.Delay(100);
                         Clear();
-                        start = true;
+                        start = false;
+                        menuStart = true;
+
                         break;
                     }
 
@@ -183,11 +215,10 @@ namespace gameproject
             playerInfo.PlayerBullets.Clear();
             lifeInfo.LifeDrops.Clear();
 
-            playerInfo.playerX = WindowWidth / 2;
-            playerInfo.playerY = WindowHeight - 8;
+            playerInfo.playerPosition.X = WindowWidth / 2;
+            playerInfo.playerPosition.Y = WindowHeight - 8;
 
-            //isDead = false;
-            //Clear();
+            
 
         }
 
@@ -195,8 +226,8 @@ namespace gameproject
         {
             bottomRow = WindowHeight - 1;
             farRow = WindowWidth - 1;
-            playerInfo.playerX = Clamp(playerInfo.playerX, 3, farRow - 5);
-            playerInfo.playerY = Clamp(playerInfo.playerY, 0, bottomRow - 4);
+            playerInfo.playerPosition.X = Clamp(playerInfo.playerPosition.X, 3, farRow - 5);
+            playerInfo.playerPosition.Y = Clamp(playerInfo.playerPosition.Y, 0, bottomRow - 4);
 
 
 

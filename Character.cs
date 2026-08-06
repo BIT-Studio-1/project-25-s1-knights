@@ -75,7 +75,7 @@ namespace gameproject
                 int py = ToY(playerPosition);
                 playerRocket.Add(new Rocket { x = px - 3, y = py - 1 });
                 playerRocket.Add(new Rocket { x = px + 4, y = py - 1 });
-                shootCooldown = 35;
+                shootCooldown = 45;
             }
 
             if (shootCooldown > 0) shootCooldown--;// adds a cool down for the bullets

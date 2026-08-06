@@ -13,6 +13,13 @@ using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Intro;
 using static gameproject.asteroids;
+using static gameproject.Bigger_Threats.bigShip;
+
+
+
+
+
+
 using System.Collections.Concurrent;
 using static gameproject.keyboard;
 using System.Threading.Tasks;
@@ -147,6 +154,8 @@ namespace gameproject
                     //newInvader(); // removed because of async
                     updateinvaders();
                     newAsteroids();
+                    CreateBigShip();
+                    
 
                     UpdateDrops(); //add update drops function into the gameloop
 

@@ -57,7 +57,7 @@ namespace gameproject
                     ForegroundColor = ConsoleColor.Black;
                     WriteLine("> INSTRUCTIONS");
                     ResetColor();
-                    WriteLine(" EXIT    ");
+                    WriteLine("  EXIT    ");
                     SetCursorPosition(0, WindowHeight / 2);
                     WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
 
@@ -83,7 +83,7 @@ namespace gameproject
             static void menuControl()
             {
 
-                if ((IsKeyDown(DownArrow) || IsKeyDown(S)) && (option < 3))
+                if ((IsKeyDown(DownArrow) || IsKeyDown(S)) && (option < 4))
                 {
                     option++;
                 }
@@ -130,6 +130,38 @@ namespace gameproject
 
                 }
                 else if ((IsKeyDown(Spacebar) || IsKeyDown(Enter)) && (option == 3))
+                {
+                    menuStart = false;
+                    Clear();
+
+                    Console.WriteLine("INSTRUCTIONS\n");
+                    Console.WriteLine("Avoid asteroids and invaders.\n");
+                    Console.WriteLine("If you get hit by an asteroid or invader, you will lose a life.\n");
+                    Console.WriteLine("Shooting invaders will give you random drops of extra lives.\n");
+                    Console.WriteLine("A number of invaders will be displayed to show how many are needed to be destroyed to level up.\n");
+
+                    BackgroundColor = ConsoleColor.White;
+                    ForegroundColor = ConsoleColor.Black;
+
+                    WriteLine("\n\n RETURN ");
+                    ResetColor();
+
+                    bool instructions = true;
+
+                    while (instructions)
+                    {
+                        ConsoleKey key = ReadKey(true).Key;
+
+                        if(key == Spacebar || key == Enter)
+                        {
+                            instructions = false;
+                            menuStart = true;
+
+                        }
+                    }
+                }
+
+                else if ((IsKeyDown(Spacebar) || IsKeyDown(Enter)) && (option == 4))
                 {
                     start = false;
                     menuStart = false;

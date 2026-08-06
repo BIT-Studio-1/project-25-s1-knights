@@ -13,6 +13,7 @@ using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.lifeInfo;
+using System.Numerics;
 
 namespace gameproject
 {
@@ -24,9 +25,8 @@ namespace gameproject
 
     public class LifeDrop
     {
-        public int x { get; set; }
-        public int y { get; set; }
-        public void Move() => y++; //falls down like invaders
+        public Vector2 lifeDropPos { get; set; }
+        public void Move() => lifeDropPos = new Vector2(lifeDropPos.X, lifeDropPos.Y + 1); //falls down like invaders
     }
 
     internal class Lives
@@ -46,21 +46,21 @@ namespace gameproject
                 return; // skipping teh collision in this frame
             }
             //player hitbox
-            int hitboxLeft = playerInfo.playerX - 3;
-            int hitboxRight = playerInfo.playerX + 4;
-            int hitboxTop = playerInfo.playerY;
-            int hitboxBottom = playerInfo.playerY + 3;
+            int hitboxLeft = Convert.ToInt32(playerInfo.playerPosition.X - 3);
+            int hitboxRight = Convert.ToInt32(playerInfo.playerPosition.X + 4);
+            int hitboxTop = Convert.ToInt32(playerInfo.playerPosition.Y);
+            int hitboxBottom = Convert.ToInt32(playerInfo.playerPosition.Y + 3);
 
             //loop backwards so removal is safe
             for (int i = invaderInfo.Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
             {
-                bool withinX = invaderInfo.Invaders[i].x >= hitboxLeft && invaderInfo.Invaders[i].x <= hitboxRight;
-                bool withinY = invaderInfo.Invaders[i].y >= hitboxTop && invaderInfo.Invaders[i].y <= hitboxBottom;
+                bool withinX = invaderInfo.Invaders[i].invaderPos.X >= hitboxLeft && invaderInfo.Invaders[i].invaderPos.X <= hitboxRight;
+                bool withinY = invaderInfo.Invaders[i].invaderPos.Y >= hitboxTop && invaderInfo.Invaders[i].invaderPos.Y <= hitboxBottom;
                 
 
-                if (invaderInfo.Invaders[i].x >= hitboxLeft && invaderInfo.Invaders[i].x <= hitboxRight && invaderInfo.Invaders[i].y >= hitboxTop && invaderInfo.Invaders[i].y >= hitboxBottom)//removes live if hit box of the ship is hit
+                if (invaderInfo.Invaders[i].invaderPos.X >= hitboxLeft && invaderInfo.Invaders[i].invaderPos.X <= hitboxRight && invaderInfo.Invaders[i].invaderPos.Y >= hitboxTop && invaderInfo.Invaders[i].invaderPos.Y >= hitboxBottom)//removes live if hit box of the ship is hit
                 {
-                    SetCursorPosition(invaderInfo.Invaders[i].x, invaderInfo.Invaders[i].y);
+                    SetCursorPosition(Convert.ToInt32(invaderInfo.Invaders[i].invaderPos.X), Convert.ToInt32(invaderInfo.Invaders[i].invaderPos.Y));
                     Write(' ');
                     invaderInfo.Invaders.RemoveAt(i);//remove from the list
                     Life--;
@@ -77,12 +77,12 @@ namespace gameproject
 
             for (int i = asteroidInfo.Asteroids.Count - 1; i >= 0; i--)
             {
-                bool withinX = asteroidInfo.Asteroids[i].x >= hitboxLeft && asteroidInfo.Asteroids[i].x <= hitboxRight;
-                bool withinY = asteroidInfo.Asteroids[i].y >= hitboxTop && asteroidInfo.Asteroids[i].y <= hitboxBottom;
+                bool withinX = asteroidInfo.Asteroids[i].asteroidPos.X >= hitboxLeft && asteroidInfo.Asteroids[i].asteroidPos.X <= hitboxRight;
+                bool withinY = asteroidInfo.Asteroids[i].asteroidPos.Y >= hitboxTop && asteroidInfo.Asteroids[i].asteroidPos.Y <= hitboxBottom;
 
-                if (asteroidInfo.Asteroids[i].x >= hitboxLeft && asteroidInfo.Asteroids[i].x <= hitboxRight && asteroidInfo.Asteroids[i].y >= hitboxTop && asteroidInfo.Asteroids[i].y <= hitboxBottom)
+                if (asteroidInfo.Asteroids[i].asteroidPos.X >= hitboxLeft && asteroidInfo.Asteroids[i].asteroidPos.X <= hitboxRight && asteroidInfo.Asteroids[i].asteroidPos.Y >= hitboxTop && asteroidInfo.Asteroids[i].asteroidPos.Y <= hitboxBottom)
                 {
-                    SetCursorPosition(asteroidInfo.Asteroids[i].x, asteroidInfo.Asteroids[i].y);
+                    SetCursorPosition(Convert.ToInt32(asteroidInfo.Asteroids[i].asteroidPos.X), Convert.ToInt32(asteroidInfo.Asteroids[i].asteroidPos.Y));
                     Write(' ');
                     asteroidInfo.Asteroids.RemoveAt(i);//remove from the list
                     Life--;
@@ -111,13 +111,13 @@ namespace gameproject
            for(int i= LifeDrops.Count - 1; i >= 0;i--)
             {
                 // check if ships collects the drop
-                int hitboxLeft = playerInfo.playerX - 3;
-                int hitboxRight = playerInfo.playerX + 4;
-                int hitboxTop = playerInfo.playerY;
-                int hitboxBottom = playerInfo.playerY + 4;
+                int hitboxLeft = Convert.ToInt32(playerInfo.playerPosition.X - 3);
+                int hitboxRight = Convert.ToInt32(playerInfo.playerPosition.X + 4);
+                int hitboxTop = Convert.ToInt32(playerInfo.playerPosition.Y);
+                int hitboxBottom = Convert.ToInt32(playerInfo.playerPosition.Y + 4);
 
-                bool inX = LifeDrops[i].x>= hitboxLeft && LifeDrops[i].x <= hitboxRight;
-                bool inY = LifeDrops[i].y>= hitboxTop && LifeDrops[i].y <= hitboxBottom;
+                bool inX = LifeDrops[i].lifeDropPos.X >= hitboxLeft && LifeDrops[i].lifeDropPos.X <= hitboxRight;
+                bool inY = LifeDrops[i].lifeDropPos.Y >= hitboxTop && LifeDrops[i].lifeDropPos.Y <= hitboxBottom;
 
                 if (level == 1)
                 {
@@ -145,9 +145,9 @@ namespace gameproject
                 }
 
 
-                if (LifeDrops[i].x >= hitboxLeft && LifeDrops[i].x <= hitboxRight && LifeDrops[i].y >= hitboxTop && LifeDrops[i].y <= hitboxBottom)
+                if (LifeDrops[i].lifeDropPos.X >= hitboxLeft && LifeDrops[i].lifeDropPos.X <= hitboxRight && LifeDrops[i].lifeDropPos.Y >= hitboxTop && LifeDrops[i].lifeDropPos.Y <= hitboxBottom)
                 {
-                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                    SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
                     Write(' ');// erase from screen
                     LifeDrops.RemoveAt(i);
                     Life++;  //give playeran extra life
@@ -160,10 +160,10 @@ namespace gameproject
                 if (dropMoveTimer >= dropMoveRate)
                 {
                     //erase old position
-                    if (LifeDrops[i].x >=0 && LifeDrops[i].y >=0 &&
-                        LifeDrops[i].x < consoleWidth && LifeDrops[i].y < consoleHeight)
+                    if (LifeDrops[i].lifeDropPos.X >=0 && LifeDrops[i].lifeDropPos.Y >=0 &&
+                        LifeDrops[i].lifeDropPos.X < consoleWidth && LifeDrops[i].lifeDropPos.Y < consoleHeight)
                     {
-                        SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y);
+                        SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
                         Write(" ");
 
                     }
@@ -171,7 +171,7 @@ namespace gameproject
                     LifeDrops[i].Move(); //fall one row down
 
                     //remove if off screen
-                    if (LifeDrops[i].y >= consoleHeight)
+                    if (LifeDrops[i].lifeDropPos.Y >= consoleHeight)
                     {
                         LifeDrops.RemoveAt(i);
                         continue;
@@ -179,10 +179,10 @@ namespace gameproject
                 }
 
                 //draw + at current position
-                if (LifeDrops[i].x >=0 && LifeDrops[i].y >0 &&
-                    LifeDrops[i].x < consoleWidth && LifeDrops[i].y <= consoleHeight)
+                if (LifeDrops[i].lifeDropPos.X >=0 && LifeDrops[i].lifeDropPos.Y >0 &&
+                    LifeDrops[i].lifeDropPos.X < consoleWidth && LifeDrops[i].lifeDropPos.Y <= consoleHeight)
                 {
-                    SetCursorPosition(LifeDrops[i].x, LifeDrops[i].y );
+                    SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
                     ForegroundColor = ConsoleColor.Cyan;
                     Write('+');
                     ResetColor();

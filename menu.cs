@@ -9,12 +9,14 @@ using System.Diagnostics;
 using static gameproject.Bullet;
 using static gameproject.Program;
 using static gameproject.Character;
+using static gameproject.keyboard;
 
 namespace gameproject
 {
     internal class Menu
     {
         static int option = 1;
+        private static bool notReset = true;
 
         public static void startmenu()
         {
@@ -22,7 +24,10 @@ namespace gameproject
             while (menuStart)
             {
                 Clear();
-
+                notReset = true;
+                while (notReset)
+                {
+                    
                 if (option == 1)
                 {
                     BackgroundColor = ConsoleColor.White;
@@ -59,9 +64,11 @@ namespace gameproject
                     WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
                     
                 }
-                ReadKey(true);
+                
                 menuControl();
                 menuOpperation();
+                }
+
             }
 
             static void menuControl()
@@ -69,12 +76,15 @@ namespace gameproject
 
                 if ((IsKeyDown(DownArrow) || IsKeyDown(S)) && (option < 3))
                 {
+                    Thread.Sleep(releaseRelation);
                     option++;
+                    notReset = false;
                 }
                 else if ((IsKeyDown(UpArrow) || IsKeyDown(W)) && (option > 1))
                 {
+                    Thread.Sleep(releaseRelation);
                     option--;
-
+                    notReset = false;
                 }
             }
 
@@ -85,6 +95,7 @@ namespace gameproject
                 {
                     start = true;
                     menuStart = false;
+                    notReset = false;
                     Clear();
                 }
                 else if ((IsKeyDown(Spacebar) || IsKeyDown(Enter)) && (option == 2))
@@ -103,8 +114,8 @@ namespace gameproject
                     bool inControls = true;
                     while (inControls)
                     {
-                        ConsoleKey controlKey = ReadKey(true).Key;
-                        if (controlKey == Spacebar || controlKey == Enter)
+                        
+                        if (IsKeyDown(Spacebar) || IsKeyDown(Enter))
                         {
                             inControls = false;
                             menuStart = true;

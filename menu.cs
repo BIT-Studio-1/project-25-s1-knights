@@ -106,6 +106,7 @@ namespace gameproject
                     WriteLine("MOVEMENT:    A AND D        ARROW KEYS");
                     WriteLine("SHOOT:       SPACEBAR                 ");
                     WriteLine("PAUSE:       ESCAPE                   ");
+                    WriteLine("SHOOT ROCKET: R ");
                     BackgroundColor = ConsoleColor.White;
                     ForegroundColor = ConsoleColor.Black;
                     WriteLine("\n\n\n> RETURN  ");

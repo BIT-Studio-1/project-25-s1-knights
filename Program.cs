@@ -156,7 +156,7 @@ namespace gameproject
                     updateinvaders();
                     newAsteroids();
                     CreateBigShip();
-                    
+                    ThreatShipShoot();
 
                     UpdateDrops(); //add update drops function into the gameloop
 

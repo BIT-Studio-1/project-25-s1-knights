@@ -21,6 +21,7 @@ namespace gameproject
         {
             public static int bigShipSpawnTimer = 0, bigShipMoveRate = 10, maxBigShips = 2, bigShipSpeed = 10, bigShipSpawnRate = 10, bigShipMoveTimer = 0;
             public static List<BigShip> BiggerShips = new List<BigShip>();
+            public static List<ThreatBulletsPosition> ThreatBullets = new List<ThreatBulletsPosition>();
         }
 
         public class BigShip
@@ -29,6 +30,20 @@ namespace gameproject
             public int y { get; set; }
 
             public void Move() => y++;
+        }
+
+        public class ThreatBulletsPosition
+        {
+            public int x { get; set; }
+            public int y { get; set; }
+
+            public ThreatBulletsPosition(int spawnX, int spawnY)
+            {
+                x = spawnX;
+                y = spawnY;
+            }
+            public void BulletsMove() => y++;
+
         }
 
         public static class bigShip
@@ -124,6 +139,51 @@ namespace gameproject
                         }
                     }
                 }
+
+            }
+
+            public static void ThreatShipShoot()
+            {
+                int bulletSpawn = rand.Next(20);
+
+                for (int i = ThreatBullets.Count - 1; i >= 0; i--)
+                {
+                    if (ThreatBullets[i].y >= 0 && ThreatBullets[i].y < WindowHeight && ThreatBullets[i].x < WindowWidth) 
+                        // check if bullets are still within console window
+                    {
+                        SetCursorPosition(ThreatBullets[i].x, ThreatBullets[i].y);
+                        Write(' '); 
+                    }
+
+                    ThreatBullets[i].BulletsMove();
+
+                    if (ThreatBullets[i].y < 0 || ThreatBullets[i].y >= WindowHeight || ThreatBullets[i].x < 0 || ThreatBullets[i].x >= WindowWidth)
+                    {
+                        ThreatBullets.RemoveAt(i);
+                        continue;
+                    }
+
+                    else
+                    {
+                        SetCursorPosition(ThreatBullets[i].x, ThreatBullets[i].y);
+                        Write('*');
+                    }  
+
+                }
+
+                if (bulletSpawn == 10)
+                {
+                    for (int j = 0; j < BiggerShips.Count; j++)
+                    {
+                        int spawnX = BiggerShips[j].x+2;
+                        int spawnY = BiggerShips[j].y +1 ;
+
+                        ThreatBullets.Add(new ThreatBulletsPosition(spawnX, spawnY));
+                    }
+                }
+
+
+
 
             }
 

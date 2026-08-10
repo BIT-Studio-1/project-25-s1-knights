@@ -98,7 +98,7 @@ namespace gameproject
             //if (Life <= 0) { 
             //start=false;
             //    OutroAndDeath.ShowLose();
-            //    //next fuction goes here.
+            //    //next function goes here.
             //}
 
             
@@ -150,7 +150,7 @@ namespace gameproject
                     SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
                     Write(' ');// erase from screen
                     LifeDrops.RemoveAt(i);
-                    Life++;  //give playeran extra life
+                    Life++;  //give player an extra life
                     string livesText =  $"Lives: {Life}";
                     SetCursorPosition(WindowWidth - livesText.Length, 0);
                     Write(livesText); // update  HUD immediately

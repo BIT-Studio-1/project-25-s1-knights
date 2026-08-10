@@ -212,16 +212,16 @@ namespace gameproject
 
             for (int i = BigShipsInfo.ThreatBullets.Count - 1; i >= 0; i--)
             {
-                bool withinX = BigShipsInfo.ThreatBullets[i].x >= hitboxLeft && BigShipsInfo.ThreatBullets[i].x <= hitboxRight;
-                bool withinY = BigShipsInfo.ThreatBullets[i].y >= hitboxTop && BigShipsInfo.ThreatBullets[i].y <= hitboxBottom;
+                bool withinX = BigShipsInfo.ThreatBullets[i].ThreatBulletPos.X >= hitboxLeft && BigShipsInfo.ThreatBullets[i].ThreatBulletPos.X <= hitboxRight;
+                bool withinY = BigShipsInfo.ThreatBullets[i].ThreatBulletPos.Y >= hitboxTop && BigShipsInfo.ThreatBullets[i].ThreatBulletPos.Y <= hitboxBottom;
 
-                if ((BigShipsInfo.ThreatBullets[i].x >= hitboxLeft) && ((BigShipsInfo.ThreatBullets[i].x <= hitboxRight) &&
-                        (BigShipsInfo.ThreatBullets[i].y >= hitboxTop) && (BigShipsInfo.ThreatBullets[i].y <= hitboxBottom)))
+                if ((BigShipsInfo.ThreatBullets[i].ThreatBulletPos.X  >= hitboxLeft) && ((BigShipsInfo.ThreatBullets[i].ThreatBulletPos.X <= hitboxRight) &&
+                        (BigShipsInfo.ThreatBullets[i].ThreatBulletPos.Y >= hitboxTop) && (BigShipsInfo.ThreatBullets[i].ThreatBulletPos.Y <= hitboxBottom)))
                         //logic checking if bullets have hit the players coords
 
                 {
-                  
-                    SetCursorPosition(BigShipsInfo.ThreatBullets[i].x, BigShipsInfo.ThreatBullets[i].y);
+
+                    SetCursorPosition(Convert.ToInt32(BigShipsInfo.ThreatBullets[i].ThreatBulletPos.X), Convert.ToInt32(BigShipsInfo.ThreatBullets[i].ThreatBulletPos.Y));
                     Write(' ');
                     BigShipsInfo.ThreatBullets.RemoveAt(i);
                     Life--;

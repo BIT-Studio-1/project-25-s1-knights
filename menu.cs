@@ -25,64 +25,68 @@ namespace gameproject
             {
                 Clear();
                 notReset = true;
+
+                //while (notReset)
+                //{
+                    
+                    if (option == 1)
+                    {
+                        BackgroundColor = ConsoleColor.White;
+                        ForegroundColor = ConsoleColor.Black;
+                        WriteLine("> PLAY    ");
+                        ResetColor();
+                        WriteLine("  CONTROLS");
+                        WriteLine("  INSTRUCTIONS");
+                        WriteLine("  EXIT    ");
+                        SetCursorPosition(0, WindowHeight / 2);
+                        WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
+
+                    }
+                    else if (option == 2)
+                    {
+                        WriteLine("  PLAY    ");
+                        BackgroundColor = ConsoleColor.White;
+                        ForegroundColor = ConsoleColor.Black;
+                        WriteLine("> CONTROLS");
+                        ResetColor();
+                        WriteLine("  INSTRUCTIONS");
+                        WriteLine("  EXIT    ");
+                        SetCursorPosition(0, WindowHeight / 2);
+                        WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
+
+                    }
+                    else if (option == 3)
+                    {
+                        WriteLine("  PLAY    ");
+                        WriteLine("  CONTROLS");
+                        BackgroundColor = ConsoleColor.White;
+                        ForegroundColor = ConsoleColor.Black;
+                        WriteLine("> INSTRUCTIONS");
+                        ResetColor();
+                        WriteLine("  EXIT    ");
+                        SetCursorPosition(0, WindowHeight / 2);
+                        WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
+
+                    }
+                    else if (option == 4)
+                    {
+                        WriteLine("  PLAY    ");
+                        WriteLine("  CONTROLS");
+                        WriteLine("  INSTRUCTIONS");
+                        BackgroundColor = ConsoleColor.White;
+                        ForegroundColor = ConsoleColor.Black;
+                        WriteLine("> EXIT    ");
+                        ResetColor();
+                        SetCursorPosition(0, WindowHeight / 2);
+                        WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
+                    
+                    }
+
                 while (notReset)
                 {
-                    
-                if (option == 1)
-                {
-                    BackgroundColor = ConsoleColor.White;
-                    ForegroundColor = ConsoleColor.Black;
-                    WriteLine("> PLAY    ");
-                    ResetColor();
-                    WriteLine("  CONTROLS");
-                    WriteLine("  INSTRUCTIONS");
-                    WriteLine("  EXIT    ");
-                    SetCursorPosition(0, WindowHeight / 2);
-                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
 
-                }
-                else if (option == 2)
-                {
-                    WriteLine("  PLAY    ");
-                    BackgroundColor = ConsoleColor.White;
-                    ForegroundColor = ConsoleColor.Black;
-                    WriteLine("> CONTROLS");
-                    ResetColor();
-                    WriteLine("  INSTRUCTIONS");
-                    WriteLine("  EXIT    ");
-                    SetCursorPosition(0, WindowHeight / 2);
-                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
-
-                }
-                else if (option == 3)
-                {
-                    WriteLine("  PLAY    ");
-                    WriteLine("  CONTROLS");
-                    BackgroundColor = ConsoleColor.White;
-                    ForegroundColor = ConsoleColor.Black;
-                    WriteLine("> INSTRUCTIONS");
-                    ResetColor();
-                    WriteLine("  EXIT    ");
-                    SetCursorPosition(0, WindowHeight / 2);
-                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
-
-                }
-                else if (option == 4)
-                {
-                    WriteLine("  PLAY    ");
-                    WriteLine("  CONTROLS");
-                    WriteLine("  INSTRUCTIONS");
-                    BackgroundColor = ConsoleColor.White;
-                    ForegroundColor = ConsoleColor.Black;
-                    WriteLine("> EXIT    ");
-                    ResetColor();
-                    SetCursorPosition(0, WindowHeight / 2);
-                    WriteLine("TIP:  some invaders will drop and item which gives an extra life when picked up.");
-                    
-                }
-                
-                menuControl();
-                menuOpperation();
+                    menuControl();
+                    menuOpperation();
                 }
 
             }
@@ -118,7 +122,10 @@ namespace gameproject
                 {
 
                     menuStart = false;
+                    notReset = false;
+                   
                     Clear();
+
                     WriteLine("MOVEMENT:    A AND D        ARROW KEYS");
                     WriteLine("SHOOT:       SPACEBAR                 ");
                     WriteLine("PAUSE:       ESCAPE                   ");
@@ -129,9 +136,21 @@ namespace gameproject
                     ResetColor();
 
                     bool inControls = true;
+
+                    //Thread.Sleep(releaseRelation);
+
+                    //while(!IsKeyDown(Enter) && !IsKeyDown(Spacebar))
+                    //{
+                    //    Thread.Sleep(10);
+                    //}
+
+                    //ReadKey(true);
+
+                    //menuStart = true;
+                    //notReset = false;
+
                     while (inControls)
                     {
-                        
                         if (IsKeyDown(Spacebar) || IsKeyDown(Enter))
                         {
                             inControls = false;
@@ -158,18 +177,27 @@ namespace gameproject
                     WriteLine("\n\n RETURN ");
                     ResetColor();
 
+                    ReadKey(true);
+
+                    menuStart = true;
+                    notReset = false;
+
                     bool instructions = true;
 
                     while (instructions)
                     {
-                        ConsoleKey key = ReadKey(true).Key;
+                        //ConsoleKey key = ReadKey(true).Key;
+                        Thread.Sleep(releaseRelation);
 
-                        if(key == Spacebar || key == Enter)
+                        if(IsKeyDown(Spacebar) || IsKeyDown(Enter))
                         {
                             instructions = false;
                             menuStart = true;
+                            notReset = false;
 
                         }
+
+                        Thread.Sleep(10);
                     }
                 }
 

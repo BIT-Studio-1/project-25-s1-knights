@@ -13,6 +13,7 @@ using static gameproject.invaders;
 using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.lifeInfo;
+using static gameproject.Bigger_Threats;
 using System.Numerics;
 
 namespace gameproject
@@ -36,7 +37,7 @@ namespace gameproject
         {
 
             //adding hit cooldown
-            if(hitCooldown > 0)
+            if (hitCooldown > 0)
             {
                 hitCooldown--;
 
@@ -52,11 +53,11 @@ namespace gameproject
             int hitboxBottom = Convert.ToInt32(playerInfo.playerPosition.Y + 3);
 
             //loop backwards so removal is safe
-            for (int i = invaderInfo.Invaders.Count - 1; i >= 0; i-- ) //chnaged teh logic to backward safe to remove
+            for (int i = invaderInfo.Invaders.Count - 1; i >= 0; i--) //chnaged teh logic to backward safe to remove
             {
                 bool withinX = invaderInfo.Invaders[i].invaderPos.X >= hitboxLeft && invaderInfo.Invaders[i].invaderPos.X <= hitboxRight;
                 bool withinY = invaderInfo.Invaders[i].invaderPos.Y >= hitboxTop && invaderInfo.Invaders[i].invaderPos.Y <= hitboxBottom;
-                
+
 
                 if (invaderInfo.Invaders[i].invaderPos.X >= hitboxLeft && invaderInfo.Invaders[i].invaderPos.X <= hitboxRight && invaderInfo.Invaders[i].invaderPos.Y >= hitboxTop && invaderInfo.Invaders[i].invaderPos.Y >= hitboxBottom)//removes live if hit box of the ship is hit
                 {
@@ -65,14 +66,14 @@ namespace gameproject
                     invaderInfo.Invaders.RemoveAt(i);//remove from the list
                     Life--;
                     hitCooldown = 15; //30-frame invincibility
-                     //stop checking after one hit
-                    // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
-                    // Explosion + destroy invader
-                    //await ExplosionAnimation(playerX, playerY);
-                    //await Task.Delay(1000);
+                                      //stop checking after one hit
+                                      // Arjun - setting this because of need to skip or destroy the invander from screen after hitting
+                                      // Explosion + destroy invader
+                                      //await ExplosionAnimation(playerX, playerY);
+                                      //await Task.Delay(1000);
                 }
 
-                
+
             }
 
             for (int i = asteroidInfo.Asteroids.Count - 1; i >= 0; i--)
@@ -87,7 +88,7 @@ namespace gameproject
                     asteroidInfo.Asteroids.RemoveAt(i);//remove from the list
                     Life--;
                     hitCooldown = 15; //15-frame invincibility
-                    
+
                 }
             }
 
@@ -101,14 +102,14 @@ namespace gameproject
             //    //next fuction goes here.
             //}
 
-            
+
         }
 
         public static void UpdateDrops()
         {
             dropMoveTimer++;
             //TODO: move drops, draw drops, check player collection
-           for(int i= LifeDrops.Count - 1; i >= 0;i--)
+            for (int i = LifeDrops.Count - 1; i >= 0; i--)
             {
                 // check if ships collects the drop
                 int hitboxLeft = Convert.ToInt32(playerInfo.playerPosition.X - 3);
@@ -151,16 +152,16 @@ namespace gameproject
                     Write(' ');// erase from screen
                     LifeDrops.RemoveAt(i);
                     Life++;  //give playeran extra life
-                    string livesText =  $"Lives: {Life}";
+                    string livesText = $"Lives: {Life}";
                     SetCursorPosition(WindowWidth - livesText.Length, 0);
                     Write(livesText); // update  HUD immediately
                     continue;
-                    
+
                 }
                 if (dropMoveTimer >= dropMoveRate)
                 {
                     //erase old position
-                    if (LifeDrops[i].lifeDropPos.X >=0 && LifeDrops[i].lifeDropPos.Y >=0 &&
+                    if (LifeDrops[i].lifeDropPos.X >= 0 && LifeDrops[i].lifeDropPos.Y >= 0 &&
                         LifeDrops[i].lifeDropPos.X < consoleWidth && LifeDrops[i].lifeDropPos.Y < consoleHeight)
                     {
                         SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
@@ -179,7 +180,7 @@ namespace gameproject
                 }
 
                 //draw + at current position
-                if (LifeDrops[i].lifeDropPos.X >=0 && LifeDrops[i].lifeDropPos.Y >0 &&
+                if (LifeDrops[i].lifeDropPos.X >= 0 && LifeDrops[i].lifeDropPos.Y > 0 &&
                     LifeDrops[i].lifeDropPos.X < consoleWidth && LifeDrops[i].lifeDropPos.Y <= consoleHeight)
                 {
                     SetCursorPosition(Convert.ToInt32(LifeDrops[i].lifeDropPos.X), Convert.ToInt32(LifeDrops[i].lifeDropPos.Y));
@@ -191,7 +192,45 @@ namespace gameproject
             if (dropMoveTimer >= dropMoveRate) dropMoveTimer = 0;
 
         }
-         
+
+        public static void ThreatShipBulletHitsPlayer()
+        {
+            if (hitCooldown > 0)
+            {
+                hitCooldown--;
+
+                string hud = $"Lives: {Life}";
+                SetCursorPosition(WindowWidth - hud.Length, 0);
+                Write(hud);
+                return; 
+            }
+
+            int hitboxLeft = Convert.ToInt32(playerInfo.playerPosition.X - 3);       //set up hitboxes for bullets to hit
+            int hitboxRight = Convert.ToInt32(playerInfo.playerPosition.X + 4);
+            int hitboxTop = Convert.ToInt32(playerInfo.playerPosition.Y);
+            int hitboxBottom = Convert.ToInt32(playerInfo.playerPosition.Y + 3);
+
+            for (int i = BigShipsInfo.ThreatBullets.Count - 1; i >= 0; i--)
+            {
+                bool withinX = BigShipsInfo.ThreatBullets[i].x >= hitboxLeft && BigShipsInfo.ThreatBullets[i].x <= hitboxRight;
+                bool withinY = BigShipsInfo.ThreatBullets[i].y >= hitboxTop && BigShipsInfo.ThreatBullets[i].y <= hitboxBottom;
+
+                if ((BigShipsInfo.ThreatBullets[i].x >= hitboxLeft) && ((BigShipsInfo.ThreatBullets[i].x <= hitboxRight) &&
+                        (BigShipsInfo.ThreatBullets[i].y >= hitboxTop) && (BigShipsInfo.ThreatBullets[i].y <= hitboxBottom)))
+                        //logic checking if bullets have hit the players coords
+
+                {
+                  
+                    SetCursorPosition(BigShipsInfo.ThreatBullets[i].x, BigShipsInfo.ThreatBullets[i].y);
+                    Write(' ');
+                    BigShipsInfo.ThreatBullets.RemoveAt(i);
+                    Life--;
+                    hitCooldown = 45;     //set the cooldown a bit higher as the bullets can sometimes fire really fast
+                }
+            }
+
+        }
+
 
     }
 }

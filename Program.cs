@@ -70,6 +70,7 @@ namespace gameproject
             }
             return false;
         }
+           
 
         private static void otherInputProcessor()
         {
@@ -156,9 +157,10 @@ namespace gameproject
                     updateinvaders();
                     newAsteroids();
                     CreateBigShip();
-                    
+                    ThreatShipShoot();
 
                     UpdateDrops(); //add update drops function into the gameloop
+                    ThreatShipBulletHitsPlayer();
 
 
                     await Task.Delay(20);

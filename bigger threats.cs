@@ -11,6 +11,7 @@ using static gameproject.Levels;
 using static gameproject.Menu;
 using static gameproject.Globals;
 using static System.Console;
+using System.Runtime.InteropServices;
 
 namespace gameproject
 {
@@ -20,7 +21,9 @@ namespace gameproject
         public static class BigShipsInfo   //sets up things live movement speed and the max bigships
         {
             public static int bigShipSpawnTimer = 0, bigShipMoveRate = 10, maxBigShips = 2, bigShipSpeed = 10, bigShipSpawnRate = 10, bigShipMoveTimer = 0;
+            public static int threatBulletMoveRate = 2, threatBulletMoveTimer = 0;
             public static List<BigShip> BiggerShips = new List<BigShip>();
+            public static List<ThreatBulletsPosition> ThreatBullets = new List<ThreatBulletsPosition>();
         }
 
         public class BigShip
@@ -29,6 +32,20 @@ namespace gameproject
             public int y { get; set; }
 
             public void Move() => y++;
+        }
+
+        public class ThreatBulletsPosition
+        {
+            public int x { get; set; }
+            public int y { get; set; }
+
+            public ThreatBulletsPosition(int spawnX, int spawnY)
+            {
+                x = spawnX;
+                y = spawnY;
+            }
+            public void BulletsMove() => y++;
+
         }
 
         public static class bigShip
@@ -75,6 +92,8 @@ namespace gameproject
 
                 if (bigShipSpawnTimer >= bigShipSpawnRate && BiggerShips.Count < maxBigShips)
                 {
+                    int maxLocation = Math.Max(1, WindowWidth - shipLength);
+
                     BiggerShips.Add(new BigShip { x = rand.Next(consoleWidth), y = 0 }); // Spaawning randomly along x axis at 0 y position
 
                     bigShipSpawnTimer = 0;
@@ -96,7 +115,7 @@ namespace gameproject
                             BiggerShips[i].x = rand.Next(consoleWidth);
                         }
 
-                        if (BiggerShips[i].x >= 0 && BiggerShips[i].y >= 0 && BiggerShips[i].x + shipLength < consoleWidth && BiggerShips[i].y < consoleHeight)  //writes over the old position against the variable shipLength
+                        if (BiggerShips[i].x >= 0 && BiggerShips[i].y >= 0 && BiggerShips[i].x + shipLength <= consoleWidth && BiggerShips[i].y < consoleHeight)  //writes over the old position against the variable shipLength
                         {
                             SetCursorPosition(BiggerShips[i].x, BiggerShips[i].y);
 
@@ -108,10 +127,11 @@ namespace gameproject
                         if (BiggerShips[i].y >= consoleHeight)
                         {
                             BiggerShips[i].y = 0;
+                            int maxWidth = Math.Max(1, WindowWidth - shipLength);
                             BiggerShips[i].x = rand.Next(consoleWidth);
                         }
 
-                        if (BiggerShips[i].x >= 0 && BiggerShips[i].y >= 0 && BiggerShips[i].x + shipLength < consoleWidth && BiggerShips[i].y < consoleHeight)
+                        if (BiggerShips[i].x >= 0 && BiggerShips[i].y >= 0 && BiggerShips[i].x + shipLength <= consoleWidth && BiggerShips[i].y < consoleHeight)
                         //writes in clear space the threat ship against the length of the variable shipLength 
                         // and then prints in the clear space the variable drawBigShip. 
 
@@ -127,10 +147,73 @@ namespace gameproject
 
             }
 
-       
+            public static void ThreatShipShoot()
+            {
+                int bulletSpawn = rand.Next(20);
+
+                threatBulletMoveTimer++;
+                threatBulletMoveRate = 2;
+
+
+                if (threatBulletMoveTimer >= threatBulletMoveRate)
+                {
+                    threatBulletMoveTimer = 0;
+
+                    for (int i = ThreatBullets.Count - 1; i >= 0; i--)
+                    {
+                        if (ThreatBullets[i].y >= 0 && ThreatBullets[i].y < WindowHeight &&
+                            (ThreatBullets[i].x >= 0) && (ThreatBullets[i].x < WindowWidth))
+                        // check if bullets are still within console window
+                        {
+                            SetCursorPosition(ThreatBullets[i].x, ThreatBullets[i].y);
+                            Write(' ');
+                        }
+
+                        ThreatBullets[i].BulletsMove();
+
+                        if (ThreatBullets[i].y < 0 || ThreatBullets[i].y >= WindowHeight || ThreatBullets[i].x < 0 || ThreatBullets[i].x >= WindowWidth)
+                        // checks if bullets are still in console window, removes them from list if they are out of bounds
+                        {
+                            ThreatBullets.RemoveAt(i);
+                            continue;
+                        }
+
+                        else
+
+                        {
+                            SetCursorPosition(ThreatBullets[i].x, ThreatBullets[i].y);
+                            Write('*');
+                        }
+
+                    }
+                }
+
+                if (bulletSpawn == 10)
+
+                {
+                    for (int j = 0; j < BiggerShips.Count; j++)
+                    {
+                        int spawnX = BiggerShips[j].x + 2;
+                        int spawnY = BiggerShips[j].y + 1;
+
+                        if ((spawnX < WindowWidth) && (spawnY < WindowHeight))
+                        {
+                            ThreatBullets.Add(new ThreatBulletsPosition(spawnX, spawnY));
+                        }
+                    }
+                    // this loop just checks all ships on the screen, and assigns bullets to each ship.
+
+                }
+
+
+
+
+            }
+
+
 
         }
 
-        
+
     }
 }
